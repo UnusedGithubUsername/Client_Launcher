@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <BaseOutputPath>C:\Users\Klauke\Desktop\Client Build</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Video\Background.png" />
+    <None Remove="Video\Bar.png" />
+    <None Remove="Video\cloud.png" />
+    <None Remove="Video\cloud2.png" />
+    <None Remove="Video\cloud3.png" />
+    <None Remove="Video\left.png" />
+    <None Remove="Video\maskk.png" />
+    <None Remove="Video\Mein Film.mp4" />
+    <None Remove="Video\Mein Film.wmv" />
+    <None Remove="Video\Minimize.png" />
+    <None Remove="Video\qq2.mp4" />
+    <None Remove="Video\qqq.MP4" />
+    <None Remove="Video\qqw.mp4" />
+    <None Remove="Video\qqw.webm" />
+    <None Remove="Video\qwe.png" />
+    <None Remove="Video\qweq.webm" />
+    <None Remove="Video\right.png" />
+    <None Remove="Video\X.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Video\Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Bar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\cloud.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\cloud2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\cloud3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Mein Film.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Minimize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\X.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
