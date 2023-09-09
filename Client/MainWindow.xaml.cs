@@ -141,12 +141,15 @@ namespace Client {
                             OutdatedFile of = new(filename, dt);
                             string[] parts = filename.Split( '/');
 
-                            string subPath =  FilesPath+parts[0];  
+                            for (int j = 0; j < parts.Length - 1; j++) {
+                                string subPath = FilesPath + parts[j];
 
-                            bool exists = Directory.Exists(subPath);
+                                bool exists = Directory.Exists(subPath);
 
-                            if (!exists)
-                                Directory.CreateDirectory(subPath);
+                                if (!exists)
+                                    Directory.CreateDirectory(subPath);
+                            }
+
 
                             OutdatedFiles.Add(of);
                         } 
