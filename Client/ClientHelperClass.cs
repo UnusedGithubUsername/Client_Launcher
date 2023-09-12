@@ -2,7 +2,7 @@
 using System.Text; //for UTF8
 using System.Net.Sockets;//for TCPClient
 using System.Security.Cryptography;
-using System.IO;
+using System.IO; 
 
 namespace Client {
 
@@ -15,6 +15,92 @@ namespace Client {
         public ClientConnection() {
             client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
+    }
+
+    public struct IncommingFile {
+        public IncommingFile(string filePath,  string filename , int filesize, int fileIdentifier) {
+
+            fileID = fileIdentifier;
+            if (File.Exists(filePath)) {
+                File.Delete(filePath);
+            }
+
+            data = new byte[filesize];
+            name = filePath;
+
+            //calc how many packets we need
+            int numOfPacketsRequired;
+            nameOffset = 4 + 4 + filename.Length; //int for nameLen, int for filesize, name in utf8 is 1 byte per char 
+            int sizeIncludingName = nameOffset + filesize;
+            numOfPacketsRequired = (int)(sizeIncludingName / MAX_FILE_BYTES); //compare this value with Server Mainwindow line 184
+            if (sizeIncludingName % MAX_FILE_BYTES != 0) {
+                numOfPacketsRequired++;
+            }
+            packetRecieved = new bool[numOfPacketsRequired];
+        }
+
+        public static int fCount = 0;
+        public static int fFinCount = 0;
+        public static string returnThis = "";
+        public static string lastFile = "";
+        public bool FilepartSent(ref StreamResult result, int packageNumber, int _fileID ) {
+
+            if (packageNumber == 0) {
+                fileID = _fileID;
+                fCount++;
+
+
+            } else {
+                if (fileID != _fileID) {
+                    throw new Exception();
+                }
+            }
+
+            int bufferPosition = 0; //every file we send has max bytes, first package has the name first, so subtract that because that wasnt data for the file
+            if (packageNumber != 0) {
+                bufferPosition = - nameOffset + packageNumber * MAX_FILE_BYTES;
+            }
+            Buffer.BlockCopy(result.data, result.dataIndex, data, bufferPosition, result.BytesLeft());
+            result.dataIndex += result.BytesLeft();//not needed. all was read
+
+            if (name == "C:\\Users\\Klauke\\Documents\\My Games\\Corivi\\LauncherClient\\GameBuild2023\\MonoBleedingEdge\\EmbedRuntime\\MonoPosixHelper.dll") {
+                int qwe = 233; 
+                int qwe2 = 233;
+            }
+            packetRecieved[packageNumber] = true;
+            bool AllWasSent = true;
+             
+            for (int i = 0; i < packetRecieved.Length; i++) {
+                if (packetRecieved[i] == false) {
+                    AllWasSent = false;
+                }
+            }
+
+            if (AllWasSent) {
+               // FileStream fs = new(name, FileMode.Create);
+               // fs.Write(data, 0, data.Length);
+               // fs.Close();
+
+                File.WriteAllBytes(name, data);
+                fFinCount++;
+                returnThis = fCount.ToString() + "  " + fFinCount.ToString();
+                if (fCount != fFinCount) {
+                     
+                }
+                lastFile = name;
+                //File.WriteAllBytes(name, data); 
+            }
+            return AllWasSent;
+        }
+
+        public const int MAX_FILE_BYTES = 65524;
+
+
+        public string name;
+        public int nameOffset;
+        public byte[] data;
+        public bool[] packetRecieved;
+        public int fileID;
     }
 
     public struct StreamResult {

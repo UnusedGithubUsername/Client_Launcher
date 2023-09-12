@@ -138,5 +138,15 @@ namespace Client {
         public void SetPKey(string pkey) {
             rsa.FromXmlString(pkey);
         }
+
+
+        public void SetPKey2(string pkey) {
+
+            this.Dispatcher.Invoke(() =>
+            {
+                TextfieldPublicKey.Content = pkey;
+
+            });
+        }
     }
 }

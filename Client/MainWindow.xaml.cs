@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Timers;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Client {
     public partial class MainWindow : Window {
@@ -23,7 +24,11 @@ namespace Client {
         Page MainMenu;
 
         string currentFileWeAreGetting = "";
+        List<IncommingFile> incFile = new();
+
         FileStream fs;
+        byte[] fileBuffer = new byte[int.MaxValue/10];
+        int bufferPos = 0;
 
         public MainWindow() {
             InitializeComponent();
@@ -91,30 +96,22 @@ namespace Client {
                     MainMenuPage.Instance.CheckForUpdate();
                     break;
                 case PacketType.file:
-                    int filePartNumber = result.ReadInt();
-                    string filePath = FilesPath ;
-                    bool isUnfinished = result.data.Length == 65536;
+                    int packageNumber = result.ReadInt();
+                    int fileID = result.ReadInt();
+                    string filePath = FilesPath; 
 
-                    if (filePartNumber == 0 || filePartNumber == -2) {
+                    if (packageNumber == 0) {
                         currentFileWeAreGetting = result.ReadString();
-                    }
-                    filePath += currentFileWeAreGetting;
-
-                    if (filePartNumber==0 && File.Exists(filePath)) {
-                        File.Delete(filePath);
-                    }
-
-
-                    if (filePartNumber == 0|| filePartNumber == -2) { //-2 means first and last package. -1 means last
-                        FileMode fm = FileMode.Create;
-                        fs = new FileStream(filePath, fm);
+                        int fileSize = result.ReadInt();
+                        incFile.Add ( new(FilesPath+ currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID));  
                     }
                      
-                    fs.Write(result.data, result.dataIndex, result.BytesLeft());
-
-                    if (filePartNumber == -1 || filePartNumber == -2) {
-                        fs.Close();
+                    IncommingFile fileWeWriteTo = incFile.First(s => s.fileID == fileID);
+                    bool str = fileWeWriteTo.FilepartSent(ref result, packageNumber, fileID);
+                    if (str) {
+                        incFile.RemoveAt(incFile.IndexOf(fileWeWriteTo));
                     }
+                     
                     
                     break;
                 case PacketType.UpdateFilesRequest:
@@ -139,10 +136,12 @@ namespace Client {
                         }
                         if (!fileIsUpToDate) {
                             OutdatedFile of = new(filename, dt);
-                            string[] parts = filename.Split( '/');
-
+                            string[] parts = filename.Split( '\\');
+                            string subPath = FilesPath;
                             for (int j = 0; j < parts.Length - 1; j++) {
-                                string subPath = FilesPath + parts[j];
+
+                                subPath +=  "\\"+parts[j];
+
 
                                 bool exists = Directory.Exists(subPath);
 
