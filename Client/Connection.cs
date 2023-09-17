@@ -8,22 +8,22 @@ using System.Linq;
 namespace Client {
 
     public class Connection {
-        
-        private static readonly byte[] buffer = new byte[65408]; // close to max tcp package size minus 128
-        private static int bufferPosition = 0;
-        private RSACryptoServiceProvider rsaa;
 
-        private byte[] clientToken;
+        private static Socket? sock;
+        
+        private static readonly byte[] buffer = new byte[65404]; // close to max tcp package size of 65536 minus 132
+        private static int bufferPosition = 0;
+        private RSACryptoServiceProvider rsa;
+
+        private byte[] clientToken = Array.Empty<byte>();
 
         public Connection(string publicKey) {
-            rsaa = new();
-            rsaa.FromXmlString(publicKey);
-
-
-
+            rsa = new();
+            rsa.FromXmlString(publicKey);
+             
             Random rnd = new();
             int i32clientToken = rnd.Next(1, Int32.MaxValue);
-            clientToken = rsaa.Encrypt( BitConverter.GetBytes(i32clientToken), false);
+            clientToken = rsa.Encrypt( BitConverter.GetBytes(i32clientToken), false);
         }
 
         public static void EnsureFolderExists(string folderName) {
@@ -31,6 +31,10 @@ namespace Client {
                 Directory.CreateDirectory(folderName);
             }
         } 
+
+        public static void CreateSocket() {
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
 
         public void SendLoginPacket(ref Socket con, int token, string eMail, string password) {
 
@@ -50,10 +54,9 @@ namespace Client {
             byte[] bHashedPW = shaObj.ComputeHash(saltedPwBytes);
             byte[] bHashedPW_L = BitConverter.GetBytes(bHashedPW.Length); 
             byte[] data = CombineBytes(bToken, bEMail_L, bEMail, bHashedPW_L, bHashedPW); 
-            data = rsaa.Encrypt(data, false);
-            data = CombineBytes(bPType, data);
-
-
+            data = rsa.Encrypt(data, false);
+            data = CombineBytes(bPType, data);//write the package type to the front of the dataPacket
+             
             try {
                 con.Send(data);//wríte how many characters are in the string we send
             }
@@ -63,7 +66,7 @@ namespace Client {
             }
         }
 
-        public static void WriteString(ref string message) {
+        public static void WriteString(string message) {
             WriteInt(message.Length);
             byte[] bytes = Encoding.UTF8.GetBytes(message);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
@@ -71,7 +74,7 @@ namespace Client {
         }
 
         public static void WriteBytes(ref byte[] bytes) {
-           // WriteInt(bytes.Length);
+            WriteInt(bytes.Length);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
         }
@@ -92,20 +95,8 @@ namespace Client {
             int dataToSendLength = bufferPosition;
              
             byte[] dataToEncrypt = new byte[dataToSendLength];
-            Buffer.BlockCopy(buffer, 0, dataToEncrypt, 0, bufferPosition);
-           // dataToEncrypt = rsaa.Encrypt(dataToEncrypt, false);
-            dataToEncrypt = CombineBytes(BitConverter.GetBytes((int)pType), clientToken, dataToEncrypt);
-          // if (unencryptedData != null) {
-          //     dataToSendLength = 132;
-          //     dataToSendLength += unencryptedData == null ? 0 : unencryptedData.Length; //if we have additional data, we send additional data
-          //     byte[] dataToSend = new byte[dataToSendLength];
-          //
-          //     Buffer.BlockCopy(dataToEncrypt, 0, dataToSend, 0, 132);
-          //     Buffer.BlockCopy(unencryptedData, 0, dataToSend, 132, unencryptedData.Length);
-          //
-          //     dataToEncrypt = dataToSend; 
-          // }
-
+            Buffer.BlockCopy(buffer, 0, dataToEncrypt, 0, bufferPosition); 
+            dataToEncrypt = CombineBytes(BitConverter.GetBytes((int)pType), clientToken, dataToEncrypt);  
             bufferPosition = 0;
 
             try {
@@ -132,7 +123,7 @@ namespace Client {
             return bytes;
         }
 
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth) {
+        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth) {// I could reduce linecount, but c# would copy the arrays AGAIN. I could use ref though
             byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length];
             Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
             Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);

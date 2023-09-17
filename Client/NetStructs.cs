@@ -4,23 +4,8 @@ using System.Net.Sockets;//for TCPClient
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Client {
-    internal class NetStructs {
-
-
-    }
-
-
-
-    public struct ClientConnection {
-        public Socket client;
-        public bool connected = false;
-        public long lastPackageTime = 0;
-
-        public ClientConnection() {
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        }
-    }
+namespace Client { 
+     
 
     public struct IncommingFile {
         public const int MAX_FILE_BYTES = 65524;
