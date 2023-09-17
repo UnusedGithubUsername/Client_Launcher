@@ -26,9 +26,7 @@ namespace Client {
         string currentFileWeAreGetting = "";
         List<IncommingFile> incFile = new();
 
-        FileStream fs;
-        byte[] fileBuffer = new byte[int.MaxValue/10];
-        int bufferPos = 0;
+  
 
         public MainWindow() {
             InitializeComponent();
@@ -36,7 +34,7 @@ namespace Client {
 
             for (int i = 0; i < fpParts.Length; i++) {
                 FilesPath += fpParts[i];
-                ClientHelperClass.EnsureFolderExists(FilesPath);
+                Connection.EnsureFolderExists(FilesPath);
             }
 
             connectingPage = new ConnectingPage();
@@ -72,6 +70,7 @@ namespace Client {
              
         }
 
+        public Connection conn;
         private void ReadData(Socket _client) {
             StreamResult result = new(ref _client);
             PacketType packageType = (PacketType)result.ReadInt();
@@ -91,9 +90,18 @@ namespace Client {
                 case PacketType.saveCharacterData:
                     break;
                 case PacketType.publicKeyPackage:
-                    string publicKey = result.ReadString();
-                    MainMenuPage.Instance.SetPKey(publicKey);
-                    MainMenuPage.Instance.CheckForUpdate();
+                    string publicKey = result.ReadString(); 
+                    conn = new(publicKey);
+
+                    Socket netStream = con.client;
+                    try {
+                        //Connection.WriteInt((int)PacketType.UpdateFilesRequest);
+                        //Connection.WriteInt(MainMenuPage.Instance.clientToken);
+                        conn.Send(ref netStream, PacketType.UpdateFilesRequest);
+                    }
+                    catch (IOException) {
+                        Disconnect();
+                    }
                     break;
                 case PacketType.file:
                     int packageNumber = result.ReadInt();
@@ -103,11 +111,12 @@ namespace Client {
                     if (packageNumber == 0) {
                         currentFileWeAreGetting = result.ReadString();
                         int fileSize = result.ReadInt();
-                        incFile.Add ( new(FilesPath+ currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID));  
+                        long timeTicks = result.ReadLong();
+                        incFile.Add ( new(FilesPath+ currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID, timeTicks));  
                     }
                      
                     IncommingFile fileWeWriteTo = incFile.First(s => s.fileID == fileID);
-                    bool str = fileWeWriteTo.FilepartSent(ref result, packageNumber, fileID);
+                    bool str = fileWeWriteTo.FilepartSent(ref result, packageNumber);
                     if (str) {
                         incFile.RemoveAt(incFile.IndexOf(fileWeWriteTo));
                     }
