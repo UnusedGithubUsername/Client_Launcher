@@ -73,8 +73,13 @@ namespace Client {
         public byte[] data;
         public int dataIndex;
 
-        public StreamResult(ref Socket client) {
+        public StreamResult() {
+            data = Array.Empty<byte>();
+            dataIndex = 0;
+        }
 
+        public StreamResult(ref Socket client) {
+              
             byte[] ds = new byte[4];
             client.Receive(ds);
             int dataSize = BitConverter.ToInt32(ds, 0);

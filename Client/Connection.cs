@@ -9,16 +9,21 @@ namespace Client {
 
     public class Connection {
 
-        private static Socket? sock;
-        
-        private static readonly byte[] buffer = new byte[65404]; // close to max tcp package size of 65536 minus 132
-        private static int bufferPosition = 0;
-        private RSACryptoServiceProvider rsa;
+        private const int port = 16501;
+        private readonly byte[] buffer = new byte[65404]; // close to max tcp package size of 65536 minus 132
 
+        private Socket sock;
+        private static int bufferPosition;
+        private RSACryptoServiceProvider rsa; 
         private byte[] clientToken = Array.Empty<byte>();
 
-        public Connection(string publicKey) {
+        public Connection() {
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             rsa = new();
+            bufferPosition = 0;
+        }
+
+        public void CreateToken(string publicKey) {
             rsa.FromXmlString(publicKey);
              
             Random rnd = new();
@@ -32,11 +37,32 @@ namespace Client {
             }
         } 
 
-        public static void CreateSocket() {
+        public bool ConnectToServer(System.Net.IPAddress ip) {
+            try {
+                sock.Connect(ip, port);
+                return true;
+            }
+            catch (Exception) {
+
+                return false;
+            }
+        }
+
+        public void Disconnect() {
+            sock.Close();
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public void SendLoginPacket(ref Socket con, int token, string eMail, string password) {
+        public StreamResult Recieve() {
+
+            if (sock.Available == 0) {
+                return new StreamResult();
+            }
+
+            return new StreamResult(ref sock);
+        }
+
+        public void SendLoginPacket(int token, string eMail, string password) {
 
             byte[] bEMail = Encoding.UTF8.GetBytes(eMail);
             //merge (salt) the password with the email so a leaked pw database can not be used with precomputed keyword tables
@@ -58,7 +84,7 @@ namespace Client {
             data = CombineBytes(bPType, data);//write the package type to the front of the dataPacket
              
             try {
-                con.Send(data);//wríte how many characters are in the string we send
+                sock.Send(data);//wríte how many characters are in the string we send
             }
             catch (Exception) {
 
@@ -66,32 +92,32 @@ namespace Client {
             }
         }
 
-        public static void WriteString(string message) {
+        public void WriteString(string message) {
             WriteInt(message.Length);
             byte[] bytes = Encoding.UTF8.GetBytes(message);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
         }
 
-        public static void WriteBytes(ref byte[] bytes) {
+        public void WriteBytes(ref byte[] bytes) {
             WriteInt(bytes.Length);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
         }
 
-        public static void WriteInt(int message) {
+        public void WriteInt(int message) {
             byte[] bytes = BitConverter.GetBytes(message);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
         }
 
-        public static void WriteFloat(float message) {
+        public void WriteFloat(float message) {
             byte[] bytes = BitConverter.GetBytes(message);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
         }
 
-        public void Send(ref Socket netStream, PacketType pType ) {
+        public void Send(PacketType pType ) {
             int dataToSendLength = bufferPosition;
              
             byte[] dataToEncrypt = new byte[dataToSendLength];
@@ -100,7 +126,7 @@ namespace Client {
             bufferPosition = 0;
 
             try {
-                netStream.Send(dataToEncrypt);//wríte how many characters are in the string we send
+                sock.Send(dataToEncrypt);//wríte how many characters are in the string we send
             }
             catch (Exception) {
 

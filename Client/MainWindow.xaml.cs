@@ -19,9 +19,8 @@ namespace Client {
         string currentFileWeAreGetting = "";
         List<IncommingFile> incFile = new();
 
-        public Connection conn; 
-        public Socket client;  
-        private const int port = 16501;
+        public Connection con; 
+        //public Socket client;  
         bool connected = false;
         long lastConnectionAttempt = 0; //if an attempt was made recently, dont connect. Connectiong while an attempt is ongoing causes crashes 
 
@@ -38,9 +37,8 @@ namespace Client {
             MainMenu = new MainMenuPage();
 
             DataContext = this;
+            con = new();
 
-            Connection.CreateSocket();
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
 
             Timer updateLoop = new(100);//Create an Update() function used for checking incomming connections and data
             updateLoop.Elapsed += Update;
@@ -55,18 +53,15 @@ namespace Client {
         private void Update(object sender, ElapsedEventArgs e) {
             if (connected == false) {
                 return;
-            } 
-
-            while (client.Available > 0) { 
-                ReadData(client);
-            } //else if (con.lastPackageTime + 10 < currentTime) {
-                //Disconnect();
-
-             
+            }
+            
+            StreamResult result;
+            while ((result = con.Recieve()).data != Array.Empty<byte>() ) { 
+                ReadData(result);
+            }   
         }
 
-        private void ReadData(Socket _client) {
-            StreamResult result = new(ref _client);
+        private void ReadData(StreamResult result) {
             PacketType packageType = (PacketType)result.ReadInt();
             switch (packageType) {
                 case PacketType.keepAlive://due to rewrite this isno longer needed. Active connections are too much unneeded work for the server
@@ -85,8 +80,8 @@ namespace Client {
                     break;
                 case PacketType.publicKeyPackage:
                     string publicKey = result.ReadString(); 
-                    conn = new(publicKey);  
-                    conn.Send(ref client, PacketType.UpdateFilesRequest); 
+                    con.CreateToken(publicKey);  
+                    con.Send(PacketType.UpdateFilesRequest); 
 
                     break;
                 case PacketType.file:
@@ -141,14 +136,14 @@ namespace Client {
                             } 
                             OutdatedFiles.Add(of);
                         } 
-                    } 
+                    }
 
                     // Write every file thats missing to the stream and then send the packet
-                    Connection.WriteInt(OutdatedFiles.Count);
+                    con.WriteInt(OutdatedFiles.Count);
                     for (int i = 0; i < OutdatedFiles.Count; i++) { 
-                        Connection.WriteString(OutdatedFiles[i].filename);
+                        con.WriteString(OutdatedFiles[i].filename);
                     }
-                    conn.Send(ref client, PacketType.file);
+                    con.Send(PacketType.file);
 
                     break;
                 default:
@@ -158,28 +153,18 @@ namespace Client {
         }
          
 
-        private bool ConnectToServer(string ipAdress) {
+        private void ConnectToServer(string ipAdress) {
             if (DateTimeOffset.UtcNow.ToUnixTimeSeconds() < lastConnectionAttempt + 10) {
-                return false;
+                return;
             }
 
             lastConnectionAttempt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            System.Net.IPAddress ip = System.Net.IPAddress.Parse(ipAdress);
-
-            try {
-                client.Connect(ip, port);
+              
+            if (con.ConnectToServer(System.Net.IPAddress.Parse(ipAdress))){//if connection was successfull
                 connected = true;
                 TextboxErrorMsg.Content = "";
-                mainFrame.NavigationService.Navigate(MainMenu); 
-                return true;
-            }
-            catch (SocketException) {
-                TextboxErrorMsg.Content = "Socket Exception: \n Could not find the Server\n Please enter IP and click connect";
-            }
-            catch (Exception e) {
-                TextboxErrorMsg.Content = e.ToString();
-            }
-            return false;
+                mainFrame.NavigationService.Navigate(MainMenu);  
+            }  
         }
 
          
@@ -194,8 +179,7 @@ namespace Client {
             {
                 mainFrame.NavigationService.Navigate(connectingPage);
             });
-            client.Close();
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            con.Disconnect();
         }
 
         public void Connect_Click(string ipAdress) {

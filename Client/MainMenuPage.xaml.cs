@@ -27,8 +27,7 @@ namespace Client {
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) { 
-            Socket con = MainWindow.Instance.client;
-            MainWindow.Instance.conn.SendLoginPacket(ref con, clientToken, EmailTextfield.Text, PasswordTextfield.Text); 
+            MainWindow.Instance.con.SendLoginPacket(clientToken, EmailTextfield.Text, PasswordTextfield.Text); 
         }
   
         public void SetGuid(int Guid) {
