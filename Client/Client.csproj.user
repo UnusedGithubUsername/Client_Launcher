@@ -10,12 +10,18 @@
     <Compile Update="ConnectingPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Customization.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainMenuPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ConnectingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customization.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainMenuPage.xaml">

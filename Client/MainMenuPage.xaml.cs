@@ -15,10 +15,7 @@ namespace Client {
     public partial class MainMenuPage : Page {
         //The client does not need a password to login after a connection was interrupted. Just his GUId and a token ( a randomly generated number from the client)
         //A token acts as a cookie. saves db calls and improves security/performance
-
-        public int clientToken = 0;//the client chooses a token, so another client cant fake his login
-
- 
+          
         public static MainMenuPage Instance;
         public MainMenuPage() {
 
@@ -27,7 +24,7 @@ namespace Client {
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) { 
-            MainWindow.Instance.con.SendLoginPacket(clientToken, EmailTextfield.Text, PasswordTextfield.Text); 
+            MainWindow.Instance.con.SendLoginPacket(EmailTextfield.Text, PasswordTextfield.Text); 
         }
   
         public void SetGuid(int Guid) {

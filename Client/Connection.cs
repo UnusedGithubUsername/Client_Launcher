@@ -13,31 +13,32 @@ namespace Client {
         private readonly byte[] buffer = new byte[65404]; // close to max tcp package size of 65536 minus 132
 
         private Socket sock;
-        private static int bufferPosition;
-        private RSACryptoServiceProvider rsa; 
-        private byte[] clientToken = Array.Empty<byte>();
+        private int bufferPosition;
+        private readonly RSACryptoServiceProvider rsa; 
+         
+        public int savedGuid = 0;
+        public string savedPublicKey = "";
+        public byte[] clientToken = Array.Empty<byte>();
+        int i32clientToken = -1;
 
         public Connection() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             rsa = new();
             bufferPosition = 0;
-        }
 
-        public void CreateToken(string publicKey) {
-            rsa.FromXmlString(publicKey);
-             
-            Random rnd = new();
-            int i32clientToken = rnd.Next(1, Int32.MaxValue);
-            clientToken = rsa.Encrypt( BitConverter.GetBytes(i32clientToken), false);
-        }
-
-        public static void EnsureFolderExists(string folderName) {
-            if (!Directory.Exists(folderName)) {
-                Directory.CreateDirectory(folderName);
+            string path = MainWindow.FilesPath + "\\userlogin.dat";
+            //in case the login is still valid recover all the info from the file: 1) GUId, 2) Token. So the file has just pKey, guid and token
+            if (File.Exists(path)) {
+                byte[] content = File.ReadAllBytes(path);
+                savedPublicKey = Encoding.UTF8.GetString(content, 0, content.Length - 132);
+                rsa.FromXmlString(savedPublicKey); 
+                savedGuid = BitConverter.ToInt32(content, content.Length - 132);
+                clientToken = new byte[128];//  
+                Buffer.BlockCopy(content, content.Length - 128, clientToken, 0, 128); 
             }
-        } 
+        }
 
-        public bool ConnectToServer(System.Net.IPAddress ip) {
+        public bool TryToConnect(System.Net.IPAddress ip) {
             try {
                 sock.Connect(ip, port);
                 return true;
@@ -48,10 +49,39 @@ namespace Client {
             }
         }
 
-        public void Disconnect() {
-            sock.Close();
-            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        /// <summary> returns true if we already have a valid login  </summary>
+        /// This is called before we send anything deliberately. That means the client token is always generated before we send anything
+        public bool ConnectionConfirmed(string publicKey) { 
+
+            if (publicKey == savedPublicKey)
+                return true;
+
+            //if the server restarted all logins are reset and the pKey aswell. so if pKey is different we need to relog. So just generate a token and wait.  
+            savedPublicKey = publicKey;
+            rsa.FromXmlString(publicKey);
+            Random rnd = new();
+            i32clientToken = rnd.Next(1, Int32.MaxValue);//this token is meaningless until the client makes requests.
+                                                             //when a request is made, the server checks if the GUId has an active login session. the session has a token. The clients token needs to be the sessions token
+            clientToken = rsa.Encrypt(BitConverter.GetBytes(i32clientToken), false);
+            return false;
+               
         }
+
+        public void Send(PacketType pType) {
+             
+            byte[] dataPacket = new byte[bufferPosition];
+            Buffer.BlockCopy(buffer, 0, dataPacket, 0, bufferPosition);
+            dataPacket = Helper.CombineBytes(BitConverter.GetBytes((int)pType), clientToken, dataPacket);
+            bufferPosition = 0;
+
+            try {
+                sock.Send(dataPacket);//wríte how many characters are in the string we send
+            }
+            catch (Exception) {
+
+                MainWindow.Instance.Disconnect();
+            }
+        } 
 
         public StreamResult Recieve() {
 
@@ -60,9 +90,14 @@ namespace Client {
             }
 
             return new StreamResult(ref sock);
+        } 
+
+        public void Disconnect() {
+            sock.Close();
+            sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public void SendLoginPacket(int token, string eMail, string password) {
+        public void SendLoginPacket(string eMail, string password) { 
 
             byte[] bEMail = Encoding.UTF8.GetBytes(eMail);
             //merge (salt) the password with the email so a leaked pw database can not be used with precomputed keyword tables
@@ -70,24 +105,23 @@ namespace Client {
             byte[] saltedPwBytes = new byte[pwBytes.Length + bEMail.Length];
             Buffer.BlockCopy(pwBytes, 0, saltedPwBytes, 0, pwBytes.Length);
             Buffer.BlockCopy(bEMail, 0, saltedPwBytes, pwBytes.Length, bEMail.Length);
+
             // then encrypt that using an irreversible hash function. scrypt was recommended in 2016 but GPUs can now work on it, so its about as good as sha256
-            SHA256 shaObj = SHA256.Create();
-             
+            SHA256 shaObj = SHA256.Create(); 
             byte[] bPType = BitConverter.GetBytes((int)PacketType.login);
-            byte[] bToken = BitConverter.GetBytes(token);
-            byte[] bEMail_L = BitConverter.GetBytes(eMail.Length);
-            //byte[] bEMail
+            byte[] bToken = BitConverter.GetBytes(i32clientToken);//this token will be the thing that verifies requests from this client
+            byte[] bEMail_L = BitConverter.GetBytes(eMail.Length); 
             byte[] bHashedPW = shaObj.ComputeHash(saltedPwBytes);
             byte[] bHashedPW_L = BitConverter.GetBytes(bHashedPW.Length); 
-            byte[] data = CombineBytes(bToken, bEMail_L, bEMail, bHashedPW_L, bHashedPW); 
+
+            byte[] data = Helper.CombineBytes(bToken, bEMail_L, bEMail, bHashedPW_L, bHashedPW); 
             data = rsa.Encrypt(data, false);
-            data = CombineBytes(bPType, data);//write the package type to the front of the dataPacket
+            data = Helper.CombineBytes(bPType, data);//write the package type to the front of the dataPacket
              
             try {
                 sock.Send(data);//wríte how many characters are in the string we send
             }
-            catch (Exception) {
-
+            catch (Exception) { 
                 MainWindow.Instance.Disconnect();
             }
         }
@@ -115,69 +149,6 @@ namespace Client {
             byte[] bytes = BitConverter.GetBytes(message);
             Buffer.BlockCopy(bytes, 0, buffer, bufferPosition, bytes.Length);
             bufferPosition += bytes.Length; 
-        }
-
-        public void Send(PacketType pType ) {
-            int dataToSendLength = bufferPosition;
-             
-            byte[] dataToEncrypt = new byte[dataToSendLength];
-            Buffer.BlockCopy(buffer, 0, dataToEncrypt, 0, bufferPosition); 
-            dataToEncrypt = CombineBytes(BitConverter.GetBytes((int)pType), clientToken, dataToEncrypt);  
-            bufferPosition = 0;
-
-            try {
-                sock.Send(dataToEncrypt);//wríte how many characters are in the string we send
-            }
-            catch (Exception) {
-
-                MainWindow.Instance.Disconnect();
-            } 
-        }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second) {
-            byte[] bytes = new byte[first.Length + second.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            return bytes;
-        }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third) {
-            byte[] bytes = new byte[first.Length + second.Length + third.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
-            return bytes;
-        }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth) {// I could reduce linecount, but c# would copy the arrays AGAIN. I could use ref though
-            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
-            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
-            return bytes;
-        }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth, byte[] fifth) {
-            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length + fifth.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
-            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
-            Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
-            return bytes;
-        }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth, byte[] fifth, byte[] sixth) {
-            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length + fifth.Length + sixth.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
-            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
-            Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
-            Buffer.BlockCopy(sixth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length + fifth.Length, sixth.Length);
-            return bytes;
-        }
-
+        } 
     }
 }

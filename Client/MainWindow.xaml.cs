@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Net.Sockets;
+using System.Windows.Controls; 
 using System.Timers;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq; 
+using System.Text;  
 
 namespace Client {
     public partial class MainWindow : Window {
 
         public static MainWindow Instance; //WPF sucks and can not link things that inherit from window or page by refference. Only static ones work.... so static it is
-        Page connectingPage;// MVVM is stupid
-        Page MainMenu;
+        private readonly Page connectingPage;// MVVM is stupid
+        private readonly Page MainMenu;
 
-        private string FilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private string[] fpParts = { "\\My Games", "\\Corivi", "\\LauncherClient\\" };
-        string currentFileWeAreGetting = "";
-        List<IncommingFile> incFile = new();
+        public static string FilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string[] fpParts = { "\\My Games", "\\Corivi", "\\LauncherClient\\" };
+        private string currentFileWeAreGetting = "";
+        private readonly List<IncommingFile> incFile = new();
 
-        public Connection con; 
-        //public Socket client;  
-        bool connected = false;
-        long lastConnectionAttempt = 0; //if an attempt was made recently, dont connect. Connectiong while an attempt is ongoing causes crashes 
+        public Connection con;   
+        private bool connected = false;
+        private long lastConnectionAttempt = 0; //if an attempt was made recently, dont connect. Connectiong while an attempt is ongoing causes crashes 
 
         public MainWindow() {
             InitializeComponent();
@@ -30,7 +29,7 @@ namespace Client {
 
             for (int i = 0; i < fpParts.Length; i++) {
                 FilesPath += fpParts[i];
-                Connection.EnsureFolderExists(FilesPath);
+                Helper.EnsureFolderExists(FilesPath);
             }
 
             connectingPage = new ConnectingPage();
@@ -38,7 +37,6 @@ namespace Client {
 
             DataContext = this;
             con = new();
-
 
             Timer updateLoop = new(100);//Create an Update() function used for checking incomming connections and data
             updateLoop.Elapsed += Update;
@@ -69,6 +67,10 @@ namespace Client {
                 case PacketType.login:
                     int guid = result.ReadInt();
                     MainMenuPage.Instance.SetGuid(guid);
+
+                    byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken));
+                    File.WriteAllBytes(MainWindow.FilesPath + "\\userlogin.dat", loginFile);
+
                     this.Dispatcher.Invoke(() =>
                     {
                         TextboxErrorMsg.Content = "";
@@ -80,7 +82,7 @@ namespace Client {
                     break;
                 case PacketType.publicKeyPackage:
                     string publicKey = result.ReadString(); 
-                    con.CreateToken(publicKey);  
+                    con.ConnectionConfirmed(publicKey);  
                     con.Send(PacketType.UpdateFilesRequest); 
 
                     break;
@@ -129,10 +131,8 @@ namespace Client {
                             string[] parts = filename.Split( '\\');//Split the filename. Check Dir /Base/ then /Base/Part1/, then Base/Part1/Part2/.. etc.
                             string subPath = FilesPath;
                             for (int j = 0; j < parts.Length - 1; j++) { 
-                                subPath +=  "\\"+parts[j];
-                                  
-                                if (!Directory.Exists(subPath))
-                                    Directory.CreateDirectory(subPath);
+                                subPath +=  "\\"+parts[j]; 
+                                Helper.EnsureFolderExists(subPath);
                             } 
                             OutdatedFiles.Add(of);
                         } 
@@ -160,7 +160,7 @@ namespace Client {
 
             lastConnectionAttempt = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
               
-            if (con.ConnectToServer(System.Net.IPAddress.Parse(ipAdress))){//if connection was successfull
+            if (con.TryToConnect(System.Net.IPAddress.Parse(ipAdress))){//if connection was successfull
                 connected = true;
                 TextboxErrorMsg.Content = "";
                 mainFrame.NavigationService.Navigate(MainMenu);  

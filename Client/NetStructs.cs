@@ -4,14 +4,64 @@ using System.Net.Sockets;//for TCPClient
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Client { 
-     
+namespace Client {
+
+    public static class Helper{
+         
+        public static void EnsureFolderExists(string folderName) {
+            if (!Directory.Exists(folderName)) {
+                Directory.CreateDirectory(folderName);
+            }
+        }
+        public static byte[] CombineBytes(byte[] first, byte[] second) {
+            byte[] bytes = new byte[first.Length + second.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            return bytes;
+        }
+
+        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third) {
+            byte[] bytes = new byte[first.Length + second.Length + third.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
+            return bytes;
+        }
+
+        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth) {// I could reduce linecount, but c# would copy the arrays AGAIN. I could use ref though
+            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
+            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
+            return bytes;
+        }
+
+        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth, byte[] fifth) {
+            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length + fifth.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
+            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
+            Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
+            return bytes;
+        }
+
+        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth, byte[] fifth, byte[] sixth) {
+            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length + fifth.Length + sixth.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
+            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
+            Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
+            Buffer.BlockCopy(sixth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length + fifth.Length, sixth.Length);
+            return bytes;
+        }
+    }
 
     public struct IncommingFile {
         public const int MAX_FILE_BYTES = 65524;
-
-        public static int fCount = 0;
-
+          
         public string name;
         public int headerOffset;
         public byte[] data;
@@ -62,7 +112,7 @@ namespace Client {
 
             if (AllWasSent) {
                 File.WriteAllBytes(name, data);  //Create the new file and synchronize the creation time
-                FileInfo fi = new FileInfo(name);
+                FileInfo fi = new(name);
                 fi.CreationTime = new DateTime(CreationTime);
             }
             return AllWasSent;
