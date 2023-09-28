@@ -13,6 +13,7 @@ namespace Client {
         public static MainWindow Instance; //WPF sucks and can not link things that inherit from window or page by refference. Only static ones work.... so static it is
         private readonly Page connectingPage;// MVVM is stupid
         private readonly Page MainMenu;
+        private readonly Page CustomizationPage;
 
         public static string FilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public static string[] fpParts = { "\\My Games", "\\Corivi", "\\LauncherClient\\" };
@@ -34,6 +35,7 @@ namespace Client {
 
             connectingPage = new ConnectingPage();
             MainMenu = new MainMenuPage();
+            CustomizationPage = new Customization();
 
             DataContext = this;
             con = new();
@@ -70,9 +72,9 @@ namespace Client {
 
                     byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken));
                     File.WriteAllBytes(MainWindow.FilesPath + "\\userlogin.dat", loginFile);
-
                     this.Dispatcher.Invoke(() =>
                     {
+                        mainFrame.NavigationService.Navigate(CustomizationPage);
                         TextboxErrorMsg.Content = "";
                     });
                     break;

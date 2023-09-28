@@ -46,17 +46,7 @@ namespace Client {
             Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
             return bytes;
         }
-
-        public static byte[] CombineBytes(byte[] first, byte[] second, byte[] third, byte[] fourth, byte[] fifth, byte[] sixth) {
-            byte[] bytes = new byte[first.Length + second.Length + third.Length + fourth.Length + fifth.Length + sixth.Length];
-            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
-            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
-            Buffer.BlockCopy(third, 0, bytes, first.Length + second.Length, third.Length);
-            Buffer.BlockCopy(fourth, 0, bytes, first.Length + second.Length + third.Length, fourth.Length);
-            Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
-            Buffer.BlockCopy(sixth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length + fifth.Length, sixth.Length);
-            return bytes;
-        }
+         
     }
 
     public struct IncommingFile {
@@ -130,11 +120,11 @@ namespace Client {
 
         public StreamResult(ref Socket client) {
               
-            byte[] ds = new byte[4];
-            client.Receive(ds);
-            int dataSize = BitConverter.ToInt32(ds, 0);
+            byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
+            client.Receive(packetSize);
+            int dataSize = BitConverter.ToInt32(packetSize, 0);
 
-            data = new byte[dataSize];
+            data = new byte[dataSize];//recieve all the data that is expected from the package
             client.Receive(data);
             dataIndex = 0;
         }

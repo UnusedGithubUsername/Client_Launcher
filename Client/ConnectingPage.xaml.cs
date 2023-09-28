@@ -43,5 +43,6 @@ namespace Client {
 
             mediaElement.Source = new Uri(videoFullPath);
         }
+
     }
 }

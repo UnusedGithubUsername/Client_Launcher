@@ -39,3 +39,6 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\X.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\Bar.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\left.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\right.png
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.g.cs
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\WoodField.png
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.baml

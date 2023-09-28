@@ -17,6 +17,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/mein%20film.mp4")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/minimize.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/right.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/woodfield.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/x.png")]
 
 
