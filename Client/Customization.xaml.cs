@@ -25,6 +25,8 @@ namespace Client {
 
     public partial class Customization : Page {
         public static Customization Instance;
+        public int guid = 0;
+        public int loadedCharacterIndex = 0;
         private int[] initialStats = new int[4];
         private int[] stats = new int[4];
         private int[] skills = new int[10];
@@ -33,10 +35,20 @@ namespace Client {
         public Customization() {
             InitializeComponent();
             Instance = this;
-            SetCharacterStats(new byte[14*4]);
+            SetCharacterStats(new byte[14*4], -1);
         }
 
-        public void SetCharacterStats(byte[] characterData) {
+        public void SetGuid(int Guid) {
+            guid = Guid;
+            this.Dispatcher.Invoke(() =>
+            {
+                GuidTextfield.Content = Guid.ToString();
+            });
+        }
+
+        public void SetCharacterStats(byte[] characterData, int charIndex) {
+            loadedCharacterIndex = charIndex;
+
             Buffer.BlockCopy(characterData, 0, stats, 0, initialStats.Length * 4);
             Buffer.BlockCopy(characterData, 0, initialStats, 0, stats.Length * 4);
             Buffer.BlockCopy(characterData, stats.Length * 4, skills, 0, skills.Length * 4);
@@ -52,7 +64,14 @@ namespace Client {
         }
 
         private void Click_Save(object sender, RoutedEventArgs e) {
-            MainWindow.Instance.SaveUserData(stats, skills);
+            if (loadedCharacterIndex == -1) {
+                return;
+            }
+            MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, stats, skills);
+        }
+
+        private void Click_Req(object sender, RoutedEventArgs e) {
+            MainWindow.Instance.ReqCharData(guid, 1);
         }
 
         private void Click(bool left, int index) {

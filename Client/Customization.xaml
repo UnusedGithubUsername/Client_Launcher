@@ -28,6 +28,17 @@
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
             <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
+            <Button x:Name="Req" Content="Req" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="532,64,0,0" VerticalAlignment="Top" Click="Click_Req" Height="34" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
+
+                <Button.Background>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Button.Background>
+                <Button.OpacityMask>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Button.OpacityMask>
+            </Button>
+
+
         </Grid>
         <Grid>
             <Button x:Name="Save" Content="Save" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="629,288,0,0" VerticalAlignment="Top" Click="Click_Save" Height="44" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">

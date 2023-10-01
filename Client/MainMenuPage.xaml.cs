@@ -26,14 +26,7 @@ namespace Client {
         private void LoginButton_Click(object sender, RoutedEventArgs e) { 
             MainWindow.Instance.con.SendLoginPacket(EmailTextfield.Text, PasswordTextfield.Text); 
         }
-  
-        public void SetGuid(int Guid) {
-            this.Dispatcher.Invoke(() =>
-            {
-                GuidTextfield.Content = Guid.ToString();
-            });
-        }
-  
+   
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
             MainWindow.Instance.DragMove();
         }

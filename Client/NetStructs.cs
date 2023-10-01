@@ -171,13 +171,16 @@ namespace Client {
     }
 
     public enum PacketType {
-        keepAlive,
-        login,
+        keepAlive, 
         requestCharacterData,
         saveCharacterData,
         publicKeyPackage,
         file,
-        UpdateFilesRequest
+        UpdateFilesRequest,
+        requestWithToken,
+        requestWithPassword
+
+
     }
 
     public struct OutdatedFile {

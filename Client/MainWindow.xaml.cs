@@ -66,9 +66,9 @@ namespace Client {
             switch (packageType) {
                 case PacketType.keepAlive://due to rewrite this isno longer needed. Active connections are too much unneeded work for the server
                     break;
-                case PacketType.login:
+                case PacketType.requestWithPassword:
                     int guid = result.ReadInt();
-                    MainMenuPage.Instance.SetGuid(guid);
+                    Customization.Instance.SetGuid(guid);
 
                     byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken));
                     File.WriteAllBytes(MainWindow.FilesPath + "\\userlogin.dat", loginFile);
@@ -79,8 +79,9 @@ namespace Client {
                     });
                     break;
                 case PacketType.requestCharacterData:
+                    int characterIndex = result.ReadInt();
                     byte[] characterData = result.ReadBytes();
-                    Customization.Instance.SetCharacterStats(new byte[56]);
+                    Customization.Instance.SetCharacterStats(characterData, characterIndex);
                     break;
                 case PacketType.saveCharacterData:
                     break;
@@ -173,8 +174,22 @@ namespace Client {
 
          
 
-        public void SaveUserData(int[] stats, int[] skills) {
+        public void SaveUserData(int guid, int charIndex, int[] stats, int[] skills) {
+            byte[] dataToSend = new byte[stats.Length * 4 + skills.Length * 4];
+            Buffer.BlockCopy(stats, 0, dataToSend, 0, stats.Length*4);
+            Buffer.BlockCopy(skills, 0, dataToSend, stats.Length * 4, skills.Length*4);
+            con.WriteInt(guid);
+            con.WriteInt(0);
+            con.WriteInt(charIndex);
+            con.WriteBytes(ref dataToSend);
+            con.Send(PacketType.requestWithToken);
+        }
 
+        public void ReqCharData(int guid, int charIndex) { 
+            con.WriteInt(guid);
+            con.WriteInt(1); //request a chars data
+            con.WriteInt(charIndex);
+            con.Send(PacketType.requestWithToken);
         }
 
         public void Disconnect() {
