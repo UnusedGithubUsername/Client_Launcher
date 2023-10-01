@@ -26,10 +26,19 @@
             </Grid.OpacityMask>
 
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/> 
+            <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
         </Grid>
         <Grid>
+            <Button x:Name="Save" Content="Save" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="629,288,0,0" VerticalAlignment="Top" Click="Click_Save" Height="44" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
+
+                <Button.Background>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Button.Background>
+                <Button.OpacityMask>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Button.OpacityMask>
+            </Button>
             <Grid>
                 <Button x:Name="Left1" Content="" HorizontalAlignment="Left" Margin="607,165,0,0" VerticalAlignment="Top" Click="Click_L1" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
                     <Button.Background>
@@ -40,7 +49,7 @@
                     </Button.OpacityMask>
                 </Button>
 
-                <Label x:Name="Mid1" Content="" HorizontalAlignment="Left" Margin="640,165,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="22">
+                <Label x:Name="Mid1" Content=" 13" Foreground = "LightSalmon"  HorizontalAlignment="Left" Margin="640,165,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
                     <Label.Background>
                         <ImageBrush ImageSource="/Video/WoodField.png"/>
                     </Label.Background>
@@ -71,7 +80,7 @@
                     </Button.OpacityMask>
                 </Button>
 
-                <Label x:Name="Mid2" Content="" HorizontalAlignment="Left" Margin="640,195,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="22">
+                <Label x:Name="Mid2" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,195,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
                     <Label.Background>
                         <ImageBrush ImageSource="/Video/WoodField.png"/>
                     </Label.Background>
@@ -102,7 +111,7 @@
                     </Button.OpacityMask>
                 </Button>
 
-                <Label x:Name="Mid3" Content="" HorizontalAlignment="Left" Margin="640,225,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="22">
+                <Label x:Name="Mid3" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,225,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
                     <Label.Background>
                         <ImageBrush ImageSource="/Video/WoodField.png"/>
                     </Label.Background>
@@ -133,7 +142,7 @@
                     </Button.OpacityMask>
                 </Button>
 
-                <Label x:Name="Mid4" Content="" HorizontalAlignment="Left" Margin="640,255,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="22">
+                <Label x:Name="Mid4" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,255,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
                     <Label.Background>
                         <ImageBrush ImageSource="/Video/WoodField.png"/>
                     </Label.Background>
@@ -152,8 +161,8 @@
                 </Button>
 
             </Grid>
-            
-            
+
+
         </Grid>
 
 

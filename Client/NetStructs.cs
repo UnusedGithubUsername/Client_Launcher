@@ -141,6 +141,14 @@ namespace Client {
             return intRead;
         }
 
+        public byte[] ReadBytes() {
+            int arrayLen = this.ReadInt();
+            byte[] byteArray = new byte[arrayLen];
+            Buffer.BlockCopy(data, dataIndex, byteArray, 0, arrayLen);
+            dataIndex += arrayLen;
+            return byteArray;
+        }
+
         public int BytesLeft() {
             return data.Length - dataIndex;
         }

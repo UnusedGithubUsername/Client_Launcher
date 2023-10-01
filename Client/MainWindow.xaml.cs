@@ -79,6 +79,8 @@ namespace Client {
                     });
                     break;
                 case PacketType.requestCharacterData:
+                    byte[] characterData = result.ReadBytes();
+                    Customization.Instance.SetCharacterStats(new byte[56]);
                     break;
                 case PacketType.saveCharacterData:
                     break;
@@ -171,7 +173,7 @@ namespace Client {
 
          
 
-        public void SaveUserData() {
+        public void SaveUserData(int[] stats, int[] skills) {
 
         }
 
