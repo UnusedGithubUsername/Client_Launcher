@@ -7,8 +7,36 @@
       mc:Ignorable="d" 
       Background="Transparent"
       Title="MainMenuPage" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      >
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Page.Resources>
+       
+
+        <ControlTemplate x:Key="RightButton" TargetType="Button">
+            <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Video/right.png"/>
+                </Button.Background>
+                <Button.OpacityMask>
+                    <ImageBrush ImageSource="/Video/right.png"/>
+                </Button.OpacityMask>
+            </Button>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="WoodField" TargetType="Label">
+            <Label Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
+                <Label.Background>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Label.Background>
+                <Label.OpacityMask>
+                    <ImageBrush ImageSource="/Video/WoodField.png"/>
+                </Label.OpacityMask>
+            </Label>
+        </ControlTemplate>
+
+
+    </Page.Resources>
+
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="794*"/>
@@ -16,8 +44,7 @@
         </Grid.ColumnDefinitions>
         <Border Name="mask" Background="Black" CornerRadius="30"/>
 
-        <Grid Margin="0,0,0,0" >
-
+        <Grid Margin="0,0,0,0" > 
             <Grid.Background>
                 <ImageBrush ImageSource="/Client;component/Video/Background.png"/>
             </Grid.Background>
@@ -28,7 +55,10 @@
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
             <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
-            <Button x:Name="Req" Content="Req" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="532,64,0,0" VerticalAlignment="Top" Click="Click_Req" Height="34" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
+
+
+
+            <Button x:Name="Req" Content="Req"  Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="532,64,0,0" VerticalAlignment="Top" Click="Click_Req" Height="34" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
 
                 <Button.Background>
                     <ImageBrush ImageSource="/Video/WoodField.png"/>
@@ -36,9 +66,7 @@
                 <Button.OpacityMask>
                     <ImageBrush ImageSource="/Video/WoodField.png"/>
                 </Button.OpacityMask>
-            </Button>
-
-
+            </Button> 
         </Grid>
         <Grid>
             <Button x:Name="Save" Content="Save" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="629,288,0,0" VerticalAlignment="Top" Click="Click_Save" Height="44" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
@@ -50,130 +78,20 @@
                     <ImageBrush ImageSource="/Video/WoodField.png"/>
                 </Button.OpacityMask>
             </Button>
-            <Grid>
-                <Button x:Name="Left1" Content="" HorizontalAlignment="Left" Margin="607,165,0,0" VerticalAlignment="Top" Click="Click_L1" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-                <Label x:Name="Mid1" Content=" 13" Foreground = "LightSalmon"  HorizontalAlignment="Left" Margin="640,165,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.Background>
-                    <Label.OpacityMask>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.OpacityMask>
-                </Label>
-
-                <Button x:Name="Right1" Content="" HorizontalAlignment="Left" Margin="679,165,0,0" VerticalAlignment="Top" Click="Click_R1" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-            </Grid>
-
-
-            <Grid>
-                <Button x:Name="Left2" Content="" HorizontalAlignment="Left" Margin="607,195,0,0" VerticalAlignment="Top" Click="Click_L2" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-                <Label x:Name="Mid2" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,195,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.Background>
-                    <Label.OpacityMask>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.OpacityMask>
-                </Label>
-
-                <Button x:Name="Right2" Content="" HorizontalAlignment="Left" Margin="679,195,0,0" VerticalAlignment="Top" Click="Click_R2" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-            </Grid>
-
-
-            <Grid>
-                <Button x:Name="Left3" Content="" HorizontalAlignment="Left" Margin="607,225,0,0" VerticalAlignment="Top" Click="Click_L3" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-                <Label x:Name="Mid3" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,225,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.Background>
-                    <Label.OpacityMask>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.OpacityMask>
-                </Label>
-
-                <Button x:Name="Right3" Content="" HorizontalAlignment="Left" Margin="679,225,0,0" VerticalAlignment="Top" Click="Click_R3" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-            </Grid>
-
-
-            <Grid>
-                <Button x:Name="Left4" Content="" HorizontalAlignment="Left" Margin="607,255,0,0" VerticalAlignment="Top" Click="Click_L4" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/left.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-                <Label x:Name="Mid4" Content=" 13" Foreground = "LightSalmon" HorizontalAlignment="Left" Margin="640,255,0,0" VerticalAlignment="Top" Height="33" Width="39" RenderTransformOrigin="0.5,0.5" FontSize="16">
-                    <Label.Background>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.Background>
-                    <Label.OpacityMask>
-                        <ImageBrush ImageSource="/Video/WoodField.png"/>
-                    </Label.OpacityMask>
-                </Label>
-
-                <Button x:Name="Right4" Content="" HorizontalAlignment="Left" Margin="679,255,0,0" VerticalAlignment="Top" Click="Click_R4" Height="33" Width="33" RenderTransformOrigin="0.5,0.5" FontSize="22">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.Background>
-                    <Button.OpacityMask>
-                        <ImageBrush ImageSource="/Video/right.png"/>
-                    </Button.OpacityMask>
-                </Button>
-
-            </Grid>
-
-
+             
+            <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="602,165,139,252"  Click="Click_L1" Height="33" Width="33"/>
+            <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="602,195,139,222"  Click="Click_L2" Height="33" Width="33"/>
+            <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="602,225,139,192"  Click="Click_L3" Height="33" Width="33"/>
+            <Button x:Name="Left4" Template="{StaticResource LeftButton}" Margin="602,255,139,162"  Click="Click_L4" Height="33" Width="33"/>
+            <Label x:Name="Mid1" Margin="632,165,99,252" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid2" Margin="632,192,99,225" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid3" Margin="632,225,99,192" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid4" Margin="632,255,99,162" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="666,165,62,252"  Click="Click_R1"  Height="33" Width="33"/> 
+            <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="666,195,62,222"  Click="Click_R2"  Height="33" Width="33"/>
+            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="666,225,62,192"  Click="Click_R3"  Height="33" Width="33"/>  
+            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="666,255,62,162"  Click="Click_R4"  Height="33" Width="33"/> 
+              
         </Grid>
 
 

@@ -19,7 +19,7 @@ namespace Client {
         public int savedGuid = 0;
         public string savedPublicKey = "";
         public byte[] clientToken = Array.Empty<byte>();
-        int i32clientToken = -1;
+        public int i32clientToken = -1;
 
         public Connection() {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -30,11 +30,13 @@ namespace Client {
             //in case the login is still valid recover all the info from the file: 1) GUId, 2) Token. So the file has just pKey, guid and token
             if (File.Exists(path)) {
                 byte[] content = File.ReadAllBytes(path);
-                savedPublicKey = Encoding.UTF8.GetString(content, 0, content.Length - 132);
+                savedPublicKey = Encoding.UTF8.GetString(content, 0, content.Length - 136);
                 rsa.FromXmlString(savedPublicKey); 
-                savedGuid = BitConverter.ToInt32(content, content.Length - 132);
+                savedGuid = BitConverter.ToInt32(content, content.Length - 136);
                 clientToken = new byte[128];//  
-                Buffer.BlockCopy(content, content.Length - 128, clientToken, 0, 128); 
+                Buffer.BlockCopy(content, content.Length - 132, clientToken, 0, 128); 
+                i32clientToken = BitConverter.ToInt32(content, content.Length - 4);
+
             }
         }
 

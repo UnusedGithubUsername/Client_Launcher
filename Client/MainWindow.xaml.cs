@@ -68,9 +68,10 @@ namespace Client {
                     break;
                 case PacketType.requestWithPassword:
                     int guid = result.ReadInt();
+                    byte[] itemData = result.ReadBytes();
                     Customization.Instance.SetGuid(guid);
 
-                    byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken));
+                    byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken), BitConverter.GetBytes(con.i32clientToken));
                     File.WriteAllBytes(MainWindow.FilesPath + "\\userlogin.dat", loginFile);
                     this.Dispatcher.Invoke(() =>
                     {
@@ -168,7 +169,11 @@ namespace Client {
             if (con.TryToConnect(System.Net.IPAddress.Parse(ipAdress))){//if connection was successfull
                 connected = true;
                 TextboxErrorMsg.Content = "";
-                mainFrame.NavigationService.Navigate(MainMenu);  
+                if(con.i32clientToken == 69420) {
+                    mainFrame.Navigate(CustomizationPage);
+                } else {
+                    mainFrame.NavigationService.Navigate(MainMenu);
+                }
             }  
         }
 
