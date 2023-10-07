@@ -10,9 +10,11 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/background.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/bar.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/buttonbackground.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/cloud.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/cloud2.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/cloud3.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/inventorybackground.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/left.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/mein%20film.mp4")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/minimize.png")]

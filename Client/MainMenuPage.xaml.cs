@@ -43,13 +43,6 @@ namespace Client {
             Application.Current.Shutdown();
         }
          
-        public void SetPKey2(string pkey) {
-
-            this.Dispatcher.Invoke(() =>
-            {
-                TextfieldPublicKey.Content = pkey;
-
-            });
-        }
+        
     }
 }

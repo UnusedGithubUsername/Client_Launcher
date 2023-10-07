@@ -42,3 +42,7 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\right.png
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.g.cs
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\WoodField.png
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Templates.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\App.baml
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\InventoryBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\ButtonBackground.png

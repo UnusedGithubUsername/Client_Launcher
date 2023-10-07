@@ -9,33 +9,6 @@
       Title="MainMenuPage" 
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Page.Resources>
-       
-
-        <ControlTemplate x:Key="RightButton" TargetType="Button">
-            <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Video/right.png"/>
-                </Button.Background>
-                <Button.OpacityMask>
-                    <ImageBrush ImageSource="/Video/right.png"/>
-                </Button.OpacityMask>
-            </Button>
-        </ControlTemplate>
-
-        <ControlTemplate x:Key="WoodField" TargetType="Label">
-            <Label Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
-                <Label.Background>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Label.Background>
-                <Label.OpacityMask>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Label.OpacityMask>
-            </Label>
-        </ControlTemplate>
-
-
-    </Page.Resources>
 
     <Grid >
         <Grid.ColumnDefinitions>
@@ -44,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Border Name="mask" Background="Black" CornerRadius="30"/>
 
-        <Grid Margin="0,0,0,0" > 
+        <Grid Margin="0,0,0,0" >
             <Grid.Background>
                 <ImageBrush ImageSource="/Client;component/Video/Background.png"/>
             </Grid.Background>
@@ -55,30 +28,9 @@
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
             <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
+            <Button x:Name="Save" Content="Save" Template="{StaticResource WoodButton}" Click="Click_Save" Height="44" Width="62" Margin="629,288,0,0"    />
+            <Button x:Name="Req"  Content="Req"  Template="{StaticResource WoodButton}" Click="Click_Req"  Height="34" Width="62" Margin="583,81,148,335"  />
 
-
-
-            <Button x:Name="Req" Content="Req"  Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="532,64,0,0" VerticalAlignment="Top" Click="Click_Req" Height="34" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
-
-                <Button.Background>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Button.Background>
-                <Button.OpacityMask>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Button.OpacityMask>
-            </Button> 
-        </Grid>
-        <Grid>
-            <Button x:Name="Save" Content="Save" Foreground = "LightSalmon"   HorizontalAlignment="Left" Margin="629,288,0,0" VerticalAlignment="Top" Click="Click_Save" Height="44" Width="62" RenderTransformOrigin="0.5,0.5" FontSize="15">
-
-                <Button.Background>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Button.Background>
-                <Button.OpacityMask>
-                    <ImageBrush ImageSource="/Video/WoodField.png"/>
-                </Button.OpacityMask>
-            </Button>
-             
             <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="602,165,139,252"  Click="Click_L1" Height="33" Width="33"/>
             <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="602,195,139,222"  Click="Click_L2" Height="33" Width="33"/>
             <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="602,225,139,192"  Click="Click_L3" Height="33" Width="33"/>
@@ -87,15 +39,77 @@
             <Label x:Name="Mid2" Margin="632,192,99,225" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
             <Label x:Name="Mid3" Margin="632,225,99,192" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
             <Label x:Name="Mid4" Margin="632,255,99,162" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="666,165,62,252"  Click="Click_R1"  Height="33" Width="33"/> 
+            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="666,165,62,252"  Click="Click_R1"  Height="33" Width="33"/>
             <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="666,195,62,222"  Click="Click_R2"  Height="33" Width="33"/>
-            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="666,225,62,192"  Click="Click_R3"  Height="33" Width="33"/>  
-            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="666,255,62,162"  Click="Click_R4"  Height="33" Width="33"/> 
-              
+            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="666,225,62,192"  Click="Click_R3"  Height="33" Width="33"/>
+            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="666,255,62,162"  Click="Click_R4"  Height="33" Width="33"/>
+
+            <Grid x:Name="InventoryBackground" HorizontalAlignment="Left" Margin="49,93,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown = "Grid_PreviewMouseLeftButtonDown" Height="326" Width="518">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Client;component/Video/InventoryBackground.png"/>
+                </Grid.Background>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="50">
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                        <Button Width="50" Height="50"></Button>
+                    </StackPanel>
+
+                </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
         </Grid>
-
-
-
 
         <Grid HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown = "Grid_PreviewMouseLeftButtonDown" Height="54" Width="770">
             <Grid.Background>
@@ -103,24 +117,8 @@
             </Grid.Background>
         </Grid>
 
-
-        <Button x:Name="Minimize" Content="" HorizontalAlignment="Left" Margin="667,0,0,0" VerticalAlignment="Top" Click="Connect_Minimize" Height="43" Width="55" RenderTransformOrigin="0.5,0.5" FontSize="22">
-            <Button.Background>
-                <ImageBrush ImageSource="/Client;component/Video/Minimize.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Client;component/Video/Minimize.png"/>
-            </Button.OpacityMask>
-        </Button>
-
-        <Button x:Name="Quit" Content="" HorizontalAlignment="Left" Margin="734,0,0,0" VerticalAlignment="Top" Click="Connect_Quit" Height="43" Width="40" FontSize="22">
-            <Button.Background>
-                <ImageBrush ImageSource="/Client;component/Video/X.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Client;component/Video/X.png"/>
-            </Button.OpacityMask>
-        </Button>
+        <Button x:Name="Minimize"  Click="Connect_Minimize"  Template="{StaticResource Minimize}" Margin="667,0,0,0"/>
+        <Button x:Name="Quit"      Click="Connect_Quit"      Template="{StaticResource Quit}"     Margin="734,0,0,0"/>
 
     </Grid>
 

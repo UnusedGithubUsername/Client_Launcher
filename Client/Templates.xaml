@@ -10,4 +10,60 @@
             </Button.OpacityMask>
         </Button>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="RightButton" TargetType="Button">
+        <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button.Background>
+                <ImageBrush ImageSource="/Video/right.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Video/right.png"/>
+            </Button.OpacityMask>
+        </Button>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="WoodField" TargetType="Label">
+        <Label Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
+            <Label.Background>
+                <ImageBrush ImageSource="/Video/WoodField.png"/>
+            </Label.Background>
+            <Label.OpacityMask>
+                <ImageBrush ImageSource="/Video/WoodField.png"/>
+            </Label.OpacityMask>
+        </Label>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="WoodButton" TargetType="Button">
+        <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
+            <Button.Background>
+                <ImageBrush ImageSource="/Video/WoodField.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Video/WoodField.png"/>
+            </Button.OpacityMask>
+        </Button>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Minimize" TargetType="Button">
+        <Button Width="55" Height="43" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button.Background>
+                <ImageBrush ImageSource="/Video/Minimize.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Video/Minimize.png"/>
+            </Button.OpacityMask>
+        </Button>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Quit" TargetType="Button">
+        <Button Width="40" Height="43" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button.Background>
+                <ImageBrush ImageSource="/Video/X.png"/>
+            </Button.Background>
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Video/X.png"/>
+            </Button.OpacityMask>
+        </Button>
+    </ControlTemplate>
+
 </ResourceDictionary>

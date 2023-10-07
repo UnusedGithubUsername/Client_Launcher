@@ -11,9 +11,11 @@
   <ItemGroup>
     <None Remove="Video\Background.png" />
     <None Remove="Video\Bar.png" />
+    <None Remove="Video\ButtonBackground.png" />
     <None Remove="Video\cloud.png" />
     <None Remove="Video\cloud2.png" />
     <None Remove="Video\cloud3.png" />
+    <None Remove="Video\InventoryBackground.png" />
     <None Remove="Video\left.png" />
     <None Remove="Video\maskk.png" />
     <None Remove="Video\Mein Film.mp4" />
@@ -37,6 +39,9 @@
     <Content Include="Video\Bar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\ButtonBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\cloud.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -46,11 +51,14 @@
     <Content Include="Video\cloud3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\InventoryBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\Mein Film.mp4">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\Minimize.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

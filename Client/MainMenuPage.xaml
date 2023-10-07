@@ -28,11 +28,6 @@
             <TextBox x:Name="EmailTextfield" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="292,237,0,0"/>
             <TextBox x:Name="PasswordTextfield" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="292,257,0,0"/>
             <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Click="LoginButton_Click" Margin="335,280,0,0"/>
-            <Button x:Name="ReqFileButton" Content="ReqFile" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ReqFileButton_Click" Margin="71,101,0,0"/>
-
-            <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="TextfieldPublicKey" Content="0&#xA;" HorizontalAlignment="Left" Margin="743,116,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 
@@ -44,26 +39,8 @@
 
 
 
-
-
-
-        <Button x:Name="Minimize" Content="" HorizontalAlignment="Left" Margin="667,0,0,0" VerticalAlignment="Top" Click="Connect_Minimize" Height="43" Width="55" RenderTransformOrigin="0.5,0.5" FontSize="22">
-            <Button.Background>
-                <ImageBrush ImageSource="/Client;component/Video/Minimize.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Client;component/Video/Minimize.png"/>
-            </Button.OpacityMask>
-        </Button>
-
-        <Button x:Name="Quit" Content="" HorizontalAlignment="Left" Margin="734,0,0,0" VerticalAlignment="Top" Click="Connect_Quit" Height="43" Width="40" FontSize="22">
-            <Button.Background>
-                <ImageBrush ImageSource="/Client;component/Video/X.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Client;component/Video/X.png"/>
-            </Button.OpacityMask>
-        </Button>
+        <Button x:Name="Minimize"  Click="Connect_Minimize"  Template="{StaticResource Minimize}" Margin="667,0,0,0"/>
+        <Button x:Name="Quit"      Click="Connect_Quit"      Template="{StaticResource Quit}"     Margin="734,0,0,0"/>
     </Grid>
 
 </Page>
