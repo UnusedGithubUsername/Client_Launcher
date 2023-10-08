@@ -46,3 +46,5 @@ C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Templates.ba
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\App.baml
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\InventoryBackground.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\ButtonBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRune.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\WoodFieldLong.png

@@ -27,12 +27,41 @@ namespace Client {
             SetCharacterStats(new byte[14*4], -1);
         }
 
-        public void SetGuid(int Guid) {
+        public void SetGuid(int Guid, byte[] InventoryData) {
             guid = Guid;
             this.Dispatcher.Invoke(() =>
             {
                 GuidTextfield.Content = Guid.ToString();
+
+                Style iStyle = (Style)FindResource("InventoryItemButtonStyle");
+
+                int numOfItems = InventoryData.Length / 20;  
+                Button[] buttons = new Button[numOfItems];
+
+ 
+
+                StackPanel SSSP = InventoryTopBar; //useless assignment. This is only done to reduce warningcount by 2
+                for (int i = 0; i < numOfItems; i++) {
+                    if (i % 10 == 0) {//create a stackpanel for 10 elements, create a new one for the next 10
+                        SSSP = new();
+                        SSSP.Orientation = Orientation.Horizontal;
+                        SSSP.Height = 50;
+                        Inventory.Children.Add(SSSP); 
+                    }
+                    //Add thhe sp to our inventory
+                    buttons[i] = new();
+                    buttons[i].Style = iStyle;
+                    buttons[i].Height = 40;
+                    buttons[i].Width = 40;
+                    buttons[i].Click += Click_Req;
+                    buttons[i].Tag = (i);
+                    buttons[i].Margin = new Thickness(5, 5, 5, 5);
+                    SSSP.Children.Add(buttons[i]);
+                }
             });
+
+
+
         }
 
         public void SetCharacterStats(byte[] characterData, int charIndex) {
@@ -48,7 +77,7 @@ namespace Client {
                 Mid2.Content = stats[1]> 9 ? " " + stats[1].ToString(): "  " + stats[1].ToString();
                 Mid3.Content = stats[2]> 9 ? " " + stats[2].ToString(): "  " + stats[2].ToString();
                 Mid4.Content = stats[3]> 9 ? " " + stats[3].ToString(): "  " + stats[3].ToString();
-            }); 
+            });
         }
 
         private void Click_Save(object sender, RoutedEventArgs e) {
@@ -59,8 +88,12 @@ namespace Client {
         }
 
         private void Click_Req(object sender, RoutedEventArgs e) {
-            MainWindow.Instance.ReqCharData(guid, 1);
+            Button b = (Button)sender;
+            int characterID = (int)b.Tag;
+            MainWindow.Instance.ReqCharData(guid, characterID);
         }
+
+ 
 
         private void Click(bool left, int index) {
 

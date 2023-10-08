@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Border Name="mask" Background="Black" CornerRadius="30"/>
 
-        <Grid Margin="0,0,0,0" >
+        <Grid x:Name="BaseGridBackground" Margin="0,0,0,0" >
             <Grid.Background>
                 <ImageBrush ImageSource="/Client;component/Video/Background.png"/>
             </Grid.Background>
@@ -28,87 +28,42 @@
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
             <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
-            <Button x:Name="Save" Content="Save" Template="{StaticResource WoodButton}" Click="Click_Save" Height="44" Width="62" Margin="629,288,0,0"    />
-            <Button x:Name="Req"  Content="Req"  Template="{StaticResource WoodButton}" Click="Click_Req"  Height="34" Width="62" Margin="583,81,148,335"  />
+            <Button x:Name="Save" Content="Save" Template="{StaticResource WoodButton}" Click="Click_Save" Height="44" Width="62" Margin="629,288,0,0"    /> 
 
-            <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="602,165,139,252"  Click="Click_L1" Height="33" Width="33"/>
-            <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="602,195,139,222"  Click="Click_L2" Height="33" Width="33"/>
-            <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="602,225,139,192"  Click="Click_L3" Height="33" Width="33"/>
-            <Button x:Name="Left4" Template="{StaticResource LeftButton}" Margin="602,255,139,162"  Click="Click_L4" Height="33" Width="33"/>
-            <Label x:Name="Mid1" Margin="632,165,99,252" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid2" Margin="632,192,99,225" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid3" Margin="632,225,99,192" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid4" Margin="632,255,99,162" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="666,165,62,252"  Click="Click_R1"  Height="33" Width="33"/>
-            <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="666,195,62,222"  Click="Click_R2"  Height="33" Width="33"/>
-            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="666,225,62,192"  Click="Click_R3"  Height="33" Width="33"/>
-            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="666,255,62,162"  Click="Click_R4"  Height="33" Width="33"/>
+            <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="622,165,100,252"  Click="Click_L1" Height="33" Width="33"/>
+            <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="622,195,100,222"  Click="Click_L2" Height="33" Width="33"/>
+            <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="622,225,100,192"  Click="Click_L3" Height="33" Width="33"/>
+            <Button x:Name="Left4" Template="{StaticResource LeftButton}" Margin="622,255,100,162"  Click="Click_L4" Height="33" Width="33"/>
+            <Label x:Name="Mid1" Margin="652,165,49,252" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid2" Margin="652,192,49,222" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid3" Margin="652,225,49,192" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Label x:Name="Mid4" Margin="652,255,49,162" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="696,165,24,252"  Click="Click_R1"  Height="33" Width="33"/>
+            <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="696,195,24,222"  Click="Click_R2"  Height="33" Width="33"/>
+            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="696,225,24,192"  Click="Click_R3"  Height="33" Width="33"/>
+            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="696,255,24,162"  Click="Click_R4"  Height="33" Width="33"/>
 
-            <Grid x:Name="InventoryBackground" HorizontalAlignment="Left" Margin="49,93,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown = "Grid_PreviewMouseLeftButtonDown" Height="326" Width="518">
+            <Grid x:Name="InventoryBackground" HorizontalAlignment="Left" Margin="17,93,0,0" VerticalAlignment="Top" Height="326" Width="518">
                 <Grid.Background>
-                    <ImageBrush ImageSource="/Client;component/Video/InventoryBackground.png"/>
+                    <ImageBrush ImageSource="/Client;component/Video/InventoryBackground.png" Opacity="10"/>
                 </Grid.Background>
+
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50">
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
-                        <Button Width="50" Height="50"></Button>
+                    <StackPanel  x:Name="Inventory"> 
+                         <StackPanel x:Name="InventoryTopBar" Height="20" Orientation="Horizontal">
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                            <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
+                        </StackPanel> 
                     </StackPanel>
 
-                </StackPanel>
                 </ScrollViewer>
-            </Grid>
-
+            </Grid> 
         </Grid>
 
         <Grid HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown = "Grid_PreviewMouseLeftButtonDown" Height="54" Width="770">

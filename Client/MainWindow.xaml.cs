@@ -69,7 +69,7 @@ namespace Client {
                 case PacketType.requestWithPassword:
                     int guid = result.ReadInt();
                     byte[] itemData = result.ReadBytes();
-                    Customization.Instance.SetGuid(guid);
+                    Customization.Instance.SetGuid(guid, itemData);
 
                     byte[] loginFile = Helper.CombineBytes(Encoding.UTF8.GetBytes(con.savedPublicKey), BitConverter.GetBytes(guid), (con.clientToken), BitConverter.GetBytes(con.i32clientToken));
                     File.WriteAllBytes(MainWindow.FilesPath + "\\userlogin.dat", loginFile);

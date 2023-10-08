@@ -66,4 +66,40 @@
         </Button>
     </ControlTemplate>
 
+    <Style x:Key="InventoryButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button" >
+
+                    <Grid> 
+                        <Image Source="/Video/WoodFieldLong.png" Stretch="Fill"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="InventoryItemButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button" >
+
+                    <Grid>
+                        <Border
+                            BorderBrush="Teal"
+                            CornerRadius="10"
+                            BorderThickness="0.3"
+                            
+                            >
+
+                        </Border>
+                        <Image Source="/Video/spellforceRune.png" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

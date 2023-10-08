@@ -28,7 +28,9 @@
     <None Remove="Video\qwe.png" />
     <None Remove="Video\qweq.webm" />
     <None Remove="Video\right.png" />
+    <None Remove="Video\spellforceRune.png" />
     <None Remove="Video\WoodField.png" />
+    <None Remove="Video\WoodFieldLong.png" />
     <None Remove="Video\X.png" />
   </ItemGroup>
 
@@ -66,8 +68,14 @@
     <Content Include="Video\right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\spellforceRune.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\WoodField.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\WoodFieldLong.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\X.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
