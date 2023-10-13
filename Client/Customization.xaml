@@ -59,8 +59,13 @@
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
-                        </StackPanel> 
+                        </StackPanel>
+                        <!-- <StackPanel>
+                            <Button Style="{StaticResource InventoryItemButtonStyle}" Height="300" Width="300"></Button> 
+                            
+                        </StackPanel>-->
                     </StackPanel>
+                    
 
                 </ScrollViewer>
             </Grid> 

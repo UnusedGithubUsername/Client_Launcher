@@ -29,6 +29,8 @@
     <None Remove="Video\qweq.webm" />
     <None Remove="Video\right.png" />
     <None Remove="Video\spellforceRune.png" />
+    <None Remove="Video\spellforceRuneTransparent.png" />
+    <None Remove="Video\spellforceRuneTransparentBackground.png" />
     <None Remove="Video\WoodField.png" />
     <None Remove="Video\WoodFieldLong.png" />
     <None Remove="Video\X.png" />
@@ -69,6 +71,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\spellforceRune.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\spellforceRuneTransparent.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\spellforceRuneTransparentBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\WoodField.png">

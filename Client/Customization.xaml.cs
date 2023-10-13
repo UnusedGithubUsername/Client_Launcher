@@ -1,30 +1,32 @@
 ﻿using System; 
 using System.Windows;
 using System.Windows.Controls; 
-using System.Windows.Input; 
-
+using System.Windows.Input;
+using System.Windows.Media;
 namespace Client {
     /// <summary>
     /// Interaction logic for Customization.xaml
     /// </summary>
-    enum Skill {
-        s1,
-        s2,
-        s3
+    public enum Skill {
+        MassSpells = 0,  // Skill that enables AoE on Spells
+        ArcaneKnowledge = 1, //learn level 3 spells
+        PrimalAttunement = 2, //Choose a second attuned magic school, your first attuned school decreases Spellslotcost by 2;
+        NeuralFastpass = 3, //Consecutive uses of Skills and Spells reduces the casting cost for further uses by 20%, One Skill and one spell can have up to 3 Stacks at the same time
+
     }
 
     public partial class Customization : Page {
         public static Customization Instance;
         public int guid = 0;
         public int loadedCharacterIndex = 0;
-        private int[] initialStats = new int[4];
-        private int[] stats = new int[4];
+        private int[] statsPerLevel = new int[4];
+        private int[] baseStats = new int[4];
         private int[] skills = new int[10];
          
         public Customization() {
             InitializeComponent();
             Instance = this;
-            SetCharacterStats(new byte[14*4], -1);
+            SetCharacterStats(new byte[18*4], -1);
         }
 
         public void SetGuid(int Guid, byte[] InventoryData) {
@@ -36,6 +38,9 @@ namespace Client {
                 Style iStyle = (Style)FindResource("InventoryItemButtonStyle");
 
                 int numOfItems = InventoryData.Length / 20;  
+
+                int[] data = new int[numOfItems*5];
+                Buffer.BlockCopy(InventoryData, 0, data, 0, data.Length*4);
                 Button[] buttons = new Button[numOfItems];
 
  
@@ -56,6 +61,9 @@ namespace Client {
                     buttons[i].Click += Click_Req;
                     buttons[i].Tag = (i);
                     buttons[i].Margin = new Thickness(5, 5, 5, 5);
+                    buttons[i].Background = PickColorBasedOnInt(data[i*5 +2]);
+                    // Grid grid = (Grid)buttons[i].FindName("GridColorSetter");
+                    // grid.Background = new SolidColorBrush(Colors.Green);
                     SSSP.Children.Add(buttons[i]);
                 }
             });
@@ -67,16 +75,17 @@ namespace Client {
         public void SetCharacterStats(byte[] characterData, int charIndex) {
             loadedCharacterIndex = charIndex;
 
-            Buffer.BlockCopy(characterData, 0, stats, 0, initialStats.Length * 4);
-            Buffer.BlockCopy(characterData, 0, initialStats, 0, stats.Length * 4);
-            Buffer.BlockCopy(characterData, stats.Length * 4, skills, 0, skills.Length * 4);
+            //all values are multiplied by 4 because we count ints, and ints are 4x larger than bytes
+            Buffer.BlockCopy(characterData, 0, baseStats, 0, baseStats.Length * 4);
+            Buffer.BlockCopy(characterData, baseStats.Length * 4, statsPerLevel, 0, statsPerLevel.Length * 4);
+            Buffer.BlockCopy(characterData, baseStats.Length * 8, skills, 0, skills.Length * 4);
 
             this.Dispatcher.Invoke(() =>
             {
-                Mid1.Content = stats[0]> 9 ? " " + stats[0].ToString(): "  " + stats[0].ToString();
-                Mid2.Content = stats[1]> 9 ? " " + stats[1].ToString(): "  " + stats[1].ToString();
-                Mid3.Content = stats[2]> 9 ? " " + stats[2].ToString(): "  " + stats[2].ToString();
-                Mid4.Content = stats[3]> 9 ? " " + stats[3].ToString(): "  " + stats[3].ToString();
+                Mid1.Content = baseStats[0]> 9 ? " " + baseStats[0].ToString(): "  " + baseStats[0].ToString();
+                Mid2.Content = baseStats[1]> 9 ? " " + baseStats[1].ToString(): "  " + baseStats[1].ToString();
+                Mid3.Content = baseStats[2]> 9 ? " " + baseStats[2].ToString(): "  " + baseStats[2].ToString();
+                Mid4.Content = baseStats[3]> 9 ? " " + baseStats[3].ToString(): "  " + baseStats[3].ToString();
             });
         }
 
@@ -84,7 +93,7 @@ namespace Client {
             if (loadedCharacterIndex == -1) {
                 return;
             }
-            MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, stats, skills);
+            MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, baseStats, skills);
         }
 
         private void Click_Req(object sender, RoutedEventArgs e) {
@@ -93,7 +102,19 @@ namespace Client {
             MainWindow.Instance.ReqCharData(guid, characterID);
         }
 
- 
+        public static SolidColorBrush PickColorBasedOnInt(int value) {
+            switch (value) {
+                case 1001:
+                    return new SolidColorBrush(Colors.Red);
+                case 1002:
+                    return new SolidColorBrush(Colors.Blue);
+                case 1003:
+                    return new SolidColorBrush(Colors.Green);
+                // Add more cases for values 4 through 10 as needed
+                default:
+                    return new SolidColorBrush(Colors.Teal); // Default color if value is out of range
+            }
+        }
 
         private void Click(bool left, int index) {
 
@@ -116,12 +137,12 @@ namespace Client {
                     break;
             }
 
-            stats[index] += left ? -1 : 1;
-            stats[index] = Math.Max(0, stats[index]);//cap value at 0
+            baseStats[index] += left ? -1 : 1;
+            baseStats[index] = Math.Max(0, baseStats[index]);//cap value at 0
 
             this.Dispatcher.Invoke(() =>
             {
-                l.Content = stats[index] > 9 ? " " + stats[index].ToString() : "  " + stats[index].ToString();
+                l.Content = baseStats[index] > 9 ? " " + baseStats[index].ToString() : "  " + baseStats[index].ToString();
             });
         }
 

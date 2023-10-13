@@ -48,3 +48,5 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\InventoryBackgro
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\ButtonBackground.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRune.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\WoodFieldLong.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRuneTransparent.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRuneTransparentBackground.png

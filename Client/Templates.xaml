@@ -80,22 +80,28 @@
         </Setter>
     </Style>
 
+
+    <ImageBrush x:Key="ImageOpacityMaskBrush" ImageSource="/Video/spellforceRuneTransparentBackground.png" />
+    
     <Style x:Key="InventoryItemButtonStyle" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button" >
 
-                    <Grid>
+                    <Grid x:Name="GridColorSetter"  Background="{TemplateBinding Background}"> 
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="/Video/spellforceRuneTransparentBackground.png"/>
+                        </Grid.OpacityMask>
+                        
+                        
                         <Border
                             BorderBrush="Teal"
                             CornerRadius="10"
-                            BorderThickness="0.3"
-                            
-                            >
-
-                        </Border>
-                        <Image Source="/Video/spellforceRune.png" />
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            BorderThickness="0.3" 
+                            > 
+                        </Border> 
+                        <Image Source="/Video/spellforceRuneTransparent.png"/>
+                       
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
