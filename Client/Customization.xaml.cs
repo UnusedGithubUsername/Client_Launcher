@@ -55,11 +55,30 @@ namespace Client {
                     }
                     //Add thhe sp to our inventory
                     buttons[i] = new();
+
+                    string imgSrc;
+                    if (data[i*5 + 2]>1000) {
+                        imgSrc = "/Video/spellforceRuneTransparent.png";
+                    } else {
+                        imgSrc = "/Video/Minimize.png";
+                    }
+                    CustomButton.SetImageSource(buttons[i], imgSrc);
+
+                    if (data[i*5+3]>1) {
+                        buttons[i].Content = data[i * 5 + 3].ToString();
+                    }
+                    if (!(data[i * 5 + 3] > 1)) {
+                        CustomButton.SetImageSource2(buttons[i], "/Video/spellforceRuneTransparentBackground.png");
+
+                    } else {
+                        CustomButton.SetImageSource2(buttons[i], "/Video/Minimize.png");
+
+                    }
                     buttons[i].Style = iStyle;
                     buttons[i].Height = 40;
                     buttons[i].Width = 40;
-                    buttons[i].Click += Click_Req;
-                    buttons[i].Tag = (i);
+                    buttons[i].Click += Click_Req; 
+                    buttons[i].Tag = (data[5 * i]);//postgres indices start at 1
                     buttons[i].Margin = new Thickness(5, 5, 5, 5);
                     buttons[i].Background = PickColorBasedOnInt(data[i*5 +2]);
                     // Grid grid = (Grid)buttons[i].FindName("GridColorSetter");
@@ -93,7 +112,7 @@ namespace Client {
             if (loadedCharacterIndex == -1) {
                 return;
             }
-            MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, baseStats, skills);
+            MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, baseStats, statsPerLevel, skills);
         }
 
         private void Click_Req(object sender, RoutedEventArgs e) {
@@ -188,5 +207,30 @@ namespace Client {
         }
     }
 
+    public static class CustomButton {
+        public static readonly DependencyProperty ImageSourceProperty =
+            DependencyProperty.RegisterAttached(
+                "ImageSource",
+                typeof(string),
+                typeof(CustomButton),
+                new PropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty ImageSourceProperty2 =
+            DependencyProperty.RegisterAttached(
+                "ImageSource2",
+                typeof(string),
+                typeof(CustomButton),
+                new PropertyMetadata(string.Empty));
+
+        public static string GetImageSource(DependencyObject obj) {
+            return (string)obj.GetValue(ImageSourceProperty);
+        }
+
+        public static void SetImageSource(DependencyObject obj, string value) {
+            obj.SetValue(ImageSourceProperty, value);
+        }
+        public static void SetImageSource2(DependencyObject obj, string value) {
+            obj.SetValue(ImageSourceProperty2, value);
+        }
+    }
 }

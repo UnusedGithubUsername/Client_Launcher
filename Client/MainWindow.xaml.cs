@@ -179,10 +179,11 @@ namespace Client {
 
          
 
-        public void SaveUserData(int guid, int charIndex, int[] stats, int[] skills) {
-            byte[] dataToSend = new byte[stats.Length * 4 + skills.Length * 4];
-            Buffer.BlockCopy(stats, 0, dataToSend, 0, stats.Length*4);
-            Buffer.BlockCopy(skills, 0, dataToSend, stats.Length * 4, skills.Length*4);
+        public void SaveUserData(int guid, int charIndex, int[] baseStats, int[] statIncrease,  int[] skills) {
+            byte[] dataToSend = new byte[baseStats.Length * 4 + statIncrease.Length * 4 + skills.Length * 4];
+            Buffer.BlockCopy(baseStats, 0, dataToSend, 0, baseStats.Length*4);
+            Buffer.BlockCopy(statIncrease, 0, dataToSend, baseStats.Length * 4, statIncrease.Length * 4);
+            Buffer.BlockCopy(skills, 0, dataToSend, baseStats.Length * 4 + statIncrease.Length * 4, skills.Length * 4);
             con.WriteInt(guid);
             con.WriteInt(0);
             con.WriteInt(charIndex);
