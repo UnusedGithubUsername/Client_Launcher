@@ -100,7 +100,7 @@ namespace Client {
                 }
             }
 
-            if (AllWasSent) {
+            if (AllWasSent) {  
                 File.WriteAllBytes(name, data);  //Create the new file and synchronize the creation time
                 FileInfo fi = new(name);
                 fi.CreationTime = new DateTime(CreationTime);
@@ -123,9 +123,12 @@ namespace Client {
             byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
             client.Receive(packetSize);
             int dataSize = BitConverter.ToInt32(packetSize, 0);
-
+            dataSize = Math.Min(65536, dataSize);
             data = new byte[dataSize];//recieve all the data that is expected from the package
             client.Receive(data);
+            byte[] test = new byte[dataSize];
+            Buffer.BlockCopy(data, 0, test, 0, dataSize);
+            string qwe = Encoding.UTF8.GetString(test);
             dataIndex = 0;
         }
 
@@ -163,7 +166,11 @@ namespace Client {
         }
 
         public DateTime ReadDateTime() {
-            long ticks = BitConverter.ToInt64(data, dataIndex);
+            //c and c# measure time differently.
+            //getting the filetime returns different values and we need to offset that on both c# server and client
+            long CSharpToC_Filetime_Offset = new DateTime(1601, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks + 72000000000;
+
+            long ticks = BitConverter.ToInt64(data, dataIndex) + CSharpToC_Filetime_Offset;
             dataIndex += 8;
             DateTime dt = new(ticks);
             return dt;

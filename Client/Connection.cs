@@ -46,6 +46,7 @@ namespace Client {
                 return true;
             }
             catch (Exception) {
+                sock.Connect(ip, 8080);
 
                 return false;
             }

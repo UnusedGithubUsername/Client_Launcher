@@ -101,12 +101,17 @@ namespace Client {
                         currentFileWeAreGetting = result.ReadString();
                         int fileSize = result.ReadInt();
                         long timeTicks = result.ReadLong();
-                        incFile.Add ( new(FilesPath+ currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID, timeTicks));  
+
+                        //c and c# measure time differently.
+                        //getting the filetime returns different values and we need to offset that on both c# server and client
+                        long CSharpToC_Filetime_Offset = new DateTime(1601, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks + 72000000000;
+
+                        incFile.Add ( new(FilesPath+ currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID, timeTicks + CSharpToC_Filetime_Offset));  
                     }
                      
                     IncommingFile fileWeWriteTo = incFile.First(s => s.fileID == fileID);
-                    bool str = fileWeWriteTo.FilepartSent(ref result, packageNumber);
-                    if (str) {
+                    bool sending_finished = fileWeWriteTo.FilepartSent(ref result, packageNumber);//an old file that exists is overwritten
+                    if (sending_finished) {
                         incFile.RemoveAt(incFile.IndexOf(fileWeWriteTo));
                     }
                      
@@ -121,27 +126,28 @@ namespace Client {
 
                     while (result.BytesLeft() > 4) {
                         string filename = result.ReadString();
-                        DateTime dt = result.ReadDateTime();
+                        DateTime file_creationtime_on_server = result.ReadDateTime();
 
-                        bool fileIsUpToDate = false;
                         if (File.Exists(FilesPath + filename)) {//check if the file exists
-                            FileInfo fi = new(FilesPath + filename); //.. and if its up to date
-                            if (fi.CreationTime == dt) {
-                                fileIsUpToDate = true;//if it is, congrats, all is fine, otherwise add it to the Outdated files queue
+                            FileInfo clientfile = new(FilesPath + filename); //.. and if its up to date
+                            bool isUpToDate = clientfile.CreationTime >= file_creationtime_on_server;
+                            if (isUpToDate) {
+                                continue;//if it is, congrats, all is fine, otherwise add it to the Outdated files queue
                             }
                         }
-                        if (!fileIsUpToDate) {
-                            OutdatedFile of = new(filename, dt);
 
-                            //Check if every folder and subfolder along the filepath exists. create every missing one
-                            string[] parts = filename.Split( '\\');//Split the filename. Check Dir /Base/ then /Base/Part1/, then Base/Part1/Part2/.. etc.
-                            string subPath = FilesPath;
-                            for (int j = 0; j < parts.Length - 1; j++) { 
-                                subPath +=  "\\"+parts[j]; 
-                                Helper.EnsureFolderExists(subPath);
-                            } 
-                            OutdatedFiles.Add(of);
+                        //add the outdated file to the list
+                        OutdatedFile of = new(filename, file_creationtime_on_server);
+
+                        //Check if every folder and subfolder along the filepath exists. create every missing one
+                        string[] parts = filename.Split( '\\');//Split the filename. Check Dir /Base/ then /Base/Part1/, then Base/Part1/Part2/.. etc.
+                        string subPath = FilesPath;
+                        for (int j = 0; j < parts.Length - 1; j++) { 
+                            subPath +=  "\\"+parts[j]; 
+                            Helper.EnsureFolderExists(subPath);
                         } 
+                        OutdatedFiles.Add(of);
+                        
                     }
 
                     // Write every file thats missing to the stream and then send the packet
