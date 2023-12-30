@@ -45,9 +45,7 @@ namespace Client {
                 sock.Connect(ip, port);
                 return true;
             }
-            catch (Exception) {
-                sock.Connect(ip, 8080);
-
+            catch (Exception) {  
                 return false;
             }
         }
@@ -111,7 +109,7 @@ namespace Client {
 
             // then encrypt that using an irreversible hash function. scrypt was recommended in 2016 but GPUs can now work on it, so its about as good as sha256
             SHA256 shaObj = SHA256.Create(); 
-            byte[] bPType = BitConverter.GetBytes((int)PacketType.requestWithPassword);
+            byte[] bPType = BitConverter.GetBytes((int)PacketType.Login);
             byte[] bToken = BitConverter.GetBytes(i32clientToken);//this token will be the thing that verifies requests from this client
             byte[] bEMail_L = BitConverter.GetBytes(eMail.Length); 
             byte[] bHashedPW = shaObj.ComputeHash(saltedPwBytes);

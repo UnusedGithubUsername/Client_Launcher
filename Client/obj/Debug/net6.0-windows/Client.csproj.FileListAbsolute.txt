@@ -50,3 +50,5 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRune.p
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\WoodFieldLong.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRuneTransparent.png
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\spellforceRuneTransparentBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\weapon1.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\weapon2.png

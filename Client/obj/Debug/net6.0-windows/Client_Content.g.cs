@@ -22,6 +22,8 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/spellforcerune.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/spellforcerunetransparent.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/spellforcerunetransparentbackground.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/weapon1.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/weapon2.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/woodfield.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/woodfieldlong.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/x.png")]

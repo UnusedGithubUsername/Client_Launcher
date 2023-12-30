@@ -50,7 +50,7 @@ namespace Client {
     }
 
     public struct IncommingFile {
-        public const int MAX_FILE_BYTES = 65524;
+        public const int MAX_FILE_BYTES = 65520;
           
         public string name;
         public int headerOffset;
@@ -72,9 +72,9 @@ namespace Client {
             }
 
             //calc how many packets we need 
-            int normalPackageSize = headerOffset + dataSize; // All Packets have the same size (except the last). But the data size varies. 
-            int numOfPacketsRequired = (int)(normalPackageSize / MAX_FILE_BYTES);
-            if (normalPackageSize % MAX_FILE_BYTES != 0) {
+            int totalNetworkedBytes = headerOffset + dataSize; // All Packets have the same size (except the last). But the data size varies. 
+            int numOfPacketsRequired = (int)(totalNetworkedBytes / MAX_FILE_BYTES);
+            if (totalNetworkedBytes % MAX_FILE_BYTES != 0) {
                 numOfPacketsRequired++; // casting to an int cuts off the last package. If we have a partial package we still need to allocate memory for it
             }
             packetRecieved = new bool[numOfPacketsRequired];
@@ -102,6 +102,7 @@ namespace Client {
 
             if (AllWasSent) {  
                 File.WriteAllBytes(name, data);  //Create the new file and synchronize the creation time
+                 
                 FileInfo fi = new(name);
                 fi.CreationTime = new DateTime(CreationTime);
             }
@@ -185,17 +186,17 @@ namespace Client {
         file,
         UpdateFilesRequest,
         requestWithToken,
-        requestWithPassword
+        Login,
+        loginFailed
 
 
     }
 
     public struct OutdatedFile {
-        public string filename;
-        public DateTime creationTime;
-        public OutdatedFile(string _filename, DateTime _creationTime) {
-            filename = _filename;
-            creationTime = _creationTime;
+        public string filename; 
+        public int file_index = -1; // for communication with c server. send ints instead of stings to simplify the **struct 
+        public OutdatedFile(string _filename) {
+            filename = _filename; 
         }
     }
 

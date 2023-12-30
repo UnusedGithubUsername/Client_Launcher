@@ -57,10 +57,14 @@ namespace Client {
                     buttons[i] = new();
 
                     string imgSrc;
-                    if (data[i*5 + 2]>1000) {
+                    int item_id = data[i * 5 + 2];
+                    int character_experience_used = data[i * 5 + 3];
+                    int item_level = data[i * 5 + 4];
+
+                    if (item_id > 1000) {
                         imgSrc = "/Video/spellforceRuneTransparent.png";
                     } else {
-                        imgSrc = "/Video/Minimize.png";
+                        imgSrc = "/Video/weapon" + item_id.ToString() + ".png";
                     }
                     CustomButton.SetImageSource(buttons[i], imgSrc);
 
@@ -69,26 +73,31 @@ namespace Client {
                     }
                     if (!(data[i * 5 + 3] > 1)) {
                         CustomButton.SetImageSource2(buttons[i], "/Video/spellforceRuneTransparentBackground.png");
+                        buttons[i].Click += Click_Req; //Buttons pass their tag, so that the correct method can be called
 
                     } else {
-                        CustomButton.SetImageSource2(buttons[i], "/Video/Minimize.png");
+                        CustomButton.SetImageSource2(buttons[i], "/Video/weapon"+ item_id.ToString()  +".png");
+                        buttons[i].Click += ShowXP; //Buttons pass their tag, so that the correct method can be called
+                        xp = character_experience_used;
 
                     }
+
                     buttons[i].Style = iStyle;
                     buttons[i].Height = 40;
-                    buttons[i].Width = 40;
-                    buttons[i].Click += Click_Req; 
+                    buttons[i].Width = 40; 
                     buttons[i].Tag = (data[5 * i]);//postgres indices start at 1
                     buttons[i].Margin = new Thickness(5, 5, 5, 5);
-                    buttons[i].Background = PickColorBasedOnInt(data[i*5 +2]);
-                    // Grid grid = (Grid)buttons[i].FindName("GridColorSetter");
-                    // grid.Background = new SolidColorBrush(Colors.Green);
+                    buttons[i].Background = PickColorBasedOnInt(data[i*5 +2]); 
                     SSSP.Children.Add(buttons[i]);
                 }
             });
 
 
 
+        }
+        int xp = 0;
+        public void ShowXP(Object sender, RoutedEventArgs args) {
+            Mid1.Content = xp;
         }
 
         public void SetCharacterStats(byte[] characterData, int charIndex) {
@@ -115,7 +124,7 @@ namespace Client {
             MainWindow.Instance.SaveUserData(guid, loadedCharacterIndex, baseStats, statsPerLevel, skills);
         }
 
-        private void Click_Req(object sender, RoutedEventArgs e) {
+        private void Click_Req(object sender, RoutedEventArgs e) { 
             Button b = (Button)sender;
             int characterID = (int)b.Tag;
             MainWindow.Instance.ReqCharData(guid, characterID);
