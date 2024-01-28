@@ -1,0 +1,49 @@
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\Background.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\ButtonBackground.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\InventoryBackground.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\Mein Film.mp4
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\spellforceRune.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\spellforceRuneTransparent.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\spellforceRuneTransparentBackground.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\weapon1.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\weapon2.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\WoodFieldLong.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Client.exe
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\Bar.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\cloud.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\cloud2.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\cloud3.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\left.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\Minimize.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\right.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\WoodField.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Video\X.png
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Client.deps.json
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Client.runtimeconfig.json
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Client.dll
+C:\Users\Klauke\Desktop\Client Build\Release\net6.0-windows\Client.pdb
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.csproj.AssemblyReference.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\ConnectingPage.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Customization.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\MainMenuPage.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\MainWindow.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\App.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client_Content.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client_MarkupCompile.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client_MarkupCompile.lref
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\App.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\ConnectingPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Customization.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\MainMenuPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\MainWindow.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Templates.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.g.resources
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.AssemblyInfoInputs.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.AssemblyInfo.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.csproj.CoreCompileInputs.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.dll
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\refint\Client.dll
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.pdb
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\Client.genruntimeconfig.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Release\net6.0-windows\ref\Client.dll

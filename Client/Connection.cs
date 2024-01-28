@@ -2,8 +2,7 @@
 using System.Text; //for UTF8
 using System.Net.Sockets;//for TCPClient
 using System.Security.Cryptography;
-using System.IO;
-using System.Linq;
+using System.IO; 
 
 namespace Client {
 
@@ -35,8 +34,7 @@ namespace Client {
                 savedGuid = BitConverter.ToInt32(content, content.Length - 136);
                 clientToken = new byte[128];//  
                 Buffer.BlockCopy(content, content.Length - 132, clientToken, 0, 128); 
-                i32clientToken = BitConverter.ToInt32(content, content.Length - 4);
-
+                i32clientToken = BitConverter.ToInt32(content, content.Length - 4); 
             }
         }
 
@@ -64,11 +62,10 @@ namespace Client {
             i32clientToken = rnd.Next(1, Int32.MaxValue);//this token is meaningless until the client makes requests.
                                                              //when a request is made, the server checks if the GUId has an active login session. the session has a token. The clients token needs to be the sessions token
             clientToken = rsa.Encrypt(BitConverter.GetBytes(i32clientToken), false);
-            return false;
-               
+            return false; 
         }
 
-        public void Send(PacketType pType) {
+        public void Send(PacketTypeClient pType) {
              
             byte[] dataPacket = new byte[bufferPosition];
             Buffer.BlockCopy(buffer, 0, dataPacket, 0, bufferPosition);
@@ -78,17 +75,14 @@ namespace Client {
             try {
                 sock.Send(dataPacket);//wríte how many characters are in the string we send
             }
-            catch (Exception) {
-
+            catch (Exception) { 
                 MainWindow.Instance.Disconnect();
             }
         } 
 
-        public StreamResult Recieve() {
-
-            if (sock.Available == 0) {
-                return new StreamResult();
-            }
+        public StreamResult Recieve() { 
+            if (sock.Available == 0) 
+                return new StreamResult(); 
 
             return new StreamResult(ref sock);
         } 
@@ -109,13 +103,16 @@ namespace Client {
 
             // then encrypt that using an irreversible hash function. scrypt was recommended in 2016 but GPUs can now work on it, so its about as good as sha256
             SHA256 shaObj = SHA256.Create(); 
-            byte[] bPType = BitConverter.GetBytes((int)PacketType.Login);
+            byte[] bPType = BitConverter.GetBytes((int)PacketTypeClient.Login);
             byte[] bToken = BitConverter.GetBytes(i32clientToken);//this token will be the thing that verifies requests from this client
             byte[] bEMail_L = BitConverter.GetBytes(eMail.Length); 
             byte[] bHashedPW = shaObj.ComputeHash(saltedPwBytes);
             byte[] bHashedPW_L = BitConverter.GetBytes(bHashedPW.Length); 
+            byte[] bNetID = BitConverter.GetBytes(0); // a netid that is sent back on the gameserver
 
-            byte[] data = Helper.CombineBytes(bToken, bEMail_L, bEMail, bHashedPW_L, bHashedPW); 
+            byte[] data = Helper.CombineBytes(bToken, bEMail_L, bEMail, bHashedPW_L, bHashedPW);
+            data = Helper.CombineBytes(data, bNetID);
+
             data = rsa.Encrypt(data, false);
             data = Helper.CombineBytes(bPType, data);//write the package type to the front of the dataPacket
              

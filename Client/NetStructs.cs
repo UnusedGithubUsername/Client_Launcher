@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Text; //for UTF8
-using System.Net.Sockets;//for TCPClient
-using System.Security.Cryptography;
+using System.Net.Sockets;//for TCPClient 
 using System.IO;
 
 namespace Client {
 
-    public static class Helper{
-         
+    public static class Helper {
+
         public static void EnsureFolderExists(string folderName) {
             if (!Directory.Exists(folderName)) {
                 Directory.CreateDirectory(folderName);
             }
         }
+
+        public static void CreateAllFoldersAlongPath(string filename) {
+            //Check if every folder and subfolder along the filepath exists. create every missing one
+            string[] parts = filename.Split('\\');//Split the filename. Check Dir /Base/ then /Base/Part1/, then Base/Part1/Part2/.. etc.
+            string subPath = MainWindow.FilesPath;
+            for (int j = 0; j < parts.Length - 1; j++) {
+                subPath += "\\" + parts[j];
+                Helper.EnsureFolderExists(subPath);
+            }
+        }
+
         public static byte[] CombineBytes(byte[] first, byte[] second) {
             byte[] bytes = new byte[first.Length + second.Length];
             Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
@@ -46,12 +56,12 @@ namespace Client {
             Buffer.BlockCopy(fifth, 0, bytes, first.Length + second.Length + third.Length + fourth.Length, fifth.Length);
             return bytes;
         }
-         
+
     }
 
     public struct IncommingFile {
-        public const int MAX_FILE_BYTES = 65520;
-          
+        public const int MAX_FILE_BYTES = 65524;
+
         public string name;
         public int headerOffset;
         public byte[] data;
@@ -88,9 +98,19 @@ namespace Client {
             }
 
             //Save the data that was sent
-            Buffer.BlockCopy(result.data, result.dataIndex, data, bufferPosition, result.BytesLeft());
+            int bytesLeft = result.BytesLeft();
+            if (bytesLeft > 65520) {
+
+                int error = 11111;
+            }
+
+            Buffer.BlockCopy(result.data, result.dataIndex, data, bufferPosition, bytesLeft);//BUG HERER; BYTES LEFT IS TOO HIGH FOR REAL IP
             result.dataIndex += result.BytesLeft();//not needed. all was read 
             packetRecieved[packageNumber] = true;
+
+
+
+
 
             //Check if the file is complete
             bool AllWasSent = true;
@@ -100,11 +120,13 @@ namespace Client {
                 }
             }
 
-            if (AllWasSent) {  
+            if (AllWasSent) {
                 File.WriteAllBytes(name, data);  //Create the new file and synchronize the creation time
-                 
+
                 FileInfo fi = new(name);
                 fi.CreationTime = new DateTime(CreationTime);
+
+
             }
             return AllWasSent;
         }
@@ -119,17 +141,34 @@ namespace Client {
             dataIndex = 0;
         }
 
+        public StreamResult(ref byte[] dataArray) {
+            data = dataArray;
+            dataIndex = 0;
+        }
+
+
         public StreamResult(ref Socket client) {
-              
+
             byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
+
             client.Receive(packetSize);
             int dataSize = BitConverter.ToInt32(packetSize, 0);
-            dataSize = Math.Min(65536, dataSize);
-            data = new byte[dataSize];//recieve all the data that is expected from the package
-            client.Receive(data);
-            byte[] test = new byte[dataSize];
-            Buffer.BlockCopy(data, 0, test, 0, dataSize);
-            string qwe = Encoding.UTF8.GetString(test);
+            int dataSizeActuallyHere = client.Available;
+            if (dataSizeActuallyHere < dataSize) {
+                int debugFail = 5;
+            }
+
+            if (dataSize < 4 || dataSize > 65536) { //if a transmission error occured and useless data was sent
+
+                byte[] dataToDelete = new byte[client.Available];
+                client.Receive(dataToDelete); 
+                data = new byte[8]; 
+            }
+            else {
+                //recive data normally 
+                data = new byte[dataSize];//recieve all the data that is expected from the package
+                int recieved = client.Receive(data);
+            }
             dataIndex = 0;
         }
 
@@ -178,26 +217,36 @@ namespace Client {
         }
     }
 
-    public enum PacketType {
-        keepAlive, 
-        requestCharacterData,
-        saveCharacterData,
-        publicKeyPackage,
-        file,
-        UpdateFilesRequest,
-        requestWithToken,
+    public enum PacketTypeClient {
+
         Login,
-        loginFailed
+        requestWithToken
+    }
+    public enum PacketTypeServer {
 
-
+        publicKeyPackage,
+        LoginSuccessfull,
+        loginFailed,
+        CharacterData,
+        levelupSuccessfull
     }
 
-    public struct OutdatedFile {
-        public string filename; 
-        public int file_index = -1; // for communication with c server. send ints instead of stings to simplify the **struct 
-        public OutdatedFile(string _filename) {
-            filename = _filename; 
+
+    public struct CustomizedCharacter {
+        public byte[] stats = new byte[4];
+        public byte[] statsPerLevel = new byte[4];
+        public byte[] skills = new byte[10];
+        public byte statpointsFullyAllocated = 0;
+
+        public CustomizedCharacter() { }
+
+        public CustomizedCharacter(byte[] characterData) {
+            Buffer.BlockCopy(characterData, 0, stats, 0, stats.Length);
+            Buffer.BlockCopy(characterData, 4, statsPerLevel, 0, statsPerLevel.Length);
+            Buffer.BlockCopy(characterData, 8, skills, 0, skills.Length);
+            statpointsFullyAllocated = characterData[18];
         }
+
     }
 
 }

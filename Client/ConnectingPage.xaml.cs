@@ -9,10 +9,11 @@ namespace Client {
     /// </summary>
     public partial class ConnectingPage : Page {
 
+        public static ConnectingPage Instance;
         public ConnectingPage() {
             InitializeComponent();
             SetVideoSource();
-
+            Instance = this;
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e) {

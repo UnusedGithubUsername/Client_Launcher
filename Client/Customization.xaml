@@ -28,20 +28,36 @@
             <Label x:Name="Descriptor_GUId" Content="GUId" HorizontalAlignment="Left" Margin="733,68,0,0" VerticalAlignment="Top"/>
             <Label x:Name="GuidTextfield" Content="0&#xD;&#xA;" HorizontalAlignment="Left" Margin="743,85,0,0" VerticalAlignment="Top"/>
 
-            <Button x:Name="Save" Content="Save" Template="{StaticResource WoodButton}" Click="Click_Save" Height="44" Width="62" Margin="629,288,0,0"    /> 
 
-            <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="622,165,100,252"  Click="Click_L1" Height="33" Width="33"/>
-            <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="622,195,100,222"  Click="Click_L2" Height="33" Width="33"/>
-            <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="622,225,100,192"  Click="Click_L3" Height="33" Width="33"/>
-            <Button x:Name="Left4" Template="{StaticResource LeftButton}" Margin="622,255,100,162"  Click="Click_L4" Height="33" Width="33"/>
-            <Label x:Name="Mid1" Margin="652,165,49,252" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid2" Margin="652,192,49,222" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid3" Margin="652,225,49,192" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Label x:Name="Mid4" Margin="652,255,49,162" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
-            <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="696,165,24,252"  Click="Click_R1"  Height="33" Width="33"/>
-            <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="696,195,24,222"  Click="Click_R2"  Height="33" Width="33"/>
-            <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="696,225,24,192"  Click="Click_R3"  Height="33" Width="33"/>
-            <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="696,255,24,162"  Click="Click_R4"  Height="33" Width="33"/>
+            <Grid x:Name="CharacterCustomizationButtons" Margin="0,0,0,0" Visibility="Visible">
+
+                <Button x:Name="LevelField"     Style="{StaticResource InventoryButtonStyle}" Margin="542,216,176,201"  Height="33" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="Level 3"/>
+
+                <Button x:Name="Strength"     Style="{StaticResource InventoryButtonStyle}" Margin="517,249,94,168"  Height="33" Width="133" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="Strength"/>
+                <Button x:Name="Vitality"     Style="{StaticResource InventoryButtonStyle}" Margin="517,278,94,139"  Height="33" Width="133" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="Vitality"/>
+                <Button x:Name="Intelligence" Style="{StaticResource InventoryButtonStyle}" Margin="517,309,94,108"  Height="33" Width="133" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="Intelligence"/>
+                <Button x:Name="Wisdom"       Style="{StaticResource InventoryButtonStyle}" Margin="517,339,94,78"  Height="33" Width="133" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="Wisdom"/>
+
+                <Button x:Name="Left1" Template="{StaticResource LeftButton}" Margin="640,249,50,168"  Click="Click_L1" Height="33" Width="33"/>
+                <Button x:Name="Left2" Template="{StaticResource LeftButton}" Margin="640,279,50,138"  Click="Click_L2" Height="33" Width="33"/>
+                <Button x:Name="Left3" Template="{StaticResource LeftButton}" Margin="640,309,50,108"  Click="Click_L3" Height="33" Width="33"/>
+                <Button x:Name="Left4" Template="{StaticResource LeftButton}" Margin="640,339,50,78"  Click="Click_L4" Height="33" Width="33"/>
+                <Label x:Name="Mid1" Margin="678,249,16,168" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+                <Label x:Name="Mid2" Margin="678,278,16,139" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+                <Label x:Name="Mid3" Margin="678,309,16,108" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+                <Label x:Name="Mid4" Margin="678,339,16,78" Height="33" Width="39" Content=" 13" Template="{StaticResource WoodField}"/>
+                <Button x:Name="Right1" Template="{StaticResource RightButton}"  Margin="729,249,0,168"  Click="Click_R1"  Height="33" Width="33"/>
+                <Button x:Name="Right2" Template="{StaticResource RightButton}"  Margin="729,279,0,138"  Click="Click_R2"  Height="33" Width="33"/>
+                <Button x:Name="Right3" Template="{StaticResource RightButton}"  Margin="729,309,0,108"  Click="Click_R3"  Height="33" Width="33"/>
+                <Button x:Name="Right4" Template="{StaticResource RightButton}"  Margin="729,339,0,78"  Click="Click_R4"  Height="33" Width="33"/>
+
+                <Button x:Name="Reskill"    Content="Reskill" Template="{StaticResource WoodButton}" Click="Click_Reskill" Height="44" Width="72" Margin="535,372,166,34"/>
+                <Button x:Name="Levelup"    Content="Levelup" Template="{StaticResource WoodButton}" Click="Click_Levelup" Height="44" Width="87" Margin="607,372,79,34"/>
+                <Button x:Name="Save"       Content="Save"    Template="{StaticResource WoodButton}" Click="Click_Save" Height="44" Width="62" Margin="694,372,17,34"/>
+                <Button x:Name="XP_Field"     Style="{StaticResource InventoryButtonStyle}" Margin="542,81,90,336"  Height="33" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="11600 XP Available"/>
+                <Button x:Name="StatpointsLeft"     Style="{StaticResource InventoryButtonStyle}" Margin="692,216,27,201"  Height="33" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground = "LightSalmon" Content="16/16"/>
+            </Grid>
+
 
             <Grid x:Name="InventoryBackground" HorizontalAlignment="Left" Margin="17,93,0,0" VerticalAlignment="Top" Height="326" Width="518">
                 <Grid.Background>
@@ -49,8 +65,8 @@
                 </Grid.Background>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel  x:Name="Inventory"> 
-                         <StackPanel x:Name="InventoryTopBar" Height="20" Orientation="Horizontal">
+                    <StackPanel  x:Name="Inventory">
+                        <StackPanel x:Name="InventoryTopBar" Height="20" Orientation="Horizontal">
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
@@ -60,15 +76,11 @@
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                             <Button Style ="{StaticResource InventoryButtonStyle}" Width="62.5"></Button>
                         </StackPanel>
-                        <!-- <StackPanel>
-                            <Button Style="{StaticResource InventoryItemButtonStyle}" Height="300" Width="300"></Button> 
-                            
-                        </StackPanel>-->
                     </StackPanel>
-                    
+
 
                 </ScrollViewer>
-            </Grid> 
+            </Grid>
         </Grid>
 
         <Grid HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" PreviewMouseLeftButtonDown = "Grid_PreviewMouseLeftButtonDown" Height="54" Width="770">
@@ -77,8 +89,8 @@
             </Grid.Background>
         </Grid>
 
-        <Button x:Name="Minimize"  Click="Connect_Minimize"  Template="{StaticResource Minimize}" Margin="667,0,0,0"/>
-        <Button x:Name="Quit"      Click="Connect_Quit"      Template="{StaticResource Quit}"     Margin="734,0,0,0"/>
+        <Button x:Name="Minimize"  Click="Connect_Minimize"  Template="{StaticResource Minimize}" Margin="667,0,0,400"/>
+        <Button x:Name="Quit"      Click="Connect_Quit"      Template="{StaticResource Quit}"     Margin="734,0,0,400"/>
 
     </Grid>
 
