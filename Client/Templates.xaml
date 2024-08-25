@@ -1,112 +1,107 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:local="clr-namespace:Client">
-    <ControlTemplate x:Key="LeftButton" TargetType="Button">
-        <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"  HorizontalAlignment="Left" VerticalAlignment="Top">
+                    xmlns:local="clr-namespace:Client" 
+                    xmlns:local1="clr-namespace:Client.Xaml_Helper_Classes" > 
+
+    <ImageBrush x:Key="WoodShort" ImageSource="/Video/WoodField.png" Stretch="Fill" />
+    <ImageBrush x:Key="WoodBrush" ImageSource="/Video/WoodFieldLong.png" Stretch="Fill" />
+    <ImageBrush x:Key="BackgroundPic" ImageSource="/Client;component/Video/Background.png" Stretch="Fill" />  
+    <ImageBrush x:Key="LeafL" ImageSource="/Video/left.png"  />
+    <ImageBrush x:Key="LeafR" ImageSource="/Video/right.png"  />
+    <ImageBrush x:Key="GreenFade" ImageSource="/Client;component/Video/InventoryBackground.png"  />
+    <ImageBrush x:Key="GreenFade2" ImageSource="/Client;component/Video/SkillchoiceBackground .png"   /> 
+    <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    <local:IntToVisConverter x:Key="IntToVisibilityConverter"/> 
+    <local1:IsDecreasableConverter x:Key="IsDecreasable"/>
+    
+    <ControlTemplate x:Key="SkillButton" TargetType="Button">
+        <Button  
+            Tag="{TemplateBinding Tag}"
+            Style="{TemplateBinding Style}">
+
             <Button.Background>
-                <ImageBrush ImageSource="/Video/left.png"/>
+                <ImageBrush ImageSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
             </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Video/left.png"/>
-            </Button.OpacityMask>
+
+            <Button.Content>
+                <TextBlock Opacity="0"/>
+            </Button.Content>
         </Button>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="RightButton" TargetType="Button">
-        <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button.Background>
-                <ImageBrush ImageSource="/Video/right.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Video/right.png"/>
-            </Button.OpacityMask>
-        </Button>
+    <Style x:Key="HoverButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.75" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="DoubleTextLabel" TargetType="Label">
+        <Grid Background="{TemplateBinding Background}" Opacity="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" />
+            <Label Grid.Column="1" Content="{TemplateBinding Tag}"     FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Left" />
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DoubleNumberLabel" TargetType="Label">
+        <Grid Background="{TemplateBinding Background}" Opacity="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.33*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label BorderThickness="0" Grid.Column="0" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" />
+            <Label BorderThickness="0" Grid.Column="1" Content="{TemplateBinding Tag}"     FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Left" />
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="NoContentBtn" TargetType="Button">
+        <Button  Background="{TemplateBinding Background}" Style="{StaticResource HoverButton}"/> 
     </ControlTemplate>
 
     <ControlTemplate x:Key="WoodField" TargetType="Label">
-        <Label Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
-            <Label.Background>
-                <ImageBrush ImageSource="/Video/WoodField.png"/>
-            </Label.Background>
-            <Label.OpacityMask>
-                <ImageBrush ImageSource="/Video/WoodField.png"/>
-            </Label.OpacityMask>
-        </Label>
+        <Label Background="{StaticResource WoodShort}" OpacityMask="{StaticResource WoodShort}"  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" Foreground = "LightSalmon" FontSize="16"/>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="WoodFieldLong" TargetType="Label">
+        <Label Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}"  Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" Foreground = "LightSalmon" FontSize="16"/>
+    </ControlTemplate> 
 
     <ControlTemplate x:Key="WoodButton" TargetType="Button">
-        <Button Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Content="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
-            <Button.Background>
-                <ImageBrush ImageSource="/Video/WoodField.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Video/WoodField.png"/>
-            </Button.OpacityMask>
+        <Button  Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
+            <Grid>
+                <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/> 
+            </Grid>
         </Button>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="Minimize" TargetType="Button">
-        <Button Width="55" Height="43" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button.Background>
-                <ImageBrush ImageSource="/Video/Minimize.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Video/Minimize.png"/>
-            </Button.OpacityMask>
-        </Button>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="Quit" TargetType="Button">
-        <Button Width="40" Height="43" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button.Background>
-                <ImageBrush ImageSource="/Video/X.png"/>
-            </Button.Background>
-            <Button.OpacityMask>
-                <ImageBrush ImageSource="/Video/X.png"/>
-            </Button.OpacityMask>
-        </Button>
-    </ControlTemplate>
-
-    <Style x:Key="InventoryButtonStyle" TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button" >
-
-                    <Grid> 
-                        <Image Source="/Video/WoodFieldLong.png" Stretch="Fill"/>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-
-    <ImageBrush x:Key="ImageOpacityMaskBrush" ImageSource="/Video/spellforceRuneTransparentBackground.png" />
-    
-    <Style x:Key="InventoryItemButtonStyle" TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button" >
-
-                    <Grid x:Name="GridColorSetter"  Background="{TemplateBinding Background}"> 
-                        <Grid.OpacityMask>
-                            <ImageBrush ImageSource="{Binding Path=(local:CustomButton.ImageSource2), RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
-                        </Grid.OpacityMask>
-                        
-                        
-                        <Border
-                            BorderBrush="Teal"
-                            CornerRadius="10"
-                            BorderThickness="0.3" 
-                            > 
-                        </Border>
-                        <Image Source="{Binding Path=(local:CustomButton.ImageSource), RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
-                       
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+    <ControlTemplate x:Key="WoodButtonT" TargetType="ToggleButton">
+        <ToggleButton IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground = "LightSalmon" FontSize="16">
+            <Grid>
+                <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Popup Name="myPopup" IsOpen="{TemplateBinding IsChecked}" AllowsTransparency="True">
+                    <StackPanel>
+                    </StackPanel>
+                </Popup>
+            </Grid>
+        </ToggleButton>
+    </ControlTemplate>  
+ 
 </ResourceDictionary>

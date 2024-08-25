@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "q7huqgl4D2kN1b0icipdeUS83vQQUIJPTtjTGOoxY3SHO+R94k6NmYjfuci5iM8iLNkiO5vZgNZHMzE5084Bmg==",
+  "dgSpecHash": "2SHZOpEt+uRdFCBO6YZch66ma+QPZUdbajfzZ59REOSbUD5KKGtHzYOjI4fJMMSE/KDtzHgpCDRYpebz6DaFGQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Client.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Klauke\\.nuget\\packages\\awssdk.core\\3.7.400\\awssdk.core.3.7.400.nupkg.sha512",
+    "C:\\Users\\Klauke\\.nuget\\packages\\awssdk.s3\\3.7.400\\awssdk.s3.3.7.400.nupkg.sha512"
+  ],
   "logs": []
 }

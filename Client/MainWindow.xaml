@@ -1,28 +1,72 @@
 ﻿<Window x:Class="Client.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Client" 
-        mc:Ignorable="d"
-           
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
         WindowStyle = "None"
-        ResizeMode="CanMinimize"
+        ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
-        Background="Transparent"
-        
+        Background="Transparent" 
         Title="MainWindow" 
-        Height="450" Width="800">
+        Height="450" Width="800"
+        MinHeight="300" MinWidth="450">
 
+
+
+
+    <Grid Background="Transparent"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Name="mask" Background="Black" CornerRadius="30"/>
+        <MediaElement Name="mediaElement" Grid.RowSpan="3" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="MediaElement_MediaRepeat" Stretch="UniformToFill"/>
+
+
+        <DockPanel VerticalAlignment="Top" Grid.Row="0">
+            <Grid Height="50" DockPanel.Dock="Top" >
+                <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <StackPanel x:Name="TopStack" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Orientation="Horizontal" >
+
+                        <Grid x:Name="InvisibleDragBar" Background="Transparent" PreviewMouseLeftButtonDown="DragWindow" Width="3000"/>
+                        <Grid x:Name="ProgressBar">
+                            <ProgressBar x:Name="Progress" Minimum="0" Maximum="100" Value="0" Grid.Row="1" Height="50" Width="200" Margin="5,20,5,17"/>
+                            <Label x:Name="ProgressLabel" Height="25"  Content="No connection to update-server" Margin="5,0,0,0" />
+                        </Grid>
+
+
+                        <Button x:Name="Minimize"   Click="Connect_Minimize"  Width="41" Height="33">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Video/Minimize.png"/>
+                            </Button.Background>
+                            <Button.OpacityMask>
+                                <ImageBrush ImageSource="/Video/Minimize.png"/>
+                            </Button.OpacityMask>
+                        </Button>
+
+                        <Button x:Name="Quit"       Click="Connect_Quit"     Width="41" Height="35">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Video/X.png"/>
+                            </Button.Background>
+                            <Button.OpacityMask>
+                                <ImageBrush ImageSource="/Video/X.png"/>
+                            </Button.OpacityMask>
+                        </Button>
+
+                    </StackPanel>
+                </DockPanel>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Client;component/Video/Bar.png"/>
+                </Grid.Background>
+
+            </Grid>
+
+        </DockPanel>
+        <Frame Grid.Row="2" x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
+        <Grid.OpacityMask>
+            <VisualBrush Visual="{Binding ElementName=mask}"/>
+        </Grid.OpacityMask>
+    </Grid> 
  
-
-    <Border CornerRadius="30" ClipToBounds="True">
-        <Grid>
-            <Frame x:Name="mainFrame" Content="Frame" Margin="5,5,5,0" NavigationUIVisibility="Hidden"/>
-            <Label x:Name="TextboxErrorMsg" Content="" HorizontalAlignment="Left" Margin="613,375,0,0" VerticalAlignment="Top"/>
-        </Grid>
-    </Border>
-
 </Window>
 
 

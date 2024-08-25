@@ -16,7 +16,7 @@ namespace Client {
         public static void CreateAllFoldersAlongPath(string filename) {
             //Check if every folder and subfolder along the filepath exists. create every missing one
             string[] parts = filename.Split('\\');//Split the filename. Check Dir /Base/ then /Base/Part1/, then Base/Part1/Part2/.. etc.
-            string subPath = MainWindow.FilesPath;
+            string subPath = App.FilesPath;
             for (int j = 0; j < parts.Length - 1; j++) {
                 subPath += "\\" + parts[j];
                 Helper.EnsureFolderExists(subPath);
@@ -72,7 +72,7 @@ namespace Client {
         public IncommingFile(string filePath, string filename, int dataSize, int fileIdentifier, long creationT) {
 
             CreationTime = creationT;
-            headerOffset = 4 + 4 + filename.Length + 8; //int for nameLen, int for filesize, name in utf8 is 1 byte per char 
+            headerOffset = 4 + 4 + filename.Length*2 + 8; //int for nameLen, int for filesize, name in utf8 is 1 byte per char 
             data = new byte[dataSize];
             name = filePath;
 
@@ -172,6 +172,11 @@ namespace Client {
             dataIndex = 0;
         }
 
+        public byte ReadByte() {  
+            dataIndex += 1;
+            return data[dataIndex - 1];
+        }
+
         public int ReadInt() {
             int intRead = BitConverter.ToInt32(data, dataIndex);
             dataIndex += 4;
@@ -204,6 +209,14 @@ namespace Client {
             dataIndex += strLen;
             return str;
         }
+        public string ReadString16() {
+            int strLen = ReadInt();
+            byte[] stringstr = new byte[strLen];
+            Buffer.BlockCopy(data, dataIndex, stringstr, 0, stringstr.Length);
+            string str = Encoding.Unicode.GetString(stringstr);
+            dataIndex += strLen;
+            return str;
+        }
 
         public DateTime ReadDateTime() {
             //c and c# measure time differently.
@@ -217,36 +230,90 @@ namespace Client {
         }
     }
 
-    public enum PacketTypeClient {
-
-        Login,
-        requestWithToken
+    public enum PacketTypeClient { 
+        KeepAlive = 0,
+        RequestKey = 1,
+        requestWithToken,
+        Login = 3,
+        RegisterUser = 4,
+        ForewardLoginPacket,
+        Friendrequest,
+        Message=9
     }
+
+    public enum FriendrequestAction {
+        RequestFriendship,
+        Accept,
+        Deny,
+        Block,
+        Remove
+    }
+
     public enum PacketTypeServer {
 
         publicKeyPackage,
         LoginSuccessfull,
         loginFailed,
         CharacterData,
-        levelupSuccessfull
+        levelupSuccessfull,
+        Message=9
     }
 
+    public enum SkillID {
+        None = 0,
 
-    public struct CustomizedCharacter {
-        public byte[] stats = new byte[4];
-        public byte[] statsPerLevel = new byte[4];
-        public byte[] skills = new byte[10];
-        public byte statpointsFullyAllocated = 0;
+        Strength = 1,
+        ExplosiveArrows = 10,
 
-        public CustomizedCharacter() { }
 
-        public CustomizedCharacter(byte[] characterData) {
-            Buffer.BlockCopy(characterData, 0, stats, 0, stats.Length);
-            Buffer.BlockCopy(characterData, 4, statsPerLevel, 0, statsPerLevel.Length);
-            Buffer.BlockCopy(characterData, 8, skills, 0, skills.Length);
-            statpointsFullyAllocated = characterData[18];
+        Vitality = 2,
+        PhysResist = 20,
+        PhysImmun = 200,
+
+        Intelligence = 3,
+        ExplosiveSpells = 30,
+
+        Wisdom = 4,
+        SecondaryAttunement = 40,
+        //OneWithEverything = 41,
+
+
+        //testskill7 = 6,
+        //testskill8 = 7,
+        //testskill9 = 8,
+        //Nothing = 9, //abilities with 90 to 99 have no prequisites
+        NeuralFastpass = 90,
+
+    }
+
+    public struct SkillFile {
+        public SkillID ID = SkillID.None;
+        public string Name = "skill1";
+        public string Description = "descriptionxxx";
+
+        public SkillFile(SkillID id, string name, string skillDescription) {
+            ID = id;
+            Name = name;
+            Description = skillDescription;
         }
+         
 
+        public SkillFile(string path) {
+            byte[] bytes = File.ReadAllBytes(path);
+            ID = (SkillID)BitConverter.ToInt16(bytes, 0);
+
+            byte nameLen = bytes[2];
+            char[] nameArray = new char[nameLen];
+            Buffer.BlockCopy(bytes, 3, nameArray, 0, nameArray.Length * 2);
+            Name = new string(nameArray); 
+
+            byte descLen = bytes[nameLen * 2 + 3];
+            char[] descArray = new char[descLen];
+            Buffer.BlockCopy(bytes, (nameArray.Length * 2) + 4, descArray, 0, descArray.Length * 2);
+            Description = new string(descArray);
+        }
     }
+
+
 
 }

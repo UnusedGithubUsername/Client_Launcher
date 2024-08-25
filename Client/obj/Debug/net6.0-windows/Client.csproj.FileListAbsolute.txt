@@ -28,18 +28,14 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Client.runtimeconfig.j
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Client.dll
 C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Client.pdb
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.csproj.AssemblyReference.cache
-C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\ConnectingPage.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.g.cs
-C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\MainMenuPage.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client_Content.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client_MarkupCompile.cache
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client_MarkupCompile.lref
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\App.baml
-C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\ConnectingPage.baml
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Customization.baml
-C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\MainMenuPage.baml
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Templates.baml
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.g.resources
@@ -52,3 +48,30 @@ C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\refint\Clien
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.pdb
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.genruntimeconfig.cache
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\ref\Client.dll
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\LoginPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\LoginPage.g.cs
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\SkillchoiceBackground .png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\11.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\12.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\13.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\14.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\0.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\16.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\17.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\15.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\empty.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\None.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\ExplosiveArrows.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\ExplosiveSpells.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\Intelligence.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\NeuralFastpass.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\SecondaryAttunement.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\Strength.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\Vitality.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\Wisdom.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\PhysImmun.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\PhysResist.png
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\RegistrationPage.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\RegistrationPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.csproj.CopyComplete

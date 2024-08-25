@@ -1,46 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <BaseOutputPath>C:\Users\Klauke\Desktop\Client Build</BaseOutputPath>
+    <SupportedCultures>en-US</SupportedCultures>
+    <SatelliteResourceLanguages></SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Video\Background.png" />
-    <None Remove="Video\Bar.png" />
-    <None Remove="Video\ButtonBackground.png" />
-    <None Remove="Video\cloud.png" />
-    <None Remove="Video\cloud2.png" />
-    <None Remove="Video\cloud3.png" />
-    <None Remove="Video\InventoryBackground.png" />
-    <None Remove="Video\left.png" />
-    <None Remove="Video\maskk.png" />
-    <None Remove="Video\Mein Film.mp4" />
-    <None Remove="Video\Mein Film.wmv" />
-    <None Remove="Video\Minimize.png" />
-    <None Remove="Video\qq2.mp4" />
-    <None Remove="Video\qqq.MP4" />
-    <None Remove="Video\qqw.mp4" />
-    <None Remove="Video\qqw.webm" />
-    <None Remove="Video\qwe.png" />
-    <None Remove="Video\qweq.webm" />
-    <None Remove="Video\right.png" />
-    <None Remove="Video\spellforceRune.png" />
-    <None Remove="Video\spellforceRuneTransparent.png" />
-    <None Remove="Video\spellforceRuneTransparentBackground.png" />
-    <None Remove="Video\sword_ui12.png" />
-    <None Remove="Video\weapon0.png" />
-    <None Remove="Video\weapon1.png" />
-    <None Remove="Video\weapon2.png" />
-    <None Remove="Video\WoodField.png" />
-    <None Remove="Video\WoodFieldLong.png" />
-    <None Remove="Video\X.png" />
+    <None Remove="Video\empty.png" />
+    <None Remove="Video\ExplosiveArrows.png" />
+    <None Remove="Video\ExplosiveSpells.png" />
+    <None Remove="Video\Intelligence.png" />
+    <None Remove="Video\NeuralFastpass.png" />
+    <None Remove="Video\None.png" />
+    <None Remove="Video\PhysImmun.png" />
+    <None Remove="Video\PhysResist.png" />
+    <None Remove="Video\SecondaryAttunement.png" />
+    <None Remove="Video\Strength.png" />
+    <None Remove="Video\Vitality.png" />
+    <None Remove="Video\Wisdom.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Video\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\17.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -59,6 +69,18 @@
     <Content Include="Video\cloud3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\empty.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\ExplosiveArrows.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\ExplosiveSpells.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Intelligence.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\InventoryBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -71,8 +93,26 @@
     <Content Include="Video\Minimize.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\NeuralFastpass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\None.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\PhysImmun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\PhysResist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\SecondaryAttunement.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\SkillchoiceBackground .png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\spellforceRune.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -83,10 +123,19 @@
     <Content Include="Video\spellforceRuneTransparentBackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Video\Strength.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Vitality.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Video\weapon1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\weapon2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Wisdom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\WoodField.png">
@@ -98,6 +147,10 @@
     <Content Include="Video\X.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.400" />
   </ItemGroup>
 
 </Project>
