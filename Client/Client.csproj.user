@@ -9,6 +9,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CharacterOptions.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Chat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Customization.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,6 +26,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="CharacterOptions.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Chat.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Customization.xaml">
       <SubType>Designer</SubType>
     </Page>

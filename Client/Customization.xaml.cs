@@ -8,46 +8,49 @@ using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using Client.Models;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Client { 
     public partial class Customization : Window, INotifyPropertyChanged {
         public static Customization Instance;
-        public CharacterStat_Model CurrentUIStats { get; set; }
         public ObservableCollection<Friend_Model> friendsList { get; set; }
         public ObservableCollection<Friend_Model> friendsRequestList { get; set; }
-        public ObservableCollection<CharacterRune_Model> CharacterData { get; set; }
-        public ObservableCollection<SkillChoice_Model> skillInfoLibrary { get; set; } 
+
+        public int xp { get { return _xp; } set { _xp = value; OnPropertyChanged(nameof(xp)); } }
+        private int _xp = -10;
+        public string Username { get { return _username; } set { _username = value; OnPropertyChanged(nameof(Username)); } }
+        private string _username = "";
 
         public int UserGuid { get { return _userGuid; } set { _userGuid = value; OnPropertyChanged(nameof(UserGuid)); } }
         private int _userGuid = 0;
+
+        public ObservableCollection<CharacterRune_Model> CharacterData { get; set; }
+
         public int loadedCharacterIndex { get { return _loadedCharacterIndex; } set { _loadedCharacterIndex = value; OnPropertyChanged(nameof(loadedCharacterIndex)); } }
         private int _loadedCharacterIndex = -1;
+
         public int loadedFriendIndex { get { return _loadedFriendIndex; } set { _loadedFriendIndex = value; OnPropertyChanged(nameof(loadedFriendIndex)); } }
         private int _loadedFriendIndex = -1;
-        public int xp { get { return _xp; } set { _xp = value; OnPropertyChanged(nameof(xp)); } }
-        private int _xp = -10; 
-        public string Username { get { return _username; } set { _username = value; OnPropertyChanged(nameof(Username)); } }
-        private string _username = "";
-        public int currentlyCustomizedSkill { get { return _currentSkill; } set { _currentSkill = value; OnPropertyChanged(nameof(currentlyCustomizedSkill)); } }
-        private int _currentSkill = -1;  
 
         CharacterDataServer[] baseStatsOfAllCharacters;//baseStats downlaoded from the server 
-        CharacterStat_Model ServersideCharacterData; //this struct is read and replace only and can not be modified
+         
+        public Friend_Model CurrentChat { get; set; }
 
-        private ObservableCollection<FriendChat_Model> AllChats;
-        public FriendChat_Model CurrentChat { get; set; }
+        public Chat chatPage;
+        public CharacterOptions customizationPage;
+
         public Customization() {
-            Instance = this; 
+            Instance = this;
+            customizationPage = new();
+
             InitializeComponent();
 
-            skillInfoLibrary = new();
-            ReadSkillInfo();
-            OnPropertyChanged(nameof(skillInfoLibrary));
+            chatPage = new();
 
-            AllChats = new();
-            CurrentUIStats = new();
-            ServersideCharacterData = new();
-            CharacterData = new(); 
+            customizationPage.ParentUI = this;
+
+            CharacterData = new();
+
             friendsList = new();
             friendsRequestList = new();
              //now load the base values of characters from data files
@@ -66,30 +69,22 @@ namespace Client {
                 //baseStatsOfAllCharacters[i].SetAllStats();
             }
              
+
         }
 
-        private void ChatInputBox_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Key != Key.Enter)
-                return;
 
-            App.Instance.SendMessage(UserGuid, CurrentChat.Guid, ChatInputBox.Text); 
-            ChatInputBox.Clear();
-        }
 
         public void MessageRecieved(int guid, string message) {
             int index = -1;
-            for (int i = 0; i < AllChats.Count; i++) 
-                if(AllChats[i].Guid == guid)
+            for (int i = 0; i < friendsList.Count; i++) 
+                if(friendsList[i].Guid == guid)
                     index=i;
 
-            if (index == -1) {
-                index = AllChats.Count;
-                AllChats.Add(new FriendChat_Model(guid));
-            }
+ 
 
             this.Dispatcher.Invoke(() =>
-            {  
-                AllChats[index].MessageRecieved(message);
+            {
+                friendsList[index].MessageRecieved( message);
             }); 
         }
 
@@ -99,13 +94,46 @@ namespace Client {
             OnPropertyChanged(nameof(friendsRequestList));
         }
 
-        public void ReadSkillInfo() {//the txt contains 1 line for the imagename and one for the description   
-            SkillID[] ids = (SkillID[])Enum.GetValues(typeof(SkillID)); 
-            
-            for (int i = 0; i < ids.Length; i++)   
-                skillInfoLibrary.Add(new(App.FilesPath + "Skills\\" + ((int)ids[i]).ToString() + ".skill")); 
+        public void SetCharacterLevel(int characterGuid, int newLevel, int remainingXP)
+        {
+            xp = remainingXP;
+            for (int i = 0; i < CharacterData.Count; i++)
+                if (CharacterData[i].ItemGUId == characterGuid)
+                    CharacterData[i].level = newLevel;
+
+            //CurrentUIStats.level = newLevel;
+            customizationPage.SetCharacterLevel(newLevel);
+
         }
- 
+
+        public void SetCharacterStats(byte[] charDataServer, int charGuid)
+        {
+
+
+            for (int i = 0; i < CharacterData.Count; i++)
+            {
+                if (CharacterData[i].ItemGUId == charGuid)
+                {
+                    loadedCharacterIndex = i;
+                    break;
+                }
+            }  
+
+            customizationPage.SetCharacterStats(charDataServer, CharacterData[loadedCharacterIndex]);
+            customizationPage.UpdateUI();
+
+            this.Dispatcher.Invoke(() => {
+                OnPropertyChanged(nameof(CharacterCustomizationButton));
+                OnPropertyChanged(nameof(loadedFriendIndex));
+                CharacterCustomizationButton.Navigate(customizationPage);
+                OnPropertyChanged(nameof(CharacterCustomizationButton));
+                OnPropertyChanged(nameof(loadedFriendIndex));
+
+            });
+
+
+        }
+
         public void Click_AddFriend(object sender, RoutedEventArgs e) {
             string friendGuid = AddFriend.Text;
             if (!IsAllDigits(friendGuid))
@@ -138,31 +166,47 @@ namespace Client {
             OnPropertyChanged(nameof(friendsList));
         }
 
-        public void AcceptFriend(object sender, RoutedEventArgs e) {
+        public void AcceptFriend(object sender, RoutedEventArgs e)
+        {
             Button b = (Button)sender;
             int friendGuid = (int)(b.Tag);
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Accept);
 
 
             int index = 0;
-            for (int i = 0; i < friendsRequestList.Count; i++) {
-                if (friendsRequestList[i].FriendId == friendGuid)
+            for (int i = 0; i < friendsRequestList.Count; i++)
+            {
+                if (friendsRequestList[i].Guid == friendGuid)
                     index = i;
             }
-            friendsList.Add(new Friend_Model(friendsRequestList[index].FriendName, friendsRequestList[index].FriendId, false)); 
+            string friendName = friendsRequestList[index].FriendName;
+            int friendId = friendsRequestList[index].Guid;
             friendsRequestList.RemoveAt(index);
 
-            OnPropertyChanged(nameof(friendsList));
-            OnPropertyChanged(nameof(friendsRequestList));
+            AddFriendToFList(friendId, friendName);
 
         }
+
+        public void AddFriendToFList(int friendId, string friendName)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                friendsList.Add(new Friend_Model(friendName, friendId, false));
+
+                OnPropertyChanged(nameof(friendsList));
+                OnPropertyChanged(nameof(friendsRequestList));
+            });
+
+        }
+
+
         public void RejectFriend(object sender, RoutedEventArgs e) {
             Button b = (Button)sender;
             int friendGuid = (int)(b.Tag);
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Deny);
 
             for (int i = 0; i < friendsRequestList.Count; i++) {
-                if(friendsRequestList[i].FriendId == friendGuid)
+                if(friendsRequestList[i].Guid == friendGuid)
                     friendsRequestList.RemoveAt(i);
             }
             OnPropertyChanged(nameof(friendsRequestList));
@@ -174,7 +218,7 @@ namespace Client {
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Block);
 
             for (int i = 0; i < friendsRequestList.Count; i++) {
-                if (friendsRequestList[i].FriendId == friendGuid)
+                if (friendsRequestList[i].Guid == friendGuid)
                     friendsRequestList.RemoveAt(i);
             }
             OnPropertyChanged(nameof(friendsRequestList));
@@ -185,146 +229,76 @@ namespace Client {
             int friendGuid = (int)(b.Tag);
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Remove);
             for (int i = 0; i < friendsRequestList.Count; i++) {
-                if (friendsRequestList[i].FriendId == friendGuid)
+                if (friendsRequestList[i].Guid == friendGuid)
                     friendsRequestList.RemoveAt(i);
             }
             OnPropertyChanged(nameof(friendsList));
 
         }
          
-        public void ConfirmSkillChoice(object sender, RoutedEventArgs e) {
-             
-
-            int ID = (int)((Button)sender).Tag; //the button in the menu has the skillID attatched as a tag
-
-            CurrentUIStats.SetSkill(currentlyCustomizedSkill, (byte)(ID));
-            CurrentUIStats.skills[currentlyCustomizedSkill] = (byte)ID;
-            currentlyCustomizedSkill = -1;
-            CurrentUIStats.UpdateGUI();
-
-            OnPropertyChanged(nameof(CurrentUIStats));
-        }
-          
-        public void ShowSkillchoice(object sender, RoutedEventArgs e) {
-            currentlyCustomizedSkill = int.Parse(((Button)sender).Tag.ToString());
-        }
-
-        public void SetItems(int Guid, int[] guids, int[] levels, int[] types, string username, int playerXP) {
-            
-            UserGuid = Guid;
-            xp = playerXP;
-            Username = username;    
-            this.Dispatcher.Invoke(() =>
-            {
-                CharacterData.Clear();
-                for (int i = 0; i < guids.Length; i++)     
-                    CharacterData.Add(new(guids[i], levels[i], types[i], i));  
-            });
-
-            OnPropertyChanged(nameof(CharacterData));
-        }
-         
-        public void SetCharacterLevel(int characterGuid, int newLevel, int remainingXP) {
-            xp = remainingXP;
-            for (int i = 0; i < CharacterData.Count; i++) 
-                if (CharacterData[i].ItemGUId == characterGuid)  
-                    CharacterData[i].level = newLevel; 
-                    
-            CurrentUIStats.level = newLevel;
-            OnPropertyChanged(nameof(CurrentUIStats));
-
-        }
-          
-        public void SetCharacterStats(byte[] charDataServer, int charGuid) {
 
 
-            for (int i = 0; i < CharacterData.Count; i++) {
-                if (CharacterData[i].ItemGUId == charGuid) {
-                    loadedCharacterIndex = i;
-                    break;
-                }
-            }
-            ServersideCharacterData.SetAllStats(charDataServer, CharacterData[loadedCharacterIndex]); 
-            CurrentUIStats.SetAllStats(charDataServer, CharacterData[loadedCharacterIndex]);
-
-            currentlyCustomizedSkill = -1;
-
-            OnPropertyChanged(nameof(CurrentUIStats));
-        }
          
         private void Click_Friend(object sender, RoutedEventArgs e) {
             //unload the characterUI and load the friendUI
-            loadedCharacterIndex = -1;
+            CharacterCustomizationButton.Content = chatPage;
+            //TODO Get the friend name, its the content of the button we pressed
+            //loadedCharacterIndex = -1;
             loadedFriendIndex = 1; 
-            OnPropertyChanged(nameof(loadedCharacterIndex));
+            //OnPropertyChanged(nameof(loadedCharacterIndex));
 
             Button b = (Button)sender;
             int friendGuid =(int)(b.Tag);
             loadedFriendIndex = friendGuid;
             int chatIndex = -1;
-            for (int i = 0; i < AllChats.Count; i++) 
-                if (AllChats[i].Guid == friendGuid)
+            for (int i = 0; i < friendsList.Count; i++) 
+                if (friendsList[i].Guid == friendGuid)
                     chatIndex = i;
              
-            //create a new chat if we cant find the correct one
-            if(chatIndex == -1) {
-                chatIndex = AllChats.Count;
-                AllChats.Add(new(friendGuid)); 
-            }
+ 
 
-            CurrentChat = AllChats[chatIndex];
-
+            CurrentChat = friendsList[chatIndex];
+             
             OnPropertyChanged(nameof(CurrentChat));
             OnPropertyChanged(nameof(CurrentChat.Chatoutput));
+            OnPropertyChanged(nameof(customizationPage));
         }
 
         private void Click_Req(object sender, RoutedEventArgs e) {
+            this.Dispatcher.Invoke(() => { 
+                CharacterCustomizationButton.Navigate(customizationPage); 
+
+            });
+             
             loadedFriendIndex = -1;
 
             Button b = (Button)sender;
-            CharacterRune_Model objectData = CharacterData[(int)b.Tag];
+            CharacterRune_Model objectData = CharacterData[(int)b.Tag]; 
             int characterID = objectData.ItemGUId;
             App.Instance.ReqCharData(UserGuid, characterID);
+            customizationPage.UpdateUI();
+
         }
 
-        private void Click_Reskill(object sender, RoutedEventArgs e) {
-            App.Instance.ReskillCharData(UserGuid, CharacterData[loadedCharacterIndex].ItemGUId);
+
+        public void SetItems(int Guid, int[] guids, int[] levels, int[] types, string username, int playerXP)
+        {
+
+            UserGuid = Guid;
+            xp = playerXP;
+            Username = username;
+            this.Dispatcher.Invoke(() =>
+            {
+                CharacterData.Clear();
+                for (int i = 0; i < guids.Length; i++)
+                    CharacterData.Add(new(guids[i], levels[i], types[i], i));
+            });
+
+            OnPropertyChanged(nameof(CharacterData));
         }
 
-        private void Click_Save(object sender, RoutedEventArgs e) {
-            if (CurrentUIStats.stats[0] + CurrentUIStats.stats[1] + CurrentUIStats.stats[2] + CurrentUIStats.stats[3] != 60)
-                return;//not all points have been used
-
-            byte[] deltaStats = new byte[4];
-            for (int i = 0; i < 4; i++) {
-                deltaStats[i] = (byte)(CurrentUIStats.stats[i] - ServersideCharacterData.stats[i]);
-            }
-            App.Instance.SaveCharacterStats(UserGuid, CharacterData[loadedCharacterIndex].ItemGUId, deltaStats,  CurrentUIStats);
-        }
-
-        private void Click_Levelup(object sender, RoutedEventArgs e) {
-            App.Instance.LevelupCharacter(UserGuid, CharacterData[loadedCharacterIndex].ItemGUId, CharacterData[loadedCharacterIndex].level + 1);
-        }
-          
-        private void Click(object sender, RoutedEventArgs e) {
-
-            bool left = ((Button)sender).Content.ToString() == "left";
-            int index = int.Parse(((Button)sender).Tag.ToString()); 
-
-            if (CurrentUIStats.stats[index] == 0 && left)  
-                return;//cap stats at 0
-             
-            if (!left)  
-                CurrentUIStats.Increment(index); 
-            else  
-                CurrentUIStats.Decrement(index);
-
-            OnPropertyChanged(nameof(CurrentUIStats));
-             
-        }
-        //"{Binding currentlyCustomizedSkill, Converter={StaticResource IntToVisibilityConverter}}"
         private void Click_Play(object sender, RoutedEventArgs e) {
-            string unityGamePath = App.FilesPath + "GameBuild2023/My Project.exe"; // Path to your Unity game executable
+            string unityGamePath = App.FilesPath + "GameBuild2023/My Project.exe"; // Path to Unity game executable
 
             //as argument we provide the full package that the user would log in with
             byte[] msg = App.Instance.con.loginPackage;
@@ -339,19 +313,7 @@ namespace Client {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void Page_SizeChanged(object sender, SizeChangedEventArgs e) {
-            double multiplier = this.ActualHeight / 450;
-            this.Dispatcher.Invoke(() =>
-            {
-                SkillGrid.Height = 350 * multiplier;
-                 
-                CharStatGrid.ColumnDefinitions[0].Width = new GridLength( 70 * multiplier);
-                SkillGrid.Width = 70 * multiplier;
 
-                StatGrid.Width = 200 * multiplier;
-            });
-
-        }
         private void Connect_Minimize(object sender, RoutedEventArgs e) {
             WindowState = WindowState.Minimized;
         }

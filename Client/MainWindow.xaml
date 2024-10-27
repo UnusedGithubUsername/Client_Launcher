@@ -27,14 +27,16 @@
                 <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <StackPanel x:Name="TopStack" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Orientation="Horizontal" >
 
-                        <Grid x:Name="InvisibleDragBar" Background="Transparent" PreviewMouseLeftButtonDown="DragWindow" Width="3000"/>
-                        <Grid x:Name="ProgressBar">
+						<Grid x:Name="InvisibleDragBar" Background="Transparent" PreviewMouseLeftButtonDown="DragWindow" Width="3000"/>
+
+						<Button x:Name="ButtonStartDownload" Width="30" Height="30" Content="&#x23F5;" FontSize="34" Padding="-3,-12,0,0" Click="ButtonStartDownload_Click"/>
+						<Grid x:Name="ProgressBar">
                             <ProgressBar x:Name="Progress" Minimum="0" Maximum="100" Value="0" Grid.Row="1" Height="50" Width="200" Margin="5,20,5,17"/>
                             <Label x:Name="ProgressLabel" Height="25"  Content="No connection to update-server" Margin="5,0,0,0" />
                         </Grid>
+						<Button x:Name="ButtonChangeGameLocation" Width="30" Height="30" Content="&#x1F4C2;" FontSize="23" VerticalAlignment="Center" Padding="-1,-4,0,0" Click="ButtonChangeGameLocation_Click" />
 
-
-                        <Button x:Name="Minimize"   Click="Connect_Minimize"  Width="41" Height="33">
+						<Button x:Name="Minimize"   Click="Connect_Minimize"  Width="41" Height="33">
                             <Button.Background>
                                 <ImageBrush ImageSource="/Video/Minimize.png"/>
                             </Button.Background>

@@ -74,4 +74,5 @@ C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\Video\PhysResist.png
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\RegistrationPage.g.cs
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\RegistrationPage.baml
-C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.csproj.CopyComplete
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.sourcelink.json
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\Client.csproj.Up2Date

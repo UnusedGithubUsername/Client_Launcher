@@ -1,0 +1,168 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Klauke\\source\\repos\\Client\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\characterstat_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\characterstat_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\characterrune_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\characterrune_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\customization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\customization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\friend_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\friend_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\netstructs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\netstructs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\registrationpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\registrationpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 248,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CharacterRune_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterRune_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\CharacterRune_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterRune_Model.cs",
+              "RelativeToolTip": "Client\\Models\\CharacterRune_Model.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T22:15:21.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CharacterStat_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterStat_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\CharacterStat_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterStat_Model.cs",
+              "RelativeToolTip": "Client\\Models\\CharacterStat_Model.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAnwCsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T19:39:28.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Customization.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\Customization.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml.cs",
+              "RelativeToolTip": "Client\\Customization.xaml.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAIwGgAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-09-28T15:24:55.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Client\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T21:51:47.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Friend_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\Friend_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\Friend_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\Friend_Model.cs",
+              "RelativeToolTip": "Client\\Models\\Friend_Model.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T14:45:13.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\App.xaml.cs",
+              "RelativeToolTip": "Client\\App.xaml.cs",
+              "ViewState": "AgIAANkAAAAAAAAAAAAEwOgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-23T20:04:16.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "Client\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml",
+              "RelativeToolTip": "Client\\LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-13T17:13:55.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "NetStructs.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\NetStructs.cs",
+              "RelativeDocumentMoniker": "Client\\NetStructs.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\NetStructs.cs",
+              "RelativeToolTip": "Client\\NetStructs.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAswLQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T12:01:58.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RegistrationPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\RegistrationPage.xaml",
+              "RelativeDocumentMoniker": "Client\\RegistrationPage.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\RegistrationPage.xaml",
+              "RelativeToolTip": "Client\\RegistrationPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-07-24T16:14:12.999Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

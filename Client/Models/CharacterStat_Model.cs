@@ -23,7 +23,7 @@ namespace Client.Models {
             }
         }
 
-        private void RevertChanges() {
+        public void RevertChanges() {
             //Revert changes made if a levelup is done;
             AvailableSkillpoints = _level - skillpointsFullyAllocated;
             IncreasableStatpoints = 0;
@@ -66,13 +66,18 @@ namespace Client.Models {
 
             AvailableSkillpoints = level - changes - skillpointsFullyAllocated; 
         }
+        public int itemID;
+        public int itemGUId;
         public CharacterDataServer ServersideData;
+
         public void SetAllStats(byte[] charDataServer, CharacterRune_Model BaseData) {
             statpointsFullyAllocated = charDataServer[18];
             skillpointsFullyAllocated = charDataServer[19];
             Name = Encoding.UTF8.GetString(charDataServer, 21, charDataServer[20]);
             ServersideData = new(charDataServer); 
-            level = BaseData.level; 
+            level = BaseData.level;
+            itemID = BaseData.ItemID;
+            itemGUId = BaseData.ItemGUId;
         }
 
         public CharacterStat_Model() {
@@ -102,11 +107,11 @@ namespace Client.Models {
                 string[] imgPath = new string[skills.Length];
                 for (int i = 0; i < imgPath.Length; i++) {
                     int libraryIndex = -1;
-                    for (int j = 0; j < Customization.Instance.skillInfoLibrary.Count; j++) {
-                        if (Customization.Instance.skillInfoLibrary[j].ID == (SkillID)skills[i])
+                    for (int j = 0; j < CharacterOptions.skillInfoLibrary.Count; j++) {
+                        if (CharacterOptions.skillInfoLibrary[j].ID == (SkillID)skills[i])
                             libraryIndex = j;
                     }
-                    imgPath[i] = Customization.Instance.skillInfoLibrary[libraryIndex].img;
+                    imgPath[i] = CharacterOptions.skillInfoLibrary[libraryIndex].img;
                 }
 
                 return imgPath;

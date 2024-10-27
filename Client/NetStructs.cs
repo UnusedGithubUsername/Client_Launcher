@@ -256,7 +256,8 @@ namespace Client {
         loginFailed,
         CharacterData,
         levelupSuccessfull,
-        Message=9
+        Message=9,
+        YourFriendrequestWasAccepted = 10
     }
 
     public enum SkillID {
