@@ -1,0 +1,309 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Klauke\\source\\repos\\Client\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\templates.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\templates.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\customizationoptions.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\customizationoptions.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\customizationoptions.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\customizationoptions.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\customization.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\customization.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\customization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\customization.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\characterstat_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\characterstat_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\connection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\chat.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\chat.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\netstructs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\netstructs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\xaml helper classes\\isdecreasableconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\xaml helper classes\\isdecreasableconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\chat.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\chat.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\characterrune_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\characterrune_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\models\\friend_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\models\\friend_model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|c:\\users\\klauke\\source\\repos\\client\\client\\registrationpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FAA2D7ED-5C57-42A5-BB58-2EF7096470D5}|Client\\Client.csproj|solutionrelative:client\\registrationpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 319,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Customization.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\Customization.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml.cs",
+              "RelativeToolTip": "Client\\Customization.xaml.cs",
+              "ViewState": "AgIAAOMAAAAAAAAAAAAmwPwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-09-28T15:24:55.707Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Customization.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml",
+              "RelativeDocumentMoniker": "Client\\Customization.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Customization.xaml",
+              "RelativeToolTip": "Client\\Customization.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-13T22:56:14.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomizationOptions.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\CustomizationOptions.xaml",
+              "RelativeDocumentMoniker": "Client\\CustomizationOptions.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\CustomizationOptions.xaml",
+              "RelativeToolTip": "Client\\CustomizationOptions.xaml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAswCwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-13T22:26:24.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Templates.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Templates.xaml",
+              "RelativeDocumentMoniker": "Client\\Templates.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Templates.xaml",
+              "RelativeToolTip": "Client\\Templates.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-27T23:59:26.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomizationOptions.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\CustomizationOptions.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\CustomizationOptions.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\CustomizationOptions.xaml.cs",
+              "RelativeToolTip": "Client\\CustomizationOptions.xaml.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAASwC4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T16:31:19.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Connection.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Connection.cs",
+              "RelativeDocumentMoniker": "Client\\Connection.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Connection.cs",
+              "RelativeToolTip": "Client\\Connection.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAqwFkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T10:56:14.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\App.xaml.cs",
+              "RelativeToolTip": "Client\\App.xaml.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAwD0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-23T20:04:16.368Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Chat.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Chat.xaml",
+              "RelativeDocumentMoniker": "Client\\Chat.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Chat.xaml",
+              "RelativeToolTip": "Client\\Chat.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-27T21:28:20.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Chat.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Chat.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\Chat.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Chat.xaml.cs",
+              "RelativeToolTip": "Client\\Chat.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T21:33:19.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CharacterStat_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterStat_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\CharacterStat_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterStat_Model.cs",
+              "RelativeToolTip": "Client\\Models\\CharacterStat_Model.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAIAxwIIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T19:39:28.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Client\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T21:51:47.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NetStructs.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\NetStructs.cs",
+              "RelativeDocumentMoniker": "Client\\NetStructs.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\NetStructs.cs",
+              "RelativeToolTip": "Client\\NetStructs.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAQwIoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T12:01:58.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "Client\\LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml.cs",
+              "RelativeToolTip": "Client\\LoginPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T21:10:19.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IsDecreasableConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Xaml Helper Classes\\IsDecreasableConverter.cs",
+              "RelativeDocumentMoniker": "Client\\Xaml Helper Classes\\IsDecreasableConverter.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Xaml Helper Classes\\IsDecreasableConverter.cs",
+              "RelativeToolTip": "Client\\Xaml Helper Classes\\IsDecreasableConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T23:59:20.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Friend_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\Friend_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\Friend_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\Friend_Model.cs",
+              "RelativeToolTip": "Client\\Models\\Friend_Model.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T14:45:13.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "Client\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\LoginPage.xaml",
+              "RelativeToolTip": "Client\\LoginPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-13T17:13:55.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CharacterRune_Model.cs",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterRune_Model.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\CharacterRune_Model.cs",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\Models\\CharacterRune_Model.cs",
+              "RelativeToolTip": "Client\\Models\\CharacterRune_Model.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T22:15:21.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RegistrationPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\RegistrationPage.xaml",
+              "RelativeDocumentMoniker": "Client\\RegistrationPage.xaml",
+              "ToolTip": "C:\\Users\\Klauke\\source\\repos\\Client\\Client\\RegistrationPage.xaml",
+              "RelativeToolTip": "Client\\RegistrationPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-07-24T16:14:12.999Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

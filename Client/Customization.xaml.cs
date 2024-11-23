@@ -37,7 +37,7 @@ namespace Client {
         public Friend_Model CurrentChat { get; set; }
 
         public Chat chatPage;
-        public CharacterOptions customizationPage;
+        public CustomizationOptions customizationPage { get; set; }
 
         public Customization() {
             Instance = this;
@@ -118,20 +118,12 @@ namespace Client {
                     break;
                 }
             }  
-
-            customizationPage.SetCharacterStats(charDataServer, CharacterData[loadedCharacterIndex]);
-            customizationPage.UpdateUI();
-
+             
             this.Dispatcher.Invoke(() => {
-                OnPropertyChanged(nameof(CharacterCustomizationButton));
-                OnPropertyChanged(nameof(loadedFriendIndex));
+                 
                 CharacterCustomizationButton.Navigate(customizationPage);
-                OnPropertyChanged(nameof(CharacterCustomizationButton));
-                OnPropertyChanged(nameof(loadedFriendIndex));
-
-            });
-
-
+                customizationPage.SetCharacterStats(charDataServer, CharacterData[loadedCharacterIndex]); 
+            }); 
         }
 
         public void Click_AddFriend(object sender, RoutedEventArgs e) {
@@ -239,13 +231,8 @@ namespace Client {
 
 
          
-        private void Click_Friend(object sender, RoutedEventArgs e) {
-            //unload the characterUI and load the friendUI
-            CharacterCustomizationButton.Content = chatPage;
-            //TODO Get the friend name, its the content of the button we pressed
-            //loadedCharacterIndex = -1;
-            loadedFriendIndex = 1; 
-            //OnPropertyChanged(nameof(loadedCharacterIndex));
+        private void Click_Friend(object sender, RoutedEventArgs e) { 
+            this.Dispatcher.Invoke(() => { CharacterCustomizationButton.Navigate(chatPage); });
 
             Button b = (Button)sender;
             int friendGuid =(int)(b.Tag);
@@ -258,26 +245,16 @@ namespace Client {
  
 
             CurrentChat = friendsList[chatIndex];
-             
-            OnPropertyChanged(nameof(CurrentChat));
-            OnPropertyChanged(nameof(CurrentChat.Chatoutput));
-            OnPropertyChanged(nameof(customizationPage));
+              
         }
 
-        private void Click_Req(object sender, RoutedEventArgs e) {
-            this.Dispatcher.Invoke(() => { 
-                CharacterCustomizationButton.Navigate(customizationPage); 
-
-            });
-             
+        private void Click_Req(object sender, RoutedEventArgs e) { 
             loadedFriendIndex = -1;
 
             Button b = (Button)sender;
             CharacterRune_Model objectData = CharacterData[(int)b.Tag]; 
             int characterID = objectData.ItemGUId;
-            App.Instance.ReqCharData(UserGuid, characterID);
-            customizationPage.UpdateUI();
-
+            App.Instance.ReqCharData(UserGuid, characterID);  
         }
 
 

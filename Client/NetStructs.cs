@@ -90,46 +90,7 @@ namespace Client {
             packetRecieved = new bool[numOfPacketsRequired];
         }
 
-        public bool FilepartSent(ref StreamResult result, int packageNumber) {
-            //every file we send has max bytes, first package has the name first, so subtract that because that wasnt data for the file
-            int bufferPosition = packageNumber * MAX_FILE_BYTES - headerOffset;
-            if (packageNumber == 0) {
-                bufferPosition = 0;
-            }
-
-            //Save the data that was sent
-            int bytesLeft = result.BytesLeft();
-            if (bytesLeft > 65520) {
-
-                int error = 11111;
-            }
-
-            Buffer.BlockCopy(result.data, result.dataIndex, data, bufferPosition, bytesLeft);//BUG HERER; BYTES LEFT IS TOO HIGH FOR REAL IP
-            result.dataIndex += result.BytesLeft();//not needed. all was read 
-            packetRecieved[packageNumber] = true;
-
-
-
-
-
-            //Check if the file is complete
-            bool AllWasSent = true;
-            for (int i = 0; i < packetRecieved.Length; i++) {
-                if (packetRecieved[i] == false) {
-                    AllWasSent = false;
-                }
-            }
-
-            if (AllWasSent) {
-                File.WriteAllBytes(name, data);  //Create the new file and synchronize the creation time
-
-                FileInfo fi = new(name);
-                fi.CreationTime = new DateTime(CreationTime);
-
-
-            }
-            return AllWasSent;
-        }
+ 
     }
 
     public struct StreamResult {
@@ -139,55 +100,21 @@ namespace Client {
         public StreamResult() {
             data = Array.Empty<byte>();
             dataIndex = 0;
-        }
+        } 
 
-        public StreamResult(ref byte[] dataArray) {
-            data = dataArray;
-            dataIndex = 0;
-        }
-
-
-        public StreamResult(ref Socket client) {
-
-            byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
-
-            client.Receive(packetSize);
-            int dataSize = BitConverter.ToInt32(packetSize, 0);
-            int dataSizeActuallyHere = client.Available;
-            if (dataSizeActuallyHere < dataSize) {
-                int debugFail = 5;
-            }
-
-            if (dataSize < 4 || dataSize > 65536) { //if a transmission error occured and useless data was sent
-
-                byte[] dataToDelete = new byte[client.Available];
-                client.Receive(dataToDelete); 
-                data = new byte[8]; 
-            }
-            else {
-                //recive data normally 
-                data = new byte[dataSize];//recieve all the data that is expected from the package
-                int recieved = client.Receive(data);
-            }
-            dataIndex = 0;
-        }
-
-        public byte ReadByte() {  
-            dataIndex += 1;
-            return data[dataIndex - 1];
-        }
+        public StreamResult(ref Socket client, int dataSize) { 
+            //recive data normally 
+            data = new byte[dataSize];//recieve all the data that is expected from the package. Client.Available is NOT NECESSARILY equal.
+            client.Receive(data);//if the server sends packets rapidly, available will be higher.
+             
+            dataIndex = 4; //the first 4 bytes are just the total size minus 4. we can always just skip over that because we read that with socketflag peek
+        } 
 
         public int ReadInt() {
             int intRead = BitConverter.ToInt32(data, dataIndex);
             dataIndex += 4;
             return intRead;
-        }
-
-        public long ReadLong() {
-            long intRead = BitConverter.ToInt64(data, dataIndex);
-            dataIndex += 8;
-            return intRead;
-        }
+        } 
 
         public byte[] ReadBytes() {
             int arrayLen = this.ReadInt();
@@ -209,25 +136,7 @@ namespace Client {
             dataIndex += strLen;
             return str;
         }
-        public string ReadString16() {
-            int strLen = ReadInt();
-            byte[] stringstr = new byte[strLen];
-            Buffer.BlockCopy(data, dataIndex, stringstr, 0, stringstr.Length);
-            string str = Encoding.Unicode.GetString(stringstr);
-            dataIndex += strLen;
-            return str;
-        }
-
-        public DateTime ReadDateTime() {
-            //c and c# measure time differently.
-            //getting the filetime returns different values and we need to offset that on both c# server and client
-            long CSharpToC_Filetime_Offset = new DateTime(1601, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks + 72000000000;
-
-            long ticks = BitConverter.ToInt64(data, dataIndex) + CSharpToC_Filetime_Offset;
-            dataIndex += 8;
-            DateTime dt = new(ticks);
-            return dt;
-        }
+         
     }
 
     public enum PacketTypeClient { 

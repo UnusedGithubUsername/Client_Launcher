@@ -13,42 +13,92 @@
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
     <local:IntToVisConverter x:Key="IntToVisibilityConverter"/> 
     <local1:IsDecreasableConverter x:Key="IsDecreasable"/>
-    
-    <ControlTemplate x:Key="SkillButton" TargetType="Button">
-        <Button  
+
+	<ControlTemplate x:Key="SkillButton" TargetType="Button">
+		<Button  
             Tag="{TemplateBinding Tag}"
             Style="{TemplateBinding Style}">
 
-            <Button.Background>
-                <ImageBrush ImageSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
-            </Button.Background>
+			<Button.Background>
+				<ImageBrush ImageSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+			</Button.Background>
 
-            <Button.Content>
-                <TextBlock Opacity="0"/>
-            </Button.Content>
-        </Button>
-    </ControlTemplate>
+			<Button.Content>
+				<TextBlock Opacity="0"/>
+			</Button.Content>
+		</Button>
+	</ControlTemplate>
 
-    <Style x:Key="HoverButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.75" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+	<Style x:Key="ScalingLabel" TargetType="Label"> 
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Label">
+					<Border Background="{StaticResource WoodShort}">
+						<Viewbox Margin="0,6,3,8">
+							<TextBlock Text="{TemplateBinding Content}" Foreground="#FFFA8072"/>
+						</Viewbox>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+  
+	<Style x:Key="HoverButtonImage" TargetType="Button">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>  
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="0.75" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <ControlTemplate x:Key="DoubleTextLabel" TargetType="Label">
+	<Style x:Key="HoverButton" TargetType="Button">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="0.2*" />
+								<RowDefinition Height="0.6*" />
+								<RowDefinition Height="0.2*" />
+							</Grid.RowDefinitions>
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="0.1*" />
+								<ColumnDefinition Width="0.8*" />
+								<ColumnDefinition Width="0.1*" />
+							</Grid.ColumnDefinitions>
+							<Viewbox Grid.Row="1" Grid.Column="1" >
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Viewbox>
+						</Grid>
+
+
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="0.75" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<ControlTemplate x:Key="DoubleTextLabel" TargetType="Label">
         <Grid Background="{TemplateBinding Background}" Opacity="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.6*"/>

@@ -136,7 +136,7 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Button Width="55" Height="55" Margin="5,5,5,5" Background ="Transparent" BorderThickness="0"
-                                                    Click="Click_Req" Tag="{Binding Index}" Style="{StaticResource HoverButton}" >
+                                                    Click="Click_Req" Tag="{Binding Index}" Style="{StaticResource HoverButtonImage}" >
                                                 <Grid    Opacity="{Binding Opacityy}"  Background="{Binding Background}" >
                                                     <Grid.OpacityMask>
                                                         <ImageBrush ImageSource="/Video/spellforceRuneTransparentBackground.png"/>

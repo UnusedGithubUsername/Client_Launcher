@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic; 
+﻿using System; 
 using System.Windows; 
 using System.Timers;
-using System.IO; 
-using System.Linq;
-using System.Net.Sockets; 
-using System.Threading.Tasks;
-using Client.Models;
+using System.IO;  
+using System.Threading.Tasks; 
 using System.Text;
 
 using Amazon;
@@ -14,17 +10,12 @@ using Amazon.S3;
 using Amazon.S3.Transfer; 
 
 namespace Client
-{
-
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
+{ 
     public partial class App : Application {
         public static App Instance;
          
         private Window CustomizationWindow;
         private MainWindow mainWindow;
-
 
         public Connection con;
         private bool connected = false;
@@ -32,6 +23,7 @@ namespace Client
         public static string FilesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public static string[] fpParts = { "\\My Games", "\\Corivi", "\\LauncherClient\\" };
         public static int UserGuid;
+
         [STAThread] 
         protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
@@ -58,11 +50,8 @@ namespace Client
 
             //we gotta connect to the fileserver asynchronously and while the download is ongoing we call the windows UpdateProgressBar()
             //ConnectToFileServer(serverIP);//eventually this needs to happen AND FINISH before we create the main window. or make a small c programm that opens this app..
-            ConnectToServer();
+            ConnectToDatabaseServer();
         }
-
-
-
 
         public void SaveCharacterStats(int guid, int charIndex, byte[] deltaStats, CharacterStat_Model character) {
             byte[] dataToSend = character.ToByte();
@@ -70,7 +59,7 @@ namespace Client
             con.WriteInt(guid);
             con.WriteInt(0);
             con.WriteInt(charIndex);
-            con.WriteBytes(ref dataToSend);
+            con.WriteBytes(ref dataToSend); 
             con.Send(PacketTypeClient.requestWithToken);
         }
 
@@ -78,8 +67,7 @@ namespace Client
             con.WriteInt(guid);
             con.WriteInt(2);//requestType
             con.WriteInt(charIndex);
-            con.WriteInt(requestedLevel); //sent "redundantly" to prevent accidentailly computing the request twice
-
+            con.WriteInt(requestedLevel); //sent "redundantly" to prevent accidentailly computing the request twice 
             con.Send(PacketTypeClient.requestWithToken);
         }
 
@@ -104,20 +92,19 @@ namespace Client
             con.Send(PacketTypeClient.Message);
         }
 
-        public async void ConnectToServer() {
-            string serverIP = await GetIPAWS();
+        public async void ConnectToDatabaseServer() {
+            string serverIP = await GetIPAWS();//find out where the server is
              
-            while (true) {
-
+            while (true) { //and connect to it
                 if (await con.TryToConnect(System.Net.IPAddress.Parse(serverIP))) {//if connection was successfull
                     connected = true;
                     mainWindow.ShowLogin();
                     con.Send(PacketTypeClient.RequestKey);
                     return;
-                }
-
+                } 
             }
         }
+
         public void Disconnect() {
             if (connected == false)
                 return;
@@ -129,13 +116,12 @@ namespace Client
             {  
                 mainWindow.Show();
                 mainWindow.ShowNoPage();
-                CustomizationWindow.Hide();
-                //CustomizationWindow = new Customization(); 
-            });
+                CustomizationWindow.Hide(); 
+            }); 
 
-
-            App.Instance.ConnectToServer();
+            App.Instance.ConnectToDatabaseServer();
         }
+
         private void Update(object sender, ElapsedEventArgs e) {
             if (connected == false)
                 return;
@@ -256,173 +242,39 @@ namespace Client
             con.Send(PacketTypeClient.Friendrequest); 
         }
 
-
-
         public async Task<string> GetIPAWS()
         {
             string folderPath = @"C:\Users\Klauke\Documents\My Games\Corivi\LauncherClient\"; 
 
             //declare a client //add qqq so this public key is not rejected by github. ITS PUBLIC 
             AmazonS3Client s3Client = new AmazonS3Client("qqqAKIAQE43KD5CKTAD77V3".Substring(3), "qqqVzf3hiPEugebvApnKkVgCl5u7GKT3erNsrx4cFBW".Substring(3), RegionEndpoint.USEast2);
-            TransferUtility fileTransferUtility = new TransferUtility(s3Client); 
- 
-
+            TransferUtility fileTransferUtility = new TransferUtility(s3Client);
             await fileTransferUtility.DownloadAsync(folderPath + "ServerIP.txt", "corivi", "ServerIP.txt");
 
             string[] ip = File.ReadAllLines(folderPath + @"ServerIP.txt");
             return ip[0];
-
         }
-
-
-        //      //------------------------ OLD FILESERVER (also much faster than aws, we need to optimize aws(multiple requests, or packing files)
-        //      private async void ConnectToFileServer(string ipAdress) {
-        //
-        //          Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        //
-        //          try {
-        //              await sock.ConnectAsync(System.Net.IPAddress.Parse(ipAdress), 16502);
-        //          }
-        //          catch (Exception) {
-        //              return;
-        //          }
-        //
-        //          sock.Send(BitConverter.GetBytes((int)1)); //connect and get a filelist as an answere
-        //
-        //          List<short> OutdatedFiles = await GetFilelistFromServer(sock); //recieve a filelist and compare it to local files
-        //                                                                   //and generate a list of files we do not have or that are outdated
-        //          if (OutdatedFiles.Count == 0) {
-        //              sock.Disconnect(false);
-        //              mainWindow.SetProgressbar(0,0); 
-        //              return;
-        //          }
-        //
-        //          mainWindow.SetProgressbar(0, OutdatedFiles.Count);
-        //
-        //          //Request all the outstanding files
-        //          List<byte> Filerequest = new List<byte>();
-        //          int packageLength = 12 + (OutdatedFiles.Count * 2);
-        //          Filerequest.AddRange(BitConverter.GetBytes(2));//package type
-        //          Filerequest.AddRange(BitConverter.GetBytes(packageLength));//package length
-        //          Filerequest.AddRange(BitConverter.GetBytes(OutdatedFiles.Count));//requested filecouunt
-        //          for (int i = 0; i < OutdatedFiles.Count; i++ ) 
-        //              Filerequest.AddRange(BitConverter.GetBytes(OutdatedFiles[i]));
-        //              
-        //          sock.Send(Filerequest.ToArray(), packageLength, SocketFlags.None);
-        //
-        //          //now recieve files
-        //          GetFiles(sock, OutdatedFiles.Count);
-        //      }
-        //
-        //      async void GetFiles(Socket s, int numOfFilesRequested) {
-        //          int numOfFilesRecieved = 0;
-        //          List<IncommingFile> incFile = new();
-        //          bool packageSizeWasRead = false;
-        //          int nextPackageSize = 65536;
-        //
-        //          while (true) {
-        //              if (s.Available < 4) {
-        //                  await Task.Delay(3);
-        //                  continue;
-        //              }
-        //              if (!packageSizeWasRead) {
-        //                  byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
-        //                  s.Receive(packetSize);
-        //                  nextPackageSize = BitConverter.ToInt32(packetSize, 0);
-        //                  packageSizeWasRead = true;
-        //              }
-        //
-        //              if (!packageSizeWasRead || nextPackageSize > s.Available) { //if packagesize wasnt read, or the size is more than what we can read
-        //                  await Task.Delay(3);
-        //                  continue;
-        //              }
-        //              packageSizeWasRead = false;//reset this value
-        //
-        //              byte[] data = new byte[nextPackageSize];
-        //              s.Receive(data);
-        //              StreamResult result = new StreamResult(ref data);
-        //              int packageNumber = result.ReadInt();
-        //              int fileID = result.ReadInt();
-        //
-        //              if (packageNumber == 0) {//read a header
-        //
-        //                  string currentFileWeAreGetting = result.ReadString16();
-        //                  int fileSize = result.ReadInt();
-        //                  long timeTicks = result.ReadLong();
-        //
-        //                  //c and c# measure time differently.
-        //                  //getting the filetime returns different values and we need to offset that on the client
-        //                  long CSharpToC_Filetime_Offset = new DateTime(1601, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks + 72000000000;
-        //
-        //                  IncommingFile fileQ = (new(App.FilesPath + currentFileWeAreGetting, currentFileWeAreGetting, fileSize, fileID, timeTicks + CSharpToC_Filetime_Offset));
-        //                  incFile.Add(fileQ);
-        //              }
-        //
-        //              //write the recieved data into the correct files buffer
-        //              IncommingFile fileWeWriteTo = incFile.First(list_element => list_element.fileID == fileID); //get the first where we have a matching fileID
-        //
-        //              bool file_fully_recieved = fileWeWriteTo.FilepartSent(ref result, packageNumber);//an old file that exists is overwritten
-        //              if (file_fully_recieved) {
-        //                  incFile.RemoveAt(incFile.IndexOf(fileWeWriteTo));
-        //                  numOfFilesRecieved++;
-        //                  mainWindow.SetProgressbar(numOfFilesRecieved, numOfFilesRequested);  
-        //              }
-        //
-        //              if (numOfFilesRecieved == numOfFilesRequested)
-        //                  break;//all is finished
-        //          }
-        //          s.Disconnect(false);
-        //      }
-        //
-        async Task<List<short>> GetFilelistFromServer(Socket socket) {//check for a response once a second
-            bool packageSizeWasRead = false;
-            int nextPackageSize = 65536; //value is never used, but IDE doesnt seem to notice..
-            List<short> OutdatedFiles = new();
-
-            while (true) {
-                if (socket.Available == 0) { //the following three ifs ensure all data that is required has been sent before we begin reading it
-                    await Task.Delay(3);
-                    continue;
-                }
-
-                if (!packageSizeWasRead) {
-                    byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package
-                    socket.Receive(packetSize);
-                    nextPackageSize = BitConverter.ToInt32(packetSize, 0);
-                    packageSizeWasRead = true;
-                }
-
-                if (!packageSizeWasRead || nextPackageSize > socket.Available) { //if packagesize wasnt read, or the size is more than what we can read
-                    await Task.Delay(1);
-                    continue;
-                }
-
-                //read all data, meaning all filenames and their creation dates
-                //check if this file exists yet, and if not, add the missing fileindex to a list
-                byte[] data = new byte[nextPackageSize];
-                socket.Receive(data);
-                StreamResult result = new StreamResult(ref data); 
-                int fileIndex = 0;
-                while (result.BytesLeft() > 4) {
-                    string filename = result.ReadString16();
-                    DateTime file_creationtime_on_server = result.ReadDateTime();
-
-                    bool file_is_upToDate = false;//false if the file does not exists
-                    if (File.Exists(App.FilesPath + filename)) {//check if the file exists
-                        FileInfo clientfile = new(App.FilesPath + filename); //.. and if its up to date
-                        file_is_upToDate = clientfile.CreationTime >= file_creationtime_on_server;
-                    }
-                    if (!file_is_upToDate) {//if file is either not there, or it is outdated
-                        Helper.CreateAllFoldersAlongPath(filename);
-                        OutdatedFiles.Add((short)fileIndex);//add the outdated file to the list 
-                    }
-                    fileIndex++;
-                }
-                break;
-            }
-            return OutdatedFiles;
-        }
-         
+                                        
 
     }
+
+    public struct CharacterDataServer
+    {
+        public readonly byte[] stats;
+
+        public readonly byte[] skills;
+
+        public readonly byte[] statsPerLevel;
+
+        public CharacterDataServer(byte[] charDataServer)
+        {
+            stats = new byte[4];
+            skills = new byte[10];
+            statsPerLevel = new byte[4];
+            Buffer.BlockCopy(charDataServer, 0, stats, 0, 4);
+            Buffer.BlockCopy(charDataServer, 4, statsPerLevel, 0, 4);
+            Buffer.BlockCopy(charDataServer, 8, skills, 0, 10);
+        }
+    }
+
 }

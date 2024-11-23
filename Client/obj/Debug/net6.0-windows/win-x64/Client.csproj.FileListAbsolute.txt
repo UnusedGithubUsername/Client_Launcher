@@ -1,0 +1,78 @@
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.csproj.AssemblyReference.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.csproj.ResolveComReference.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\LoginPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\MainWindow.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Customization.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\LoginPage.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\MainWindow.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\RegistrationPage.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\App.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client_Content.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\GeneratedInternalTypeHelper.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client_MarkupCompile.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client_MarkupCompile.lref
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\CustomizationOptions.g.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Chat.g.cs
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\0.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\11.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\12.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\13.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\14.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\15.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\16.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\17.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Background.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\ButtonBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\empty.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\ExplosiveArrows.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\ExplosiveSpells.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Intelligence.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\InventoryBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Mein Film.mp4
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\NeuralFastpass.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\None.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\PhysImmun.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\PhysResist.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\SecondaryAttunement.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\SkillchoiceBackground .png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\spellforceRune.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\spellforceRuneTransparent.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\spellforceRuneTransparentBackground.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Strength.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Vitality.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\weapon1.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\weapon2.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Wisdom.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\WoodFieldLong.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Client.exe
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Bar.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\cloud.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\cloud2.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\cloud3.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\left.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Minimize.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\right.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\WoodField.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\X.png
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Client.deps.json
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Client.runtimeconfig.json
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Client.dll
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Client.pdb
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\App.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Customization.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\RegistrationPage.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Templates.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\CustomizationOptions.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Chat.baml
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.g.resources
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.AssemblyInfoInputs.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.AssemblyInfo.cs
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.csproj.CoreCompileInputs.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.sourcelink.json
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.csproj.Up2Date
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.dll
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\refint\Client.dll
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.pdb
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.genruntimeconfig.cache
+C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\ref\Client.dll

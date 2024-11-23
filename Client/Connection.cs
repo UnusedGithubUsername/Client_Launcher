@@ -4,6 +4,7 @@ using System.Net.Sockets;//for TCPClient
 using System.Security.Cryptography;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 namespace Client {
 
     public class Connection {
@@ -68,9 +69,25 @@ namespace Client {
 
         public StreamResult Recieve() { 
             if (sock.Available == 0) 
-                return new StreamResult(); 
+                return new StreamResult();//if no data is there, return an empty result
 
-            return new StreamResult(ref sock);
+
+
+            byte[] packetSize = new byte[4];//1) Read how much data was sent. Recieving all data could read data from the next package 
+            sock.Receive(packetSize, SocketFlags.Peek);
+            int dataSize = BitConverter.ToInt32(packetSize, 0); 
+            if (sock.Available < dataSize)
+                return new StreamResult(); //if data has not fully arrived, wait until it has fully arrived
+
+            if (dataSize < 4 || dataSize > 65536)
+            { //if a transmission error occured and useless data was sent
+
+                byte[] dataToDelete = new byte[sock.Available];//read the useless data and throw it away
+                sock.Receive(dataToDelete);
+                return new StreamResult();
+            }
+
+            return new StreamResult(ref sock, dataSize + 4); //since we peeked we need to reread the first 4 bytes
         } 
 
         public void Disconnect() {

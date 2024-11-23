@@ -1,0 +1,137 @@
+﻿<Page x:Class="Client.CustomizationOptions" 
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Client" 
+	  Title="CharacterOptions" 
+	  DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+	  SizeChanged="Page_SizeChanged">
+	<Grid>
+		<Grid Name="CharacterCustomizationButtons" Visibility="Visible">
+			<Grid Name="CharStatGrid" Margin="0,0,0,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="70" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid Name="SkillGrid" Column="0" Height="350" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					<Button Tag="0" Grid.Row="0" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[0]}" Click="ShowSkillchoice" />
+					<Button Tag="1" Grid.Row="1" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[1]}" Click="ShowSkillchoice" />
+					<Button Tag="2" Grid.Row="2" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[2]}" Click="ShowSkillchoice" />
+					<Button Tag="3" Grid.Row="3" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[3]}" Click="ShowSkillchoice" />
+					<Button Tag="4" Grid.Row="4" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[4]}" Click="ShowSkillchoice" />
+					<Button Tag="5" Grid.Row="5" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[5]}" Click="ShowSkillchoice" />
+					<Button Tag="6" Grid.Row="6" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[6]}" Click="ShowSkillchoice" />
+					<Button Tag="7" Grid.Row="7" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[7]}" Click="ShowSkillchoice" />
+					<Button Tag="8" Grid.Row="8" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[8]}" Click="ShowSkillchoice" />
+					<Button Tag="9" Grid.Row="9" Grid.Column="1" Template="{StaticResource SkillButton}" Style="{StaticResource HoverButton}" Content="{Binding CurrentUIStats.skillsImg[9]}" Click="ShowSkillchoice" />
+
+
+					<Label  Grid.Row="0" Grid.Column="0" Content="1" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="1" Grid.Column="0" Content="2" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="2" Grid.Column="0" Content="3" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="3" Grid.Column="0" Content="4" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="4" Grid.Column="0" Content="5" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="5" Grid.Column="0" Content="6" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="6" Grid.Column="0" Content="7" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="7" Grid.Column="0" Content="8" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="8" Grid.Column="0" Content="9" Style="{StaticResource ScalingLabel}"/>
+					<Label  Grid.Row="9" Grid.Column="0" Content="10" Style="{StaticResource ScalingLabel}"/> 
+				</Grid>
+				<Grid Column="1" HorizontalAlignment="Left">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="0.45*" />
+						<RowDefinition Height="0.55*" />
+					</Grid.RowDefinitions>
+					<Grid Row="0" />
+					<Grid Name="StatGrid" Row="1" Width="200" Margin="10,0,0,0">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="0.1383*" />
+							<RowDefinition Height="0.0883*" />
+							<RowDefinition Height="0.0883*" />
+							<RowDefinition Height="0.1*" />
+							<RowDefinition Height="0.1*" />
+							<RowDefinition Height="0.1*" />
+							<RowDefinition Height="0.1*" />
+							<RowDefinition Height="0.115*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="0.166*" />
+							<ColumnDefinition Width="0.166*" />
+							<ColumnDefinition Width="0.166*" />
+							<ColumnDefinition Width="0.166*" />
+							<ColumnDefinition Width="0.166*" />
+							<ColumnDefinition Width="0.166*" />
+						</Grid.ColumnDefinitions>
+						<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="14" FontWeight="Bold" FontFamily="Century" Foreground="#FFFFA07A" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{StaticResource WoodBrush}" Content="{Binding CurrentUIStats.Name}" />
+						<Label Content="Level" Template="{StaticResource DoubleTextLabel}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" FontSize="11" FontFamily="Century" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" Tag="{Binding CurrentUIStats.level}" />
+						<Label Name="StatpointsLeft" Template="{StaticResource DoubleNumberLabel}" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="2" Margin="30,0,30,0" FontSize="11" FontFamily="Century" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" Content="{Binding CurrentUIStats.IncreasableStatpoints}" Tag="{Binding CurrentUIStats.DecreasableStatpoints}" />
+						<Label Name="Skillpoints_LeftField" Content="Skillpoints" Template="{StaticResource DoubleTextLabel}" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" FontSize="9" FontFamily="Century" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" Tag="{Binding CurrentUIStats.AvailableAbilitypoints}" />
+						<Label Name="Strength" Grid.ColumnSpan="3" Grid.Row="3" Background="{StaticResource WoodBrush}" FontSize="14" FontWeight="Bold" FontFamily="Century" Content="Strength" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" />
+						<Label Name="Vitality" Grid.ColumnSpan="3" Grid.Row="4" Background="{StaticResource WoodBrush}" FontSize="14" FontWeight="Bold" FontFamily="Century" Content="Vitality" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" />
+						<Label Name="Intelligence" Grid.ColumnSpan="3" Grid.Row="5" Background="{StaticResource WoodBrush}" FontSize="14" FontWeight="Bold" FontFamily="Century" Content="Intelligence" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" />
+						<Label Name="Wisdom" Grid.ColumnSpan="3" Grid.Row="6" Background="{StaticResource WoodBrush}" FontSize="14" FontWeight="Bold" FontFamily="Century" Content="Wisdom" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" />
+						<Button Name="Left1" Grid.Column="3" Grid.Row="3" Margin="5,0,0,0" Template="{StaticResource NoContentBtn}" Tag="0" Content="left" Background="{StaticResource LeafL}" OpacityMask="{StaticResource LeafL}" Visibility="{Binding CurrentUIStats, Converter={StaticResource IsDecreasable}, ConverterParameter=0}" Click="Click" />
+						<Button Name="Left2" Grid.Column="3" Grid.Row="4" Margin="5,0,0,0" Template="{StaticResource NoContentBtn}" Tag="1" Content="left" Background="{StaticResource LeafL}" OpacityMask="{StaticResource LeafL}" Visibility="{Binding CurrentUIStats, Converter={StaticResource IsDecreasable}, ConverterParameter=1}" Click="Click" />
+						<Button Name="Left3" Grid.Column="3" Grid.Row="5" Margin="5,0,0,0" Template="{StaticResource NoContentBtn}" Tag="2" Content="left" Background="{StaticResource LeafL}" OpacityMask="{StaticResource LeafL}" Visibility="{Binding CurrentUIStats, Converter={StaticResource IsDecreasable}, ConverterParameter=2}" Click="Click" />
+						<Button Name="Left4" Grid.Column="3" Grid.Row="6" Margin="5,0,0,0" Template="{StaticResource NoContentBtn}" Tag="3" Content="left" Background="{StaticResource LeafL}" OpacityMask="{StaticResource LeafL}" Visibility="{Binding CurrentUIStats, Converter={StaticResource IsDecreasable}, ConverterParameter=3}" Click="Click" />
+						<Label Name="Mid1" Grid.Column="4" Grid.Row="3" Background="{StaticResource WoodShort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" Content="{Binding CurrentUIStats.stats[0]}" />
+						<Label Name="Mid2" Grid.Column="4" Grid.Row="4" Background="{StaticResource WoodShort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" Content="{Binding CurrentUIStats.stats[1]}" />
+						<Label Name="Mid3" Grid.Column="4" Grid.Row="5" Background="{StaticResource WoodShort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" Content="{Binding CurrentUIStats.stats[2]}" />
+						<Label Name="Mid4" Grid.Column="4" Grid.Row="6" Background="{StaticResource WoodShort}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFFA07A" Content="{Binding CurrentUIStats.stats[3]}" />
+						<Button Name="Right1" Grid.Column="5" Grid.Row="3" Margin="0,0,5,0" Template="{StaticResource NoContentBtn}" Tag="0" Content="right" Background="{StaticResource LeafR}" OpacityMask="{StaticResource LeafR}" Visibility="{Binding CurrentUIStats.IncreasableStatpoints, Converter={StaticResource IntToVisibilityConverter}, ConverterParameter=0}" Click="Click" />
+						<Button Name="Right2" Grid.Column="5" Grid.Row="4" Margin="0,0,5,0" Template="{StaticResource NoContentBtn}" Tag="1" Content="right" Background="{StaticResource LeafR}" OpacityMask="{StaticResource LeafR}" Visibility="{Binding CurrentUIStats.IncreasableStatpoints, Converter={StaticResource IntToVisibilityConverter}, ConverterParameter=0}" Click="Click" />
+						<Button Name="Right3" Grid.Column="5" Grid.Row="5" Margin="0,0,5,0" Template="{StaticResource NoContentBtn}" Tag="2" Content="right" Background="{StaticResource LeafR}" OpacityMask="{StaticResource LeafR}" Visibility="{Binding CurrentUIStats.IncreasableStatpoints, Converter={StaticResource IntToVisibilityConverter}, ConverterParameter=0}" Click="Click" />
+						<Button Name="Right4" Grid.Column="5" Grid.Row="6" Margin="0,0,5,0" Template="{StaticResource NoContentBtn}" Tag="3" Content="right" Background="{StaticResource LeafR}" OpacityMask="{StaticResource LeafR}" Visibility="{Binding CurrentUIStats.IncreasableStatpoints, Converter={StaticResource IntToVisibilityConverter}, ConverterParameter=0}" Click="Click" />
+						<Button Name="Reskill" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="7" FontFamily="Century" Style="{StaticResource HoverButton}" Content="Reskill" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}" Click="Click_Reskill" />
+						<Button Name="Levelup" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="7" FontFamily="Century" Style="{StaticResource HoverButton}" Content="Levelup" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}" Click="Click_Levelup" />
+						<Button Name="Save" Grid.ColumnSpan="2" Grid.Column="4" Grid.Row="7" FontFamily="Century" Style="{StaticResource HoverButton}" Content="Save" Foreground="#FFFFA07A" Background="{StaticResource WoodBrush}" OpacityMask="{StaticResource WoodBrush}" Click="Click_Save" />
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+		<Grid Name="SkillchoiceBackground" Background="{StaticResource GreenFade2}" HorizontalAlignment="Stretch" Margin="50,50,50,50" VerticalAlignment="Stretch" Visibility="{Binding currentlyCustomizedSkill, Converter={StaticResource IntToVisibilityConverter}}">
+			<ScrollViewer Name="SkillBackdrop" VerticalScrollBarVisibility="Auto">
+				<ItemsControl Name="SkillsItemsControl" ItemsSource="{Binding skillInfoLibrary}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Button Height="50" Width="50" Margin="5,5,5,5" Style="{StaticResource HoverButton}" ToolTipService.InitialShowDelay="100" ToolTipService.BetweenShowDelay="100" Tag="{Binding ID}" Click="ConfirmSkillChoice">
+								<FrameworkElement.ToolTip>
+									<ToolTip Background="{StaticResource WoodBrush}" BorderThickness="0">
+										<StackPanel Margin="25,15,25,15">
+											<TextBlock FontWeight="Bold" Foreground="#FFFFA07A" Text="{Binding Name}" />
+											<TextBlock Foreground="#FFFFA07A" Text="{Binding Description}" />
+										</StackPanel>
+									</ToolTip>
+								</FrameworkElement.ToolTip>
+								<Control.Background>
+									<ImageBrush ImageSource="{Binding img}" />
+								</Control.Background>
+							</Button>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel />
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+			</ScrollViewer>
+		</Grid>
+	</Grid>
+</Page>
