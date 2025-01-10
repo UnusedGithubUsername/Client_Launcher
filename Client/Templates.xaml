@@ -4,8 +4,9 @@
                     xmlns:local1="clr-namespace:Client.Xaml_Helper_Classes" > 
 
     <ImageBrush x:Key="WoodShort" ImageSource="/Video/WoodField.png" Stretch="Fill" />
-    <ImageBrush x:Key="WoodBrush" ImageSource="/Video/WoodFieldLong.png" Stretch="Fill" />
-    <ImageBrush x:Key="BackgroundPic" ImageSource="/Client;component/Video/Background.png" Stretch="Fill" />  
+	<ImageBrush x:Key="WoodBrush" ImageSource="/Video/WoodFieldLong.png" Stretch="Fill" />
+	<ImageBrush x:Key="Plank" ImageSource="/Video/Plank.png" Stretch="Fill" />
+	<ImageBrush x:Key="BackgroundPic" ImageSource="/Client;component/Video/Background.png" Stretch="Fill" />  
     <ImageBrush x:Key="LeafL" ImageSource="/Video/left.png"  />
     <ImageBrush x:Key="LeafR" ImageSource="/Video/right.png"  />
     <ImageBrush x:Key="GreenFade" ImageSource="/Client;component/Video/InventoryBackground.png"  />
@@ -14,60 +15,15 @@
     <local:IntToVisConverter x:Key="IntToVisibilityConverter"/> 
     <local1:IsDecreasableConverter x:Key="IsDecreasable"/>
 
-	<ControlTemplate x:Key="SkillButton" TargetType="Button">
-		<Button  
-            Tag="{TemplateBinding Tag}"
-            Style="{TemplateBinding Style}">
-
-			<Button.Background>
-				<ImageBrush ImageSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
-			</Button.Background>
-
-			<Button.Content>
-				<TextBlock Opacity="0"/>
-			</Button.Content>
-		</Button>
-	</ControlTemplate>
-
-	<Style x:Key="ScalingLabel" TargetType="Label"> 
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Label">
-					<Border Background="{StaticResource WoodShort}">
-						<Viewbox Margin="0,6,3,8">
-							<TextBlock Text="{TemplateBinding Content}" Foreground="#FFFA8072"/>
-						</Viewbox>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-  
-	<Style x:Key="HoverButtonImage" TargetType="Button">
-		<Setter Property="OverridesDefaultStyle" Value="True" />
-		<Setter Property="Cursor" Value="Hand" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
-						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>  
-					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Opacity" Value="0.75" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
 	<Style x:Key="HoverButton" TargetType="Button">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="Cursor" Value="Hand" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
+					 
+						
+					
 					<Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
 						<Grid>
 							<Grid.RowDefinitions>
@@ -88,6 +44,7 @@
 
 
 					</Border>
+					 
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
 							<Setter Property="Opacity" Value="0.75" />
@@ -98,27 +55,151 @@
 		</Setter>
 	</Style>
 
+	<ControlTemplate x:Key="SkillButton" TargetType="Button">
+		<Button   
+            Style="{StaticResource HoverButton}"> 
+			<Button.Background>
+				<ImageBrush ImageSource="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+			</Button.Background>  
+		</Button>
+	</ControlTemplate>
+
+	<Style x:Key="ScalingLabel" TargetType="Label">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Label">
+					<Border Background="{StaticResource WoodShort}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="0.2*" />
+								<RowDefinition Height="0.6*" />
+								<RowDefinition Height="0.2*" />
+							</Grid.RowDefinitions>
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="0.1*" />
+								<ColumnDefinition Width="0.8*" />
+								<ColumnDefinition Width="0.1*" />
+							</Grid.ColumnDefinitions>
+							<Viewbox Grid.Row="1" Grid.Column="1" >
+								<TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="#FFFFA07A" FontFamily="Century"/>
+							</Viewbox>
+						</Grid> 
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="ScalingLabelLong" TargetType="Label">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Label">
+					<Border Background="{StaticResource WoodBrush}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="0.2*" />
+								<RowDefinition Height="0.6*" />
+								<RowDefinition Height="0.2*" />
+							</Grid.RowDefinitions>
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="0.1*" />
+								<ColumnDefinition Width="0.8*" />
+								<ColumnDefinition Width="0.1*" />
+							</Grid.ColumnDefinitions>
+							<Viewbox Grid.Row="1" Grid.Column="1" >
+								<TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Foreground="#FFFFA07A" FontFamily="Century"/>
+							</Viewbox>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+ 
+
+
+
+	<Style x:Key="HoverButtonImage" TargetType="Button">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border Name="border" BorderThickness="0" Background="{TemplateBinding Background}">
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>  
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Opacity" Value="0.75" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+
 	<ControlTemplate x:Key="DoubleTextLabel" TargetType="Label">
-        <Grid Background="{TemplateBinding Background}" Opacity="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.6*"/>
-                <ColumnDefinition Width="0.4*"/>
-            </Grid.ColumnDefinitions>
+		<Viewbox  >
+			<Border Background="{StaticResource WoodBrush}" >
+				<TextBlock  FontFamily="Century"  Foreground="#FFFFA07A"  Padding="5">
+						<Run Text="  " />
+						<Run Text="{TemplateBinding Content}" />
+						<Run Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+						<Run Text="  "/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+				</TextBlock>
+			</Border>
+		</Viewbox>
+	</ControlTemplate>
 
-            <Label Grid.Column="0" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" />
-            <Label Grid.Column="1" Content="{TemplateBinding Tag}"     FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Left" />
-        </Grid>
-    </ControlTemplate>
+	<DropShadowEffect x:Key="ShadowEffect"
+                    Color="Transparent"
+                    ShadowDepth="5"
+                    BlurRadius="10"
+                    Opacity="0.5" />
+	
+	<ControlTemplate x:Key="DoubleTextLabel2" TargetType="Label">
+		<Viewbox  >
+			<Border Background="{StaticResource WoodShort}" >
+				<TextBlock  FontFamily="Century"  Foreground="#FFFFA07A"  Padding="5">
+						<Run Text=" " />
+						<Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+						<Run Text="/" />
+						<Run Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+						<Run Text=" "/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+				</TextBlock>
+			</Border>
+		</Viewbox>
+	</ControlTemplate>
 
-    <ControlTemplate x:Key="DoubleNumberLabel" TargetType="Label">
-        <Grid Background="{TemplateBinding Background}" Opacity="1">
+	<ControlTemplate x:Key="LevelLabel" TargetType="Label">
+		<Viewbox  >
+			<Border Background="{StaticResource WoodBrush}" >
+				<TextBlock  FontFamily="Century"  Foreground="#FFFFA07A"  Padding="5">
+						<Run Text=" " />
+						<Run Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+						<Run Text="&#x2B50;" />
+						<Run Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+						<Run Text=" "/><!-- Template binding is more performant but run can not bind to tags through a template for arcane reasons-->
+				</TextBlock>
+			</Border>
+		</Viewbox>
+	</ControlTemplate>
+
+
+
+	<ControlTemplate x:Key="DoubleNumberLabel" TargetType="Label">
+		<Grid Background="{StaticResource WoodBrush}" Opacity="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.33*"/>
                 <ColumnDefinition Width="0.5*"/>
-            </Grid.ColumnDefinitions>
-
-            <Label BorderThickness="0" Grid.Column="0" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" />
-            <Label BorderThickness="0" Grid.Column="1" Content="{TemplateBinding Tag}"     FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"  VerticalContentAlignment="Center"  HorizontalContentAlignment="Left" />
+            </Grid.ColumnDefinitions> 
+            <Label BorderThickness="0" Grid.Column="0" Content="{TemplateBinding Content}" FontSize="12"  Foreground="#FFFFA07A"   VerticalContentAlignment="Center"  HorizontalContentAlignment="Right" FontFamily="Century" />
+            <Label BorderThickness="0" Grid.Column="1" Content="{TemplateBinding Tag}"     FontSize="12"  Foreground="#FFFFA07A"   VerticalContentAlignment="Center"  HorizontalContentAlignment="Left"  FontFamily="Century"/>
         </Grid>
     </ControlTemplate>
 

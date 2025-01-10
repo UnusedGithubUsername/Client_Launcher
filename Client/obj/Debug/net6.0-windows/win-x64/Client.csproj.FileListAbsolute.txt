@@ -76,3 +76,4 @@ C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\refi
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.pdb
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\Client.genruntimeconfig.cache
 C:\Users\Klauke\source\repos\Client\Client\obj\Debug\net6.0-windows\win-x64\ref\Client.dll
+C:\Users\Klauke\Desktop\Client Build\Debug\net6.0-windows\win-x64\Video\Plank.png

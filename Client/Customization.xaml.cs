@@ -3,12 +3,11 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Diagnostics; 
-using System.Windows.Input;
-using System.Windows.Controls.Primitives; 
+using System.Windows.Input; 
 using System.Collections.ObjectModel;
 using Client.Models;
 using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.Serialization.Json;
 
 namespace Client { 
     public partial class Customization : Window, INotifyPropertyChanged {
@@ -41,16 +40,11 @@ namespace Client {
 
         public Customization() {
             Instance = this;
-            customizationPage = new();
-
-            InitializeComponent();
-
-            chatPage = new();
-
-            customizationPage.ParentUI = this;
-
-            CharacterData = new();
-
+            customizationPage = new(); 
+            InitializeComponent(); 
+            chatPage = new(); 
+            customizationPage.ParentUI = this; 
+            CharacterData = new(); 
             friendsList = new();
             friendsRequestList = new();
              //now load the base values of characters from data files
@@ -66,13 +60,8 @@ namespace Client {
             for (int i = 0; i < numOfFiles; i++) {
                 string characterFilePath = App.FilesPath + "CharacterBaseValues\\" + i.ToString() + ".characterData";
                 baseStatsOfAllCharacters[i] = new CharacterDataServer(File.ReadAllBytes(characterFilePath));
-                //baseStatsOfAllCharacters[i].SetAllStats();
             }
-             
-
         }
-
-
 
         public void MessageRecieved(int guid, string message) {
             int index = -1;
@@ -80,16 +69,14 @@ namespace Client {
                 if(friendsList[i].Guid == guid)
                     index=i;
 
- 
-
             this.Dispatcher.Invoke(() =>
             {
                 friendsList[index].MessageRecieved( message);
             }); 
         }
 
-        public void FriendRequestRecieved(int guid, string name) {
-
+        public void FriendRequestRecieved(int guid, string name)
+        {
             friendsRequestList.Add(new Friend_Model(name, guid, true));
             OnPropertyChanged(nameof(friendsRequestList));
         }
@@ -101,15 +88,12 @@ namespace Client {
                 if (CharacterData[i].ItemGUId == characterGuid)
                     CharacterData[i].level = newLevel;
 
-            //CurrentUIStats.level = newLevel;
             customizationPage.SetCharacterLevel(newLevel);
-
+            customizationPage.UpdateItself();
         }
 
         public void SetCharacterStats(byte[] charDataServer, int charGuid)
         {
-
-
             for (int i = 0; i < CharacterData.Count; i++)
             {
                 if (CharacterData[i].ItemGUId == charGuid)
@@ -120,7 +104,6 @@ namespace Client {
             }  
              
             this.Dispatcher.Invoke(() => {
-                 
                 CharacterCustomizationButton.Navigate(customizationPage);
                 customizationPage.SetCharacterStats(charDataServer, CharacterData[loadedCharacterIndex]); 
             }); 
@@ -146,13 +129,12 @@ namespace Client {
             return true;
         }
 
-        public void SetFriendslist(int[] friendIDs, string[] friendNames) {
-            
+        public void SetFriendslist(int[] friendIDs, string[] friendNames) 
+        {
             this.Dispatcher.Invoke(() => {
                 friendsList.Clear();
                 for (int i = 0; i < friendNames.Length; i++)
                     friendsList.Add(new(friendNames[i], friendIDs[i], false));
-
             });
              
             OnPropertyChanged(nameof(friendsList));
@@ -164,19 +146,15 @@ namespace Client {
             int friendGuid = (int)(b.Tag);
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Accept);
 
-
             int index = 0;
             for (int i = 0; i < friendsRequestList.Count; i++)
-            {
                 if (friendsRequestList[i].Guid == friendGuid)
                     index = i;
-            }
+             
             string friendName = friendsRequestList[index].FriendName;
             int friendId = friendsRequestList[index].Guid;
             friendsRequestList.RemoveAt(index);
-
             AddFriendToFList(friendId, friendName);
-
         }
 
         public void AddFriendToFList(int friendId, string friendName)
@@ -191,7 +169,6 @@ namespace Client {
 
         }
 
-
         public void RejectFriend(object sender, RoutedEventArgs e) {
             Button b = (Button)sender;
             int friendGuid = (int)(b.Tag);
@@ -202,8 +179,8 @@ namespace Client {
                     friendsRequestList.RemoveAt(i);
             }
             OnPropertyChanged(nameof(friendsRequestList));
-
         }
+
         public void BlockFriend(object sender, RoutedEventArgs e) {
             Button b = (Button)sender;
             int friendGuid = (int)(b.Tag);
@@ -217,21 +194,20 @@ namespace Client {
 
         }
         public void RemoveFriend(object sender, RoutedEventArgs e) {
-            Button b = (Button)sender;
-            int friendGuid = (int)(b.Tag);
+            MenuItem b = (MenuItem)sender;
+            ContextMenu qwe = (ContextMenu)b.Parent;
+            Button sss = (Button)qwe.PlacementTarget;
+            int friendGuid = (int)(sss.Tag);
             App.Instance.Friend(UserGuid, friendGuid, FriendrequestAction.Remove);
-            for (int i = 0; i < friendsRequestList.Count; i++) {
-                if (friendsRequestList[i].Guid == friendGuid)
-                    friendsRequestList.RemoveAt(i);
+            for (int i = 0; i < friendsList.Count; i++) {
+                if (friendsList[i].Guid == friendGuid)
+                    friendsList.RemoveAt(i);
             }
             OnPropertyChanged(nameof(friendsList));
-
         }
          
-
-
-         
-        private void Click_Friend(object sender, RoutedEventArgs e) { 
+        private void Click_Friend(object sender, RoutedEventArgs e) {
+            customizationPage.ThisGetsClosed();
             this.Dispatcher.Invoke(() => { CharacterCustomizationButton.Navigate(chatPage); });
 
             Button b = (Button)sender;
@@ -241,11 +217,10 @@ namespace Client {
             for (int i = 0; i < friendsList.Count; i++) 
                 if (friendsList[i].Guid == friendGuid)
                     chatIndex = i;
-             
- 
 
             CurrentChat = friendsList[chatIndex];
-              
+            chatPage.LoadChat(  friendsList[chatIndex]); 
+
         }
 
         private void Click_Req(object sender, RoutedEventArgs e) { 
@@ -257,10 +232,8 @@ namespace Client {
             App.Instance.ReqCharData(UserGuid, characterID);  
         }
 
-
         public void SetItems(int Guid, int[] guids, int[] levels, int[] types, string username, int playerXP)
         {
-
             UserGuid = Guid;
             xp = playerXP;
             Username = username;
@@ -274,11 +247,16 @@ namespace Client {
             OnPropertyChanged(nameof(CharacterData));
         }
 
+
+        private void RemoveFriend(object sender, EventArgs e)
+        {
+            MessageBox.Show("Removing friend Customzzation");
+        }
+
         private void Click_Play(object sender, RoutedEventArgs e) {
             string unityGamePath = App.FilesPath + "GameBuild2023/My Project.exe"; // Path to Unity game executable
 
-            //as argument we provide the full package that the user would log in with
-            byte[] msg = App.Instance.con.loginPackage;
+            byte[] msg = App.Instance.con.loginPackage;//as argument we provide the full package that the user would log in with
             string arguments = Convert.ToBase64String(msg);  
 
             ProcessStartInfo startInfo = new ProcessStartInfo(unityGamePath, arguments);
@@ -289,7 +267,6 @@ namespace Client {
         protected virtual void OnPropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
         private void Connect_Minimize(object sender, RoutedEventArgs e) {
             WindowState = WindowState.Minimized;

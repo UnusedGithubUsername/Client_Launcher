@@ -86,7 +86,7 @@ namespace Client
         }
 
         public void SendMessage(int guid, int friendGuid, string message) {
-            con.WriteInt(guid); 
+            con.WriteInt(UserGuid); 
             con.WriteInt(friendGuid);
             con.WriteString(message);
             con.Send(PacketTypeClient.Message);

@@ -8,16 +8,15 @@ using System.Windows.Threading;
 
 namespace Client
 {
-    /// <summary>
-    /// Interaction logic for CustomizationOptions.xaml
-    /// </summary>
     public partial class CustomizationOptions : Page, INotifyPropertyChanged
     {
-        private int _currentSkill = -1;
-
-        private int currentCharacterID = -1;
-
+        private int _currentSkill = -1; 
+        private int currentCharacterID = -1; 
         public Customization ParentUI;
+        public CharacterStat_Model CurrentUIStats { get; set; }
+        public static ObservableCollection<SkillChoice_Model> skillInfoLibrary { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public int currentlyCustomizedSkill
         {
             get
@@ -31,12 +30,6 @@ namespace Client
                 OnPropertyChanged(nameof(CurrentUIStats));
             }
         }
-
-        public CharacterStat_Model CurrentUIStats { get; set; }
-
-        public static ObservableCollection<SkillChoice_Model> skillInfoLibrary { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public CustomizationOptions()
         {
@@ -69,20 +62,21 @@ namespace Client
             currentlyCustomizedSkill = int.Parse(((Button)sender).Tag.ToString());  
         }
 
+        public void ThisGetsClosed()
+        {
+            currentlyCustomizedSkill = -1;
+        }
+
         public void Click(object sender, RoutedEventArgs e)
         {
             bool left = ((Button)sender).Content.ToString() == "left";
             int index = int.Parse(((Button)sender).Tag.ToString());
             if (!(CurrentUIStats.stats[index] == 0 && left))
             {
-                if (!left)
-                {
-                    CurrentUIStats.Increment(index);
-                }
-                else
-                {
-                    CurrentUIStats.Decrement(index);
-                } 
+                if (!left) 
+                    CurrentUIStats.Increment(index); 
+                else 
+                    CurrentUIStats.Decrement(index); 
             }
             OnPropertyChanged(nameof(CurrentUIStats));
         }
@@ -97,10 +91,9 @@ namespace Client
             if (CurrentUIStats.stats[0] + CurrentUIStats.stats[1] + CurrentUIStats.stats[2] + CurrentUIStats.stats[3] == 60)
             {
                 byte[] deltaStats = new byte[4];
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) 
                     deltaStats[i] = (byte)(CurrentUIStats.stats[i] - CurrentUIStats.ServersideData.stats[i]);
-                }
+                 
                 App.Instance.SaveCharacterStats(App.UserGuid, currentCharacterID, deltaStats, CurrentUIStats);
             }
         }
@@ -125,7 +118,7 @@ namespace Client
         public void SetCharacterLevel(int level)
         {
             CurrentUIStats.level = level;
-            CurrentUIStats.SetStatsToDefault();
+            CurrentUIStats.SetStatsToDefault(); 
         }
 
         public void ReadSkillInfo()
@@ -145,7 +138,6 @@ namespace Client
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
         public void UpdateUI()
         {
             CurrentUIStats.UpdateGUI();
@@ -154,5 +146,9 @@ namespace Client
 
         }
 
+        internal void UpdateItself()
+        {
+            OnPropertyChanged(nameof(CurrentUIStats));
+        }
     }
 }

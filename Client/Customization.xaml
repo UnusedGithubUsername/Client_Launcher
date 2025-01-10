@@ -11,7 +11,8 @@
       AllowsTransparency="True" 
       WindowStyle = "None"
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
-      
+      ResizeMode="CanResizeWithGrip"
+
     >
     <Window.Resources>
         <Style x:Key="FriendElement" TargetType="ListViewItem" >
@@ -21,12 +22,48 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <Border x:Name="border"  Opacity="1"  >
-                            <Button x:Name="label" Style="{StaticResource HoverButton}" Click="Click_Friend"  
+							<Button x:Name="label" Style="{StaticResource HoverButton}" Click="Click_Friend"  
                                     Background="{StaticResource WoodBrush}"  BorderThickness="0" 
                                     Foreground="LightSalmon" FontSize="13" Height="30"  
                                     Content="{Binding FriendName}" Margin="10,0,10,0"
-                                    Tag="{Binding Guid}"/>
-                        </Border>
+                                    Tag="{Binding Guid}" >
+
+								<Button.ContextMenu>
+									<ContextMenu Background="Transparent">
+										<ContextMenu.Template>
+											<ControlTemplate TargetType="ContextMenu">
+												<Border  Background="Transparent" CornerRadius="5"  Padding="5"  Effect="{StaticResource ShadowEffect}">
+													<StackPanel IsItemsHost="True" />
+												</Border>
+											</ControlTemplate>
+										</ContextMenu.Template>
+
+										<ContextMenu.Resources>
+											<Style TargetType="MenuItem">
+												<Setter Property="Background" Value="Transparent" />
+												<Setter Property="Foreground" Value="#FFFF0000"  />
+												<Setter Property="FontFamily" Value="Arial" />
+												<Setter Property="FontSize" Value="14" />
+												<Setter Property="Padding" Value="10,5" />
+												<Setter Property="Template">
+													<Setter.Value>
+														<ControlTemplate TargetType="MenuItem">
+															<Grid Background="{TemplateBinding Background}">
+																<ContentPresenter
+                            Content="{TemplateBinding Header}"
+                            VerticalAlignment="Center"
+                            Margin="5,2" />
+															</Grid>
+														</ControlTemplate>
+													</Setter.Value>
+												</Setter>
+											</Style>
+										</ContextMenu.Resources>
+										<MenuItem Header="❌" Background="{StaticResource WoodShort}"  Click="RemoveFriend"/>
+									</ContextMenu>
+								</Button.ContextMenu>
+							</Button>
+						</Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -39,25 +76,27 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <Border x:Name="border"  Opacity="1">
-                            <Grid  Opacity="1">  
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/> 
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Button Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HoverButton}" Background="{StaticResource WoodBrush}"  BorderThickness="0" Foreground="LightSalmon" FontSize="13" Height="30"  
-                                    Content="{Binding FriendName}" Tag="{Binding FriendId}"/>
+							<Grid  Opacity="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition/>
+									<ColumnDefinition/>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+								</Grid.RowDefinitions>
+								<Button Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HoverButton}" Background="{StaticResource WoodBrush}"  BorderThickness="0" Foreground="LightSalmon" FontSize="13" Height="30"  
+                                    Content="{Binding FriendName}" Tag="{Binding Guid}">
+									
+								</Button>
 
-                                <Button Grid.Column="2" Style="{StaticResource HoverButton}" Background="{StaticResource WoodBrush}"  BorderThickness="0" Foreground="LightSalmon" FontSize="13" Height="30"  
-                                    Content="{Binding FriendId}" Tag="{Binding FriendId}"/>
+								<Button Grid.Column="2" Style="{StaticResource HoverButton}" Background="{StaticResource WoodBrush}"  BorderThickness="0" Foreground="LightSalmon" FontSize="13" Height="30"  
+                                    Content="{Binding Guid}" Tag="{Binding Guid}"/>
 
-                                <Button Grid.Column="0" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding FriendId}" Content="Accept" Click="AcceptFriend" Foreground="LightGreen" FontSize="9" Style="{StaticResource HoverButton}"/>
-                                <Button Grid.Column="1" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding FriendId}" Content="Reject" Click="RejectFriend" Foreground="LightPink" FontSize="9" Style="{StaticResource HoverButton}"/>
-                                <Button Grid.Column="2" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding FriendId}" Content="Block"  Click="BlockFriend"  Foreground="Red" FontSize="9" Style="{StaticResource HoverButton}"/>
+                                <Button Grid.Column="0" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding Guid}" Content="Accept" Click="AcceptFriend" Foreground="LightGreen" FontSize="9" Style="{StaticResource HoverButton}"/>
+                                <Button Grid.Column="1" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding Guid}" Content="Reject" Click="RejectFriend" Foreground="LightPink" FontSize="9" Style="{StaticResource HoverButton}"/>
+                                <Button Grid.Column="2" Grid.Row="1" Height="20" Background="{StaticResource WoodBrush}" Tag="{Binding Guid}" Content="Block"  Click="BlockFriend"  Foreground="Red" FontSize="9" Style="{StaticResource HoverButton}"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -115,7 +154,7 @@
                     </Grid>
                     <Grid x:Name="BaseGridBackground" Margin="0,0,0,0" Grid.Row="1" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition Width="140"/>
                         </Grid.ColumnDefinitions>
@@ -153,7 +192,7 @@
                                     <Button Content="Play" Click="Click_Play" Background="{StaticResource WoodBrush}" Style="{StaticResource HoverButton}" FontSize="24"  Width="90" FontFamily="Century" Foreground = "LightSalmon"  />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Label Content="XP"   Tag="{Binding xp}" Width="110"   Template="{StaticResource DoubleNumberLabel}" Opacity="160" Height="33" FontSize="19"  FontFamily="Century" Foreground = "LightSalmon" Background="{StaticResource WoodBrush}" Padding="15" />
+									<Label Content="XP:"   Tag="{Binding xp}"    Template="{StaticResource DoubleTextLabel}"   Margin="0,10,0,10"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>

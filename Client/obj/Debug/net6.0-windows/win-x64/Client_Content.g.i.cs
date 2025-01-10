@@ -34,6 +34,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/none.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/physimmun.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/physresist.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/plank.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/right.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/secondaryattunement.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("video/skillchoicebackground%20.png")]

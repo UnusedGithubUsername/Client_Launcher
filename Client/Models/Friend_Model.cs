@@ -3,7 +3,20 @@ using System.ComponentModel;
 
 
 namespace Client.Models   {
+
+    public class ChatMessage
+    {
+        public string Text { get; set; }
+        public bool IsRightBound { get; set; }
+    }
     public class Friend_Model : INotifyPropertyChanged {
+
+        public string FriendName { get; set; }
+        public int Guid { get; set; }
+        public bool NotYetAccepted { get; set; }  
+        public string lastMessage { get; set; }
+        public ObservableCollection<ChatMessage> Chatoutput { get; set; }
+
         public Friend_Model(string name, int guid, bool onlyRequest)
         {
             FriendName = name;
@@ -13,19 +26,23 @@ namespace Client.Models   {
             lastMessage = "";
         }
 
-        public string FriendName { get; set; }
-        public int Guid { get; set; }
-        public bool NotYetAccepted { get; set; }  
-        public string lastMessage { get; set; }
-        public ObservableCollection<string> Chatoutput { get; set; }
-
         public void MessageRecieved(string message)
         {
-            Chatoutput.Add(message);
+            ChatMessage msg = new();
+            msg.Text = FriendName + ": "+ message;
+            msg.IsRightBound = false;
+            Chatoutput.Add(msg);
             lastMessage = message;
+             
+        }
 
-            OnPropertyChanged(nameof(Chatoutput));
-            OnPropertyChanged(nameof(lastMessage));
+        public void MessageSent(string message)
+        {
+            ChatMessage msg = new();
+            msg.Text = message;
+            msg.IsRightBound = true;
+            Chatoutput.Add(msg);
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

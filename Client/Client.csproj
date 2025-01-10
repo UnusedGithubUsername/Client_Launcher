@@ -24,6 +24,7 @@
     <None Remove="Video\None.png" />
     <None Remove="Video\PhysImmun.png" />
     <None Remove="Video\PhysResist.png" />
+    <None Remove="Video\Plank.png" />
     <None Remove="Video\SecondaryAttunement.png" />
     <None Remove="Video\Strength.png" />
     <None Remove="Video\Vitality.png" />
@@ -80,7 +81,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\cloud3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\empty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -104,7 +105,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\Minimize.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\NeuralFastpass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -116,6 +117,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\PhysResist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Video\Plank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Video\right.png">
